@@ -48,7 +48,7 @@ app.use(function(err, req, res, next) {
   res.json({error:"path not found"})
 });
 
-sequelize.sync().then((r)=>{
+sequelize.sync({}).then((r)=>{
   console.log("sync");
 }).catch((e)=>{
   console.log("error1");
