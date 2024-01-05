@@ -1,15 +1,22 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+// external import
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
+// database
 const sequelize = require("./utils/database")
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var authRouter = require('./routes/auth');
-const User = require('./models/user');
+//models
+const Teacher = require('./models/teacher')
+const Student = require('./models/student')
+// routes
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+
+
 
 
  
@@ -44,11 +51,9 @@ app.use(function(err, req, res, next) {
 sequelize.sync().then((r)=>{
   console.log("sync");
 }).catch((e)=>{
-  console.log("error");
+  console.log("error1");
 })
 
-
-User.create({userName:"joysarkar18" , password:"JoySarkar@456" , email:"joysarkar8171@gmail.com"})
 
 
 module.exports = app;
