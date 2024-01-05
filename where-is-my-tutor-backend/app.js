@@ -8,11 +8,12 @@ const sequelize = require("./utils/database")
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var authRouter = require('./routes/auth');
+const User = require('./models/user');
 
 
  
 var app = express();
-
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use("/auth" , authRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -36,15 +38,17 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({error:"path not found"})
 });
 
-sequelize.sync({ force: true }).then((r)=>{
-  console.log(r);
+sequelize.sync().then((r)=>{
   console.log("sync");
 }).catch((e)=>{
   console.log("error");
 })
+
+
+User.create({userName:"joysarkar18" , password:"JoySarkar@456" , email:"joysarkar8171@gmail.com"})
 
 
 module.exports = app;
