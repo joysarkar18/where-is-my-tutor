@@ -35,6 +35,9 @@ try {
     const password = req.body.password;
     const type = req.body.type;
     const userName = req.body.userName;
+    if(userName==null || userName==undefined){
+       return res.json({status:false,  error: {message: "plese provide userName in the body"}});
+    }
 
     if (type === 0) {
         let foundUser = await Student.findOne({ where: { email: email } });
@@ -141,17 +144,14 @@ try {
         }
 
     }
+
+    res.json({ status: false, error: {message: "plese provide type in the body"}});
     
 } catch (error) {
 
     return res.json( {status:false , error: error});
     
 }
-
-
-
-
-
 
 
 })
