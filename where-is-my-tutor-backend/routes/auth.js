@@ -156,42 +156,82 @@ router.post("/sign-up", [
 
 })
 
-router.post("/log-in" ,  async(req , res)=>{
-
+router.post("/log-in", async (req, res) => {
     console.log(req.body.email, req.body.password);
     const email = req.body.email;
     const password = req.body.password;
     const userName = req.body.userName;
     const type = req.body.type;
 
-    if(email==null || email==undefined){
+    if (email == null || email == undefined) {
         let foundUser = await Student.findOne({ where: { userName: userName } });
-        if(foundUser!=null){
+        if (foundUser != null) {
             console.log(foundUser);
-            return;
+            comparePassword(password, foundUser.dataValues.password)
+                .then((isMatch) => {
+                    if (isMatch) {
+                        console.log('Password is correct!');
+                    } else {
+                        console.log('Incorrect password!');
+                    }
+                })
+                .catch((error) => console.error(error));
+            return res.json({ found: "found" })
+
         }
-        res.json({found:"found"})
+
+        else {
+            return res.json({ status: false, error: "There is no no with this username" })
+        }
+
 
     }
 
-    if(userName==null || userName==undefined){
+    if (userName == null || userName == undefined) {
         let foundUser = await Student.findOne({ where: { email: email } });
-        if(foundUser!=null){
+
+
+
+        if (foundUser != null) {
             console.log(foundUser);
-            return;
+            comparePassword( password, foundUser.dataValues.password)
+                .then((isMatch) => {
+                    if (isMatch) {
+                        console.log('Password is correct!');
+                    } else {
+                        console.log('Incorrect password!');
+                    }
+                })
+                .catch((error) => console.error(error));
+            return res.json({ found: "found" })
+
         }
 
-        res.json({found:"found"})
+
+        else {
+            return res.json({ status: false, error: "There is no no with this email" })
+
+        }
 
     }
 
-    res.json({error : "not found"})
+    res.json({ error: "not found" })
 
 
 
 
 })
 
+
+async function comparePassword(inputPassword, hashedPassword) {
+    try {
+        const match = await bcrypt.compare(inputPassword, hashedPassword);
+        return match;
+    } catch (error) {
+        console.error('Error comparing passwords:', error);
+        throw error;
+    }
+}
 
 
 
