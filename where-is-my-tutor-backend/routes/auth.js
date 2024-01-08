@@ -69,7 +69,7 @@ router.post("/sign-up", [
 
                                 };
 
-                                let token = jwt.sign(payload, secret, options);
+                                let token =  jwt.sign(payload, secret, options);
 
                                 return res.json({ status: true, message: "student account created", token: token })
                             }).catch((err) => {
@@ -91,7 +91,7 @@ router.post("/sign-up", [
             }
         }
 
-        if (type == 1) {
+        if (type ===1) {
 
             let foundUser = await Teacher.findOne({ where: { email: email } });
             if (foundUser != null) {
@@ -145,7 +145,6 @@ router.post("/sign-up", [
 
         }
 
-        res.json({ status: false, error: { message: "plese provide type in the body" } });
 
     } catch (error) {
 
@@ -157,65 +156,167 @@ router.post("/sign-up", [
 })
 
 router.post("/log-in", async (req, res) => {
-    console.log(req.body.email, req.body.password);
-    const email = req.body.email;
-    const password = req.body.password;
-    const userName = req.body.userName;
-    const type = req.body.type;
+    try {
+        console.log(req.body.email, req.body.password);
+        const email = req.body.email;
+        const password = req.body.password;
+        const userName = req.body.userName;
+        const type = req.body.type;
 
-    if (email == null || email == undefined) {
-        let foundUser = await Student.findOne({ where: { userName: userName } });
-        if (foundUser != null) {
-            console.log(foundUser);
-            comparePassword(password, foundUser.dataValues.password)
-                .then((isMatch) => {
-                    if (isMatch) {
-                        console.log('Password is correct!');
-                    } else {
-                        console.log('Incorrect password!');
-                    }
-                })
-                .catch((error) => console.error(error));
-            return res.json({ found: "found" })
+        if (type == 0) {
 
+
+
+            if (email == null || email == undefined) {
+                let foundUser = await Student.findOne({ where: { userName: userName } });
+                if (foundUser != null) {
+                    console.log(foundUser);
+                    comparePassword(password, foundUser.dataValues.password)
+                        .then((isMatch) => {
+                            if (isMatch) {
+                                let tokenData = {
+                                    id: foundUser.dataValues.id,
+                                    email: foundUser.dataValues.email,
+                                    userName: foundUser.dataValues.userName,
+
+                                };
+
+                                let token = jwt.sign(tokenData, secret, options);
+                                return res.json({ status: true, message: "Student login successful", token: token })
+                            } else {
+                                return res.json({ status: false, message: "Invalid Password", })
+                            }
+                        })
+                        .catch((error) => {
+                            return res.json({ status: false, error: error, message: "someting went wrong!" })
+                        });
+
+
+                }
+
+                else {
+                    return res.json({ status: false, error: "There is no no with this username" })
+                }
+
+
+            }
+
+            if (userName == null || userName == undefined) {
+                let foundUser = await Student.findOne({ where: { email: email } });
+
+
+
+                if (foundUser != null) {
+                    console.log(foundUser);
+                    comparePassword(password, foundUser.dataValues.password)
+                        .then((isMatch) => {
+                            if (isMatch) {
+                                let tokenData = {
+                                    id: foundUser.dataValues.id,
+                                    email: foundUser.dataValues.email,
+                                    userName: foundUser.dataValues.userName,
+
+                                };
+
+                                let token = jwt.sign(tokenData, secret, options);
+                                return res.json({ status: true, message: "Student login successful", token: token })
+                            } else {
+                                return res.json({ status: false, message: "Invalid Password", })
+                            }
+                        })
+                        .catch((error) => {
+                            return res.json({ status: false, error: error, message: "someting went wrong!" })
+                        });
+
+
+                }
+
+
+                else {
+                    return res.json({ status: false, error: "There is no no with this email" })
+
+                }
+
+            }
         }
 
-        else {
-            return res.json({ status: false, error: "There is no no with this username" })
-        }
+        if (type == 1) {
+            if (email == null || email == undefined) {
+                let foundUser = await Teacher.findOne({ where: { userName: userName } });
+                if (foundUser != null) {
+                    console.log(foundUser);
+                    comparePassword(password, foundUser.dataValues.password)
+                        .then((isMatch) => {
+                            if (isMatch) {
+                                let tokenData = {
+                                    id: foundUser.dataValues.id,
+                                    email: foundUser.dataValues.email,
+                                    userName: foundUser.dataValues.userName,
 
+                                };
+
+                                let token = jwt.sign(tokenData, secret, options);
+                                return res.json({ status: true, message: "Student login successful", token: token })
+                            } else {
+                                return res.json({ status: false, message: "Invalid Password", })
+                            }
+                        })
+                        .catch((error) => {
+                            return res.json({ status: false, error: error, message: "someting went wrong!" })
+                        });
+
+
+                }
+
+                else {
+                    return res.json({ status: false, error: "There is no no with this username" })
+                }
+
+
+            }
+
+            if (userName == null || userName == undefined) {
+                let foundUser = await Teacher.findOne({ where: { email: email } });
+
+
+
+                if (foundUser != null) {
+                    console.log(foundUser);
+                    comparePassword(password, foundUser.dataValues.password)
+                        .then((isMatch) => {
+                            if (isMatch) {
+                                let tokenData = {
+                                    id: foundUser.dataValues.id,
+                                    email: foundUser.dataValues.email,
+                                    userName: foundUser.dataValues.userName,
+
+                                };
+
+                                let token = jwt.sign(tokenData, secret, options);
+                                return res.json({ status: true, message: "Student login successful", token: token })
+                            } else {
+                                return res.json({ status: false, message: "Invalid Password", })
+                            }
+                        })
+                        .catch((error) => {
+                            return res.json({ status: false, error: error, message: "someting went wrong!" })
+                        });
+
+
+                }
+
+
+                else {
+                    return res.json({ status: false, error: "There is no no with this email" })
+
+                }
+
+            }
+        }
+    } catch (error) {
+        return res.json({ status: false, error: error })
 
     }
-
-    if (userName == null || userName == undefined) {
-        let foundUser = await Student.findOne({ where: { email: email } });
-
-
-
-        if (foundUser != null) {
-            console.log(foundUser);
-            comparePassword( password, foundUser.dataValues.password)
-                .then((isMatch) => {
-                    if (isMatch) {
-                        console.log('Password is correct!');
-                    } else {
-                        console.log('Incorrect password!');
-                    }
-                })
-                .catch((error) => console.error(error));
-            return res.json({ found: "found" })
-
-        }
-
-
-        else {
-            return res.json({ status: false, error: "There is no no with this email" })
-
-        }
-
-    }
-
-    res.json({ error: "not found" })
 
 
 
