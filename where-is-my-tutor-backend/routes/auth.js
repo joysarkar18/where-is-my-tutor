@@ -195,7 +195,7 @@ router.post("/log-in", async (req, res) => {
                 }
 
                 else {
-                    return res.json({ status: false, error: "There is no no with this username" })
+                    return res.json({ status: false, error: "There is no Student with this username" })
                 }
 
 
@@ -233,7 +233,7 @@ router.post("/log-in", async (req, res) => {
 
 
                 else {
-                    return res.json({ status: false, error: "There is no no with this email" })
+                    return res.json({ status: false, error: "There is no Student with this email" })
 
                 }
 
@@ -256,7 +256,7 @@ router.post("/log-in", async (req, res) => {
                                 };
 
                                 let token = jwt.sign(tokenData, secret, options);
-                                return res.json({ status: true, message: "Student login successful", token: token })
+                                return res.json({ status: true, message: "Teacher login successful", token: token })
                             } else {
                                 return res.json({ status: false, message: "Invalid Password", })
                             }
@@ -269,7 +269,7 @@ router.post("/log-in", async (req, res) => {
                 }
 
                 else {
-                    return res.json({ status: false, error: "There is no no with this username" })
+                    return res.json({ status: false, error: "There is no Teacher with this username" })
                 }
 
 
@@ -293,7 +293,7 @@ router.post("/log-in", async (req, res) => {
                                 };
 
                                 let token = jwt.sign(tokenData, secret, options);
-                                return res.json({ status: true, message: "Student login successful", token: token })
+                                return res.json({ status: true, message: "Teacher login successful", token: token })
                             } else {
                                 return res.json({ status: false, message: "Invalid Password", })
                             }
@@ -307,7 +307,7 @@ router.post("/log-in", async (req, res) => {
 
 
                 else {
-                    return res.json({ status: false, error: "There is no no with this email" })
+                    return res.json({ status: false, error: "There is no Teacher with this email" })
 
                 }
 
