@@ -1,12 +1,33 @@
 import React from 'react';
+import  { useState } from 'react';
 
 function Login  ()  {
+  const [isOn, setIsOn] = useState(false);
+
+  const handleToggle = () => {
+    setIsOn(!isOn);}
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Login to your account</h2>
         </div>
+        <div className="flex">
+      <button
+        className={`${
+          isOn ? 'bg-green-500' : 'bg-gray-400'
+        } w-16 h-8 rounded-full p-1 focus:outline-none`}
+        onClick={handleToggle}
+      >
+        <div
+          className={`${
+            isOn ? 'translate-x-8' : 'translate-x-0'
+          } transform bg-white w-6 h-6 rounded-full shadow-md`}
+        ></div>
+      </button>
+      <p className="ml-2">{isOn ? 'On' : 'Off'}</p>
+    </div>
         <form className="mt-8 space-y-6">
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
