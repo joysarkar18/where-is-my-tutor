@@ -17,9 +17,6 @@ function Navbar  ()  {
           <Link to="/Login"><button className="bg-white hover:bg-sky-700 text-black font-normal  py-1 px-8 rounded-full border border-sky-600">
             Log In
           </button></Link>
-
-
-
           {/* Signup Button */}
           <button className="bg-sky-600 hover:bg-sky-700 text-white font-normal py-1 px-8 rounded-full">
             Sign Up
