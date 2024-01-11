@@ -1,82 +1,57 @@
 import React from 'react';
-import  { useState } from 'react';
-
-function Login  ()  {
+import { useState } from 'react';
+import background from '../assets/background.jpg'
+function Login() {
   const [isTeachersActive, setIsTeachersActive] = useState(false);
 
   const toggleButton = () => {
     setIsTeachersActive(!isTeachersActive);
   };
-  
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Login to your account</h2>
-        </div>
-        <div className="flex items-center space-x-4">
-      <button
-        className={`px-4 py-2 rounded-full ${
-          isTeachersActive
-            ? 'bg-blue-500 text-white'
-            : 'bg-gray-200 text-gray-700'
-        }`}
-        onClick={toggleButton}
-      >
-        Teachers
-      </button>
-      <button
-        className={`px-4 py-2 rounded-full ${
-          !isTeachersActive
-            ? 'bg-blue-500 text-white'
-            : 'bg-gray-200 text-gray-700'
-        }`}
-        onClick={toggleButton}
-      >
-        Students
-      </button>
-    </div>
-        <form className="mt-8 space-y-6">
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-              />
-            </div>
-            <div className='space-y-2'>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none rounded-t-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-              />
-            </div>
-          </div>
 
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Login
+  return (
+    <div className='w-full h-screen flex'>
+      <div className='grid grid-cols-1 md:grid-cols-2 m-auto h-[550px] shadow-lg shadow-gray-600 sm:max-w[900px]'>
+        <div className='w-full h-[550px] hidden md:block'>
+          <img className='w-full h-full' src={background} alt="/" />
+        </div>
+        <div className='p-4 flex flex-col justify-around'>
+          <form>
+            <h2 className='text-4xl font-bold text-center mb-8'>LogIn To Your Account</h2>
+            
+            <div className="flex items-center space-x-0">
+          <button
+            className={`px-4 py-1 rounded-none ${isTeachersActive
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 text-gray-700'
+              }`}
+            onClick={toggleButton}
+          >
+            Teachers
+          </button>
+          <button
+            className={`px-4 py-1 rounded-none ${!isTeachersActive
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 text-gray-700'
+              }`}
+            onClick={toggleButton}
+          >
+            Students
             </button>
-          </div>
-        </form>
+            </div>
+            
+            <div className='py-2'>
+              <input className='bordar p-2 mr-2 ' type="text" placeholder='Username' />
+              <input className='bordar p-2 ' type="password" placeholder='Password' />
+            </div>
+            <button className='w-full py-2 my-4 bg-sky-600 rounded-sm hover:bg-sky-500'>Sign In</button>
+            <button className=' border border-gray-600-400 px-6 py-1 rounded-md hover:bg-gray-400'>
+            <p className='text-center'>Forgot Username Or Password</p>
+            </button>
+          </form>
+          <button>
+          <p className='text-center'>sign Up</p>
+          </button>
+        </div>
       </div>
     </div>
   );
