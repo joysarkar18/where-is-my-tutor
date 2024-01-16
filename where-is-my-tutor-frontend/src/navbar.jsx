@@ -12,7 +12,6 @@ function Navbar  ()  {
           <a href="#" className="text-black">Home</a>
           <a href="#" className="text-black">About</a>
           <a href="#" className="text-black">Contact</a>
-
           {/* Login Button */}
           <Link to="/Login"><button className="bg-white hover:bg-sky-700 text-black font-normal  py-1 px-8 rounded-full border border-sky-600">
             Log In
@@ -21,8 +20,6 @@ function Navbar  ()  {
           <button className="bg-sky-600 hover:bg-sky-700 text-white font-normal py-1 px-8 rounded-full">
             Sign Up
           </button>
-
-
         </div>
       </div>
     </nav>
