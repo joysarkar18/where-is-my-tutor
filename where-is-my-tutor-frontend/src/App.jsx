@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Navbar from './navbar'
 import { BrowserRouter as Router,Route,Switch,Link } from 'react-router-dom'
@@ -33,4 +34,5 @@ function App() {
     </Router>
   );
 }
- export default App;
+
+export default App;
