@@ -16,7 +16,10 @@ export default {
         'bubble-gum': '#ff77e9',
         'bermuda': '#78dcca',
         'baseColor-400': "#05B7BA",
-        "baseColor-600": "#028F94"
+        "baseColor-600": "#028F94",
+        "baseColor-100": "#D4E9EA",
+        "baseColor-200": "#B5DBDC",
+        "baseColor-300": "#9BCED2",
       },
     },
 
