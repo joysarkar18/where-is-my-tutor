@@ -1,17 +1,41 @@
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdClose } from "react-icons/md";
+import { useState } from "react";
+
 function Navbar() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
     <nav className="bg-white p-4 lg:mx-32 xl:mx-60">
       <div className="container mx-auto flex justify-between items-center">
         <div className="block sm:hidden">
-          <GiHamburgerMenu className="h-[20px] w-[20px]" />
+          <GiHamburgerMenu
+            className="h-[20px] w-[20px] cursor-pointer"
+            onClick={toggleSidebar}
+          />
         </div>
 
-        <img className="h-10" src="src/assets/logo-no-background.png"></img>
+        <img
+          className="h-10"
+          src="src/assets/logo-no-background.png"
+          alt="Logo"
+        />
 
-        <div className="flex space-x-4 sm:space-x-8 items-center">
-          <div className="hidden sm:flex space-x-8  items-center">
+        <div
+          className={`flex space-x-4 sm:space-x-8 items-center ${
+            isSidebarOpen ? "hidden" : "block"
+          }`}
+        >
+          <div className="hidden sm:flex space-x-8 items-center">
             <a href="#" className="text-black">
               Home
             </a>
@@ -24,13 +48,25 @@ function Navbar() {
           </div>
           {/* Login Button */}
           <Link to="/Login">
-            <button className="font-semibold text-baseColor-600 pt-[2.5px] pb-[3px]   px-6 rounded-md border border-baseColor-600">
+            <button className="font-semibold text-baseColor-600 pt-[2.5px] pb-[3px] px-6 rounded-md border border-baseColor-600">
               Login
             </button>
           </Link>
           {/* Signup Button */}
           <button className="hover:bg-baseColor-400 font-semibold text-white py-1 px-6 rounded-md bg-baseColor-600">
             Register
+          </button>
+        </div>
+      </div>
+
+      <div
+        className={`fixed top-0 left-0 h-screen w-64 bg-gray-800 text-white transition-transform transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="p-4">
+          <button onClick={closeSidebar} className="text-white mt-4">
+            <MdClose size={24} />
           </button>
         </div>
       </div>
