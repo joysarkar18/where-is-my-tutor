@@ -56,7 +56,6 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* Sidebar with transition */}
       <div
         className={`fixed top-[68px] left-0 h-screen w-64 bg-gray-800 text-white transition-transform transform z-20 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -82,13 +81,9 @@ function Navbar() {
             Contact
           </Link>
         </div>
-        {/* Add additional sidebar content or links as needed */}
       </div>
 
-      {/* Page content */}
-      <div className={`relative z-0 ${isSidebarOpen ? "ml-64" : "ml-0"}`}>
-        {/* Your page content goes here */}
-      </div>
+      <div className={`relative z-0 ${isSidebarOpen ? "ml-64" : "ml-0"}`}></div>
     </div>
   );
 }
