@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FiX } from "react-icons/fi";
 import { useState } from "react";
 
 function Navbar() {
@@ -9,9 +10,24 @@ function Navbar() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
     <div>
-      <nav className="bg-white p-4 lg:mx-32 xl:mx-60 relative z-10">
+      {isSidebarOpen && (
+        <div
+          className="fixed top-0 left-0 w-screen h-screen bg-black opacity-50 z-10"
+          onClick={closeSidebar}
+        ></div>
+      )}
+
+      <nav
+        className={`bg-white p-4 lg:mx-32 xl:mx-60 relative z-10 ${
+          isSidebarOpen ? "opacity-50" : ""
+        }`}
+      >
         <div className="container mx-auto flex justify-between items-center">
           <div className="block sm:hidden">
             <GiHamburgerMenu
@@ -26,11 +42,7 @@ function Navbar() {
             alt="Logo"
           />
 
-          <div
-            className={`flex space-x-4 sm:space-x-8 items-center ${
-              isSidebarOpen ? "hidden" : "block"
-            }`}
-          >
+          <div className={`flex space-x-4 sm:space-x-8 items-center`}>
             <div className="hidden sm:flex space-x-8 items-center">
               <a href="#" className="text-black">
                 Home
@@ -44,7 +56,7 @@ function Navbar() {
             </div>
             {/* Login Button */}
             <Link to="/Login">
-              <button className="font-semibold text-baseColor-600 pt-[2.5px] pb-[3px] px-6 rounded-md border border-baseColor-600">
+              <button className="font-semibold text-C pt-[2.5px] pb-[3px] px-6 rounded-md border border-baseColor-600">
                 Login
               </button>
             </Link>
@@ -55,35 +67,39 @@ function Navbar() {
           </div>
         </div>
       </nav>
-
       <div
-        className={`fixed top-[68px] left-0 h-screen w-64 bg-gray-800 text-white transition-transform transform z-20 ${
+        className={`fixed top-0 left-0 h-screen w-64 bg-white text-white transition-transform transform z-20 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        style={{
+          boxShadow: isSidebarOpen ? "0 0 24px rgba(0, 0, 0, 0.1)" : "none",
+        }}
       >
         <div className="p-4">
-          <Link to="#" className="block text-white mb-4">
+          <FiX
+            className="h-6 w-6 text-white cursor-pointer absolute top-4 right-4"
+            onClick={closeSidebar}
+          />
+          <Link to="#" className="block text-baseColor-400 mb-4">
             Home
           </Link>
-          <Link to="#" className="block text-white mb-4">
+          <Link to="#" className="block text-baseColor-400 mb-4">
             About
           </Link>
-          <Link to="#" className="block text-white mb-4">
+          <Link to="#" className="block text-baseColor-400 mb-4">
             Register as Teacher
           </Link>
-          <Link to="#" className="block text-white mb-4">
+          <Link to="#" className="block text-baseColor-400 mb-4">
             Register as Student
           </Link>
-          <Link to="/Login" className="block text-white mb-4">
+          <Link to="/Login" className="block text-baseColor-400 mb-4">
             Login
           </Link>
-          <Link to="#" className="block text-white mb-4">
+          <Link to="#" className="block text-baseColor-400 mb-4">
             Contact
           </Link>
         </div>
       </div>
-
-      <div className={`relative z-0 ${isSidebarOpen ? "ml-64" : "ml-0"}`}></div>
     </div>
   );
 }
