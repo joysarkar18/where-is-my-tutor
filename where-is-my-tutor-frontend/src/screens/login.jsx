@@ -8,7 +8,7 @@ function Login() {
   // };
 
   return (
-    <div className="w-screen max-h-screen disable-scroll">
+    <div className="w-screen h-screen overflow-hidden relative">
       <div className="h-[900px] w-[900px] absolute left-[-24rem] top-[-24rem] bg-baseColor-100 rounded-full"></div>
       <div className="h-[700px] w-[700px] absolute left-[-20rem] top-[-20rem] bg-baseColor-200 rounded-full"></div>
       <div className="h-[500px] w-[500px] absolute left-[-15rem] top-[-15rem] bg-baseColor-300 rounded-full"></div>
