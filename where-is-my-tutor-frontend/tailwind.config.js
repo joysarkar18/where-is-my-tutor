@@ -20,6 +20,9 @@ export default {
         "baseColor-100": "#D4E9EA",
         "baseColor-200": "#B5DBDC",
         "baseColor-300": "#9BCED2",
+        "logIn-500": "#75D0C1",
+        "logIn-300": "#9BDDD1",
+        "logIn-200": "#C7ECE5"
       },
     },
 
