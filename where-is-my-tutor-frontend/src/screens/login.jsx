@@ -1,5 +1,3 @@
-//import React from "react";
-
 function Login() {
   return (
     <div className="flex items-center justify-center w-screen h-screen overflow-hidden relative">
@@ -12,17 +10,42 @@ function Login() {
 
       {/* Login Box */}
       <div className="flex flex-col items-center justify-center h-4/6 w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] rounded-lg p-8">
-        <input
-          className="border p-2 mb-4 rounded-full px-12 py-1 absolute left-10 shadow-md shadow-baseColor-100 "
-          type="text"
-          placeholder="Username"
-        />
-        <input
-          className="border p-1 mb-4 rounded-full px-12 py-1  absulate left-9 shadow-md shadow-baseColor-100"
-          type="password"
-          placeholder="Password"
-        />
-        {/* Add your login button or other components here */}
+        <div>
+          <label className="sr-only">Email address</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            className=" rounded-full shadow-lg shadow-baseColor-100 relative block w-full px-10 py-1 border border-gray-300 sm:text-sm"
+            placeholder="Email address"
+          />
+        </div>
+
+        <div className="mt-4 space-y-2">
+          <label htmlFor="password" className="sr-only">
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            required
+            className=" rounded-full shadow-lg shadow-baseColor-100 relative block w-full px-10 py-1 sm:text-sm border border-gray-300"
+            placeholder="Password"
+          />
+        </div>
+
+        <div className="mt-4 space-y-6">
+          <button
+            type="submit"
+            className="group relative w-full flex justify-center  py-.6 px-3 border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 "
+          >
+            Login
+          </button>
+        </div>
       </div>
     </div>
   );
