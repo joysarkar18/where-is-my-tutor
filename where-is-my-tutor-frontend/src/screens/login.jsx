@@ -22,14 +22,14 @@ function Login() {
       {/* Login Box */}
       <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden h-4/6 w-5/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] p-8">
         <div className="flex flex-col items-start justify-center">
-          <div className="text-5xl font-semibold text-baseColor-600 ml-2">
+          <div className="text-4xl sm:text-5xl font-semibold text-baseColor-600 sm:ml-2 ml-12">
             Welcome back
           </div>
           {/* <div className="text-sm font-light text-baseColor-600 ml-3">
             Enter your email/username and password to Login
           </div> */}
           <div>
-            <div className="flex flex-row items-center justify-between space-x-12 h-32 mx-6">
+            <div className="flex flex-row items-center justify-between space-x-8 sm:space-x-12 h-32 mx-10 sm:mx-6">
               <div className="flex flex-col justify-center items-center">
                 <a
                   className={`${
@@ -79,68 +79,70 @@ function Login() {
               </div>
             </div>
 
-            <div className="shadow-[rgba(5,_183,_186,_0.3)_0px_30px_90px] rounded-full">
-              <label className="sr-only">Email address</label>
-              <div className="relative">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className=" rounded-full w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block px-10 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm"
-                  placeholder="Email or username"
-                />
-                <CgProfile className="top-2 left-4 absolute text-baseColor-400"></CgProfile>
+            <div className="flex flex-col items-center justify-center">
+              <div className="shadow-[rgba(5,_183,_186,_0.3)_0px_30px_90px] rounded-full flex justify-center w-64 sm:w-80">
+                <label className="sr-only">Email address</label>
+                <div className="relative">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className=" rounded-full w-64 sm:w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block px-10 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm"
+                    placeholder="Email or username"
+                  />
+                  <CgProfile className="top-2 left-4 absolute text-baseColor-400"></CgProfile>
+                </div>
+              </div>
+
+              <div className="mt-4 space-y-2 w-64 sm:w-80">
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    id="password"
+                    name="password"
+                    type={isPasswordShowing ? "password" : "text"}
+                    autoComplete="current-password"
+                    required
+                    className=" rounded-full text-baseColor-600 shadow-baseColor-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]"
+                    placeholder="Password"
+                  />
+                  <RiLockPasswordLine className="top-2 left-4 absolute text-baseColor-400"></RiLockPasswordLine>
+                  {!isPasswordShowing && (
+                    <AiOutlineEye
+                      className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
+                      onClick={() => {
+                        setIsPasswordShowing((v) => {
+                          return !v;
+                        });
+                      }}
+                    ></AiOutlineEye>
+                  )}
+                  {isPasswordShowing && (
+                    <AiOutlineEyeInvisible
+                      className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
+                      onClick={() => {
+                        setIsPasswordShowing((v) => {
+                          return !v;
+                        });
+                      }}
+                    ></AiOutlineEyeInvisible>
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className="mt-4 space-y-2">
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  id="password"
-                  name="password"
-                  type={isPasswordShowing ? "password" : "text"}
-                  autoComplete="current-password"
-                  required
-                  className=" rounded-full text-baseColor-600 shadow-baseColor-100 relative block w-80 h-8 px-10 py-1 sm:text-sm border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]"
-                  placeholder="Password"
-                />
-                <RiLockPasswordLine className="top-2 left-4 absolute text-baseColor-400"></RiLockPasswordLine>
-                {!isPasswordShowing && (
-                  <AiOutlineEye
-                    className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
-                    onClick={() => {
-                      setIsPasswordShowing((v) => {
-                        return !v;
-                      });
-                    }}
-                  ></AiOutlineEye>
-                )}
-                {isPasswordShowing && (
-                  <AiOutlineEyeInvisible
-                    className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
-                    onClick={() => {
-                      setIsPasswordShowing((v) => {
-                        return !v;
-                      });
-                    }}
-                  ></AiOutlineEyeInvisible>
-                )}
-              </div>
-            </div>
-
-            <div className="flex flex-row items-center justify-between space-x-28 h-32">
-              <a className="text-baseColor-600 whitespace-nowrap text-sm cursor-pointer">
+            <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-32">
+              <a className="text-baseColor-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer">
                 Forgot Password?
               </a>
 
               <button
                 type="submit"
-                className="group relative w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 "
+                className="group relative w-24 sm:w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 "
               >
                 Login
               </button>
