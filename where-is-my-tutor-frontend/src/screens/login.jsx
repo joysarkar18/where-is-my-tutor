@@ -3,9 +3,11 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
+import { DotLottiePlayer } from "@dotlottie/react-player";
+import "@dotlottie/react-player/dist/index.css";
 
 function Login() {
-  const [isPasswordShowing, setIsPasswordShowing] = useState(false);
+  const [isPasswordShowing, setIsPasswordShowing] = useState(true);
   const [selectedUserType, setSelectedUserType] = useState(0);
 
   return (
@@ -20,6 +22,12 @@ function Login() {
       {/* Login Box */}
       <div className="pl-32 flex flex-row items- justify-between overflow-hidden h-4/6 w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] p-8">
         <div className="flex flex-col items-start justify-center">
+          <div className="text-5xl font-semibold text-baseColor-600 ml-2">
+            Welcome back
+          </div>
+          {/* <div className="text-sm font-light text-baseColor-600 ml-3">
+            Enter your email/username and password to Login
+          </div> */}
           <div className="flex flex-row items-center justify-between space-x-12 h-32 ml-10">
             <div className="flex flex-col justify-center items-center">
               <a
@@ -140,7 +148,15 @@ function Login() {
         <div className="relative ">
           <div className="h-[800px] w-[800px] fixed right-[-19rem] top-[-4.0rem] bg-logIn-200 rounded-full">
             <div className="h-[700px] w-[700px] fixed right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
-              <div className="h-[640px] w-[640px] fixed right-[-23rem] top-[0rem] bg-logIn-500 rounded-full"></div>
+              <div className="h-[640px] w-[640px] fixed right-[-23rem] top-[0rem] bg-logIn-500 rounded-full">
+                <div className="z-30 fixed h-[25rem] w-[25rem] right-[4.4rem] top-[6rem]">
+                  <DotLottiePlayer
+                    src="src/assets/student_animation.lottie"
+                    autoplay
+                    loop
+                  ></DotLottiePlayer>
+                </div>
+              </div>
             </div>
           </div>
         </div>
