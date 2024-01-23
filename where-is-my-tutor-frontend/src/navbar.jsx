@@ -61,9 +61,11 @@ function Navbar() {
               </button>
             </Link>
             {/* Signup Button */}
-            <button className="hover:bg-baseColor-400 font-semibold text-white py-1 px-6 rounded-md bg-baseColor-600">
-              Register
-            </button>
+            <Link to="/Register">
+              <button className="hover:bg-baseColor-400 font-semibold text-white py-1 px-6 rounded-md bg-baseColor-600">
+                Register
+              </button>
+            </Link>
           </div>
         </div>
       </nav>
