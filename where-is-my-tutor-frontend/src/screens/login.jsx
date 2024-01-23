@@ -20,7 +20,7 @@ function Login() {
       <div className="h-[500px] w-[500px] absolute right-[-16rem] bottom-[-16rem] bg-baseColor-300 rounded-full"></div>
 
       {/* Login Box */}
-      <div className="pl-32 flex flex-row items- justify-between overflow-hidden h-4/6 w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] p-8">
+      <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden h-4/6 w-5/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] p-8">
         <div className="flex flex-col items-start justify-center">
           <div className="text-5xl font-semibold text-baseColor-600 ml-2">
             Welcome back
@@ -28,133 +28,139 @@ function Login() {
           {/* <div className="text-sm font-light text-baseColor-600 ml-3">
             Enter your email/username and password to Login
           </div> */}
-          <div className="flex flex-row items-center justify-between space-x-12 h-32 ml-10">
-            <div className="flex flex-col justify-center items-center">
-              <a
-                className={`${
-                  selectedUserType == 0
-                    ? "text-baseColor-600"
-                    : "text-slate-300"
-                } ${
-                  selectedUserType == 1
-                    ? "hover:text-baseColor-400"
-                    : "hover:text-baseColor-600"
-                } whitespace-nowrap text-xl font-bold mb-1 cursor-pointer`}
-                onClick={() => {
-                  setSelectedUserType(0);
-                }}
-              >
-                Student
-              </a>
-              <div
-                className={`h-[2px] w-24 rounded-full ${
-                  selectedUserType == 0 ? "bg-baseColor-300" : "bg-slate-300"
-                }`}
-              ></div>
-            </div>
-
-            <div className="flex flex-col justify-center items-center">
-              <a
-                className={`${
-                  selectedUserType == 1
-                    ? "text-baseColor-600"
-                    : "text-slate-300"
-                } ${
-                  selectedUserType == 0
-                    ? "hover:text-baseColor-400"
-                    : "hover:text-baseColor-600"
-                } whitespace-nowrap text-xl font-bold mb-1 cursor-pointer`}
-                onClick={() => {
-                  setSelectedUserType(1);
-                }}
-              >
-                Teacher
-              </a>
-              <div
-                className={`h-[2px] w-24 rounded-full ${
-                  selectedUserType == 1 ? "bg-baseColor-300" : "bg-slate-300"
-                }`}
-              ></div>
-            </div>
-          </div>
-
-          <div className="shadow-[rgba(5,_183,_186,_0.3)_0px_30px_90px] rounded-full">
-            <label className="sr-only">Email address</label>
-            <div className="relative">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className=" rounded-full w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block px-10 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm"
-                placeholder="Email or username"
-              />
-              <CgProfile className="top-2 left-4 absolute text-baseColor-400"></CgProfile>
-            </div>
-          </div>
-
-          <div className="mt-4 space-y-2">
-            <label htmlFor="password" className="sr-only">
-              Password
-            </label>
-            <div className="relative">
-              <input
-                id="password"
-                name="password"
-                type={isPasswordShowing ? "password" : "text"}
-                autoComplete="current-password"
-                required
-                className=" rounded-full text-baseColor-600 shadow-baseColor-100 relative block w-80 h-8 px-10 py-1 sm:text-sm border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]"
-                placeholder="Password"
-              />
-              <RiLockPasswordLine className="top-2 left-4 absolute text-baseColor-400"></RiLockPasswordLine>
-              {!isPasswordShowing && (
-                <AiOutlineEye
-                  className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
+          <div>
+            <div className="flex flex-row items-center justify-between space-x-12 h-32 mx-6">
+              <div className="flex flex-col justify-center items-center">
+                <a
+                  className={`${
+                    selectedUserType == 0
+                      ? "text-baseColor-600"
+                      : "text-slate-300"
+                  } ${
+                    selectedUserType == 1
+                      ? "hover:text-baseColor-400"
+                      : "hover:text-baseColor-600"
+                  } whitespace-nowrap text-xl font-bold mb-1 cursor-pointer`}
                   onClick={() => {
-                    setIsPasswordShowing((v) => {
-                      return !v;
-                    });
+                    setSelectedUserType(0);
                   }}
-                ></AiOutlineEye>
-              )}
-              {isPasswordShowing && (
-                <AiOutlineEyeInvisible
-                  className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
+                >
+                  Student
+                </a>
+                <div
+                  className={`h-[2px] w-24 rounded-full ${
+                    selectedUserType == 0 ? "bg-baseColor-300" : "bg-slate-300"
+                  }`}
+                ></div>
+              </div>
+
+              <div className="flex flex-col justify-center items-center">
+                <a
+                  className={`${
+                    selectedUserType == 1
+                      ? "text-baseColor-600"
+                      : "text-slate-300"
+                  } ${
+                    selectedUserType == 0
+                      ? "hover:text-baseColor-400"
+                      : "hover:text-baseColor-600"
+                  } whitespace-nowrap text-xl font-bold mb-1 cursor-pointer`}
                   onClick={() => {
-                    setIsPasswordShowing((v) => {
-                      return !v;
-                    });
+                    setSelectedUserType(1);
                   }}
-                ></AiOutlineEyeInvisible>
-              )}
+                >
+                  Teacher
+                </a>
+                <div
+                  className={`h-[2px] w-24 rounded-full ${
+                    selectedUserType == 1 ? "bg-baseColor-300" : "bg-slate-300"
+                  }`}
+                ></div>
+              </div>
+            </div>
+
+            <div className="shadow-[rgba(5,_183,_186,_0.3)_0px_30px_90px] rounded-full">
+              <label className="sr-only">Email address</label>
+              <div className="relative">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className=" rounded-full w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block px-10 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm"
+                  placeholder="Email or username"
+                />
+                <CgProfile className="top-2 left-4 absolute text-baseColor-400"></CgProfile>
+              </div>
+            </div>
+
+            <div className="mt-4 space-y-2">
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  name="password"
+                  type={isPasswordShowing ? "password" : "text"}
+                  autoComplete="current-password"
+                  required
+                  className=" rounded-full text-baseColor-600 shadow-baseColor-100 relative block w-80 h-8 px-10 py-1 sm:text-sm border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]"
+                  placeholder="Password"
+                />
+                <RiLockPasswordLine className="top-2 left-4 absolute text-baseColor-400"></RiLockPasswordLine>
+                {!isPasswordShowing && (
+                  <AiOutlineEye
+                    className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
+                    onClick={() => {
+                      setIsPasswordShowing((v) => {
+                        return !v;
+                      });
+                    }}
+                  ></AiOutlineEye>
+                )}
+                {isPasswordShowing && (
+                  <AiOutlineEyeInvisible
+                    className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
+                    onClick={() => {
+                      setIsPasswordShowing((v) => {
+                        return !v;
+                      });
+                    }}
+                  ></AiOutlineEyeInvisible>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-row items-center justify-between space-x-28 h-32">
+              <a className="text-baseColor-600 whitespace-nowrap text-sm cursor-pointer">
+                Forgot Password?
+              </a>
+
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 "
+              >
+                Login
+              </button>
             </div>
           </div>
-
-          <div className="flex flex-row items-center justify-between space-x-28 h-32">
-            <a className="text-baseColor-600 whitespace-nowrap text-sm cursor-pointer">
-              Forgot Password?
-            </a>
-
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 "
-            >
-              Login
-            </button>
-          </div>
-        </div>
-        <div className="relative ">
-          <div className="h-[800px] w-[800px] fixed right-[-19rem] top-[-4.0rem] bg-logIn-200 rounded-full">
-            <div className="h-[700px] w-[700px] fixed right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
-              <div className="h-[640px] w-[640px] fixed right-[-23rem] top-[0rem] bg-logIn-500 rounded-full">
-                <div className="z-30 fixed h-[25rem] w-[25rem] right-[4.4rem] top-[6rem]">
-                  <DotLottiePlayer
-                    src="src/assets/student_animation.lottie"
-                    autoplay
-                    loop
-                  ></DotLottiePlayer>
+          <div className="relative hidden lg:block">
+            <div className="h-[800px] w-[800px] fixed right-[-29rem] xl:right-[-19rem] top-[-4.0rem] bg-logIn-200 rounded-full">
+              <div className="h-[700px] w-[700px] fixed right-[-30rem] xl:right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
+                <div className="h-[640px] w-[640px] fixed right-[-32rem] xl:right-[-23rem] top-[0rem] bg-logIn-500 rounded-full">
+                  <div className="z-30 fixed h-[18rem] w-[18rem] xl:h-[25rem] xl:w-[25rem] right-[1.4rem] xl:right-[4.4rem] top-[6.9rem] xl:top-[6rem]">
+                    <DotLottiePlayer
+                      src={
+                        selectedUserType == 0
+                          ? "src/assets/student_animation.lottie"
+                          : "src/assets/teacher_animation_.lottie"
+                      }
+                      autoplay
+                      loop
+                    ></DotLottiePlayer>
+                  </div>
                 </div>
               </div>
             </div>
