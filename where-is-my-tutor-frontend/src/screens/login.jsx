@@ -5,10 +5,41 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
+import { useSelector, useDispatch } from "react-redux";
+import { loginWithEmailPassword, logOut } from "../slices/authSlice";
+import { validate, res } from "react-email-validator";
 
 function Login() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
   const [selectedUserType, setSelectedUserType] = useState(0);
+  const [emailOrUsername, setEmailOrUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const loginState = useSelector((state) => state.auth);
+
+  function login() {
+    validate(emailOrUsername);
+    if (res) {
+      console.log(loginState);
+      dispatch(
+        loginWithEmailPassword({
+          emailOrUsername: emailOrUsername,
+          password: password,
+          type: selectedUserType,
+        })
+      );
+    } else {
+      console.log("username");
+    }
+  }
+
+  function emailController(event) {
+    setEmailOrUsername(event.target.value);
+  }
+  function passwordController(event) {
+    setPassword(event.target.value);
+    console.log(password);
+  }
 
   return (
     <div className="flex items-center justify-center w-screen h-screen overflow-hidden relative">
@@ -87,6 +118,8 @@ function Login() {
                     id="email"
                     name="email"
                     type="email"
+                    value={emailOrUsername}
+                    onChange={emailController}
                     autoComplete="email"
                     required
                     className=" rounded-full w-64 sm:w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block px-10 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm"
@@ -104,6 +137,8 @@ function Login() {
                   <input
                     id="password"
                     name="password"
+                    value={password}
+                    onChange={passwordController}
                     type={isPasswordShowing ? "password" : "text"}
                     autoComplete="current-password"
                     required
@@ -136,12 +171,18 @@ function Login() {
             </div>
 
             <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-32">
-              <a className="text-baseColor-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer">
+              <a
+                className="text-baseColor-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer"
+                onClick={() => {
+                  dispatch(logOut());
+                }}
+              >
                 Forgot Password?
               </a>
 
               <button
                 type="submit"
+                onClick={login}
                 className="group relative w-24 sm:w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 "
               >
                 Login
