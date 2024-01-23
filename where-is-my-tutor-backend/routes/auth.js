@@ -3,8 +3,8 @@ const { body, validationResult } = require('express-validator')
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
-const Teacher = require('../models/teacher')
-const Student = require('../models/student')
+const Teacher = require('../models/teacher/teacher')
+const Student = require('../models/student/student')
 
 const saltRounds = 10;
 const secret = 'please-fuck-yourself';
@@ -69,7 +69,7 @@ router.post("/sign-up", [
 
                                 };
 
-                                let token =  jwt.sign(payload, secret, options);
+                                let token = jwt.sign(payload, secret, options);
 
                                 return res.json({ status: true, message: "student account created", token: token })
                             }).catch((err) => {
@@ -91,7 +91,7 @@ router.post("/sign-up", [
             }
         }
 
-        if (type ===1) {
+        if (type === 1) {
 
             let foundUser = await Teacher.findOne({ where: { email: email } });
             if (foundUser != null) {
