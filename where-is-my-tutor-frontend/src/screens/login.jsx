@@ -13,23 +13,36 @@ function Login() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
   const [selectedUserType, setSelectedUserType] = useState(0);
   const [emailOrUsername, setEmailOrUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [password, setPassword] = useState({
+    errorType: 0,
+    errorMessage: "",
+    status: false,
+  });
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.auth);
 
   function login() {
     validate(emailOrUsername);
-    if (res) {
-      console.log(loginState);
-      dispatch(
-        loginWithEmailPassword({
-          emailOrUsername: emailOrUsername,
-          password: password,
-          type: selectedUserType,
-        })
-      );
+    if (password.length <= 6) {
+      setError({
+        status: true,
+        errorMessage: "Password is to small",
+        errorType: 1,
+      });
     } else {
-      console.log("username");
+      if (res) {
+        console.log(loginState);
+        dispatch(
+          loginWithEmailPassword({
+            emailOrUsername: emailOrUsername,
+            password: password,
+            type: selectedUserType,
+          })
+        );
+      } else {
+        console.log("username");
+      }
     }
   }
 
@@ -168,6 +181,10 @@ function Login() {
                   )}
                 </div>
               </div>
+            </div>
+            <div className="h-18 pt-4 ml-2">
+              <p className="text-red-500 text-sm">Something went wrong!</p>
+              {error.status && <p>adhasjkdh</p>}
             </div>
 
             <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-32">
