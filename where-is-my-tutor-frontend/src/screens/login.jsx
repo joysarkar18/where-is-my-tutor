@@ -6,29 +6,39 @@ import { useState } from "react";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import { useSelector, useDispatch } from "react-redux";
-import { loginWithEmailPassword, logOut } from "../slices/authSlice";
+import { useNavigate } from "react-router-dom";
+
+import {
+  loginWithEmailPassword,
+  loginWithUserNamePassword,
+  logOut,
+} from "../slices/authSlice";
 import { validate, res } from "react-email-validator";
 
 function Login() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
   const [selectedUserType, setSelectedUserType] = useState(0);
   const [emailOrUsername, setEmailOrUsername] = useState("");
-  const [error, setError] = useState("");
-  const [password, setPassword] = useState({
-    errorType: 0,
+  const [error, setError] = useState({
+    errorType: "",
     errorMessage: "",
     status: false,
   });
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.auth);
+  let navigate = useNavigate();
+  function goHome() {
+    navigate("/");
+  }
 
   function login() {
     validate(emailOrUsername);
     if (password.length <= 6) {
       setError({
         status: true,
-        errorMessage: "Password is to small",
-        errorType: 1,
+        errorMessage: "Password is to small!",
+        errorType: "password",
       });
     } else {
       if (res) {
@@ -38,15 +48,46 @@ function Login() {
             emailOrUsername: emailOrUsername,
             password: password,
             type: selectedUserType,
+            setError: (error) => {
+              setError(error);
+            },
+            goHome: goHome,
           })
         );
+        history.push("/");
       } else {
+        if (emailOrUsername.length < 1) {
+          setError({
+            status: true,
+            errorMessage: "Email or username can't be empty!",
+            errorType: "email",
+          });
+        } else {
+          dispatch(
+            loginWithUserNamePassword({
+              emailOrUsername: emailOrUsername,
+              password: password,
+              type: selectedUserType,
+              setError: (error) => {
+                setError(error);
+              },
+              goHome: goHome,
+            })
+          );
+        }
         console.log("username");
       }
     }
   }
 
   function emailController(event) {
+    if (error.status) {
+      setError({
+        status: false,
+        errorMessage: "",
+        errorType: "",
+      });
+    }
     setEmailOrUsername(event.target.value);
   }
   function passwordController(event) {
@@ -135,7 +176,11 @@ function Login() {
                     onChange={emailController}
                     autoComplete="email"
                     required
-                    className=" rounded-full w-64 sm:w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block px-10 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm"
+                    className={`rounded-full w-64 sm:w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block px-10 py-1 border ${
+                      error.status && error.errorType == "email"
+                        ? "border-red-500"
+                        : "border-baseColor-300"
+                    } focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                     placeholder="Email or username"
                   />
                   <CgProfile className="top-2 left-4 absolute text-baseColor-400"></CgProfile>
@@ -155,7 +200,11 @@ function Login() {
                     type={isPasswordShowing ? "password" : "text"}
                     autoComplete="current-password"
                     required
-                    className=" rounded-full text-baseColor-600 shadow-baseColor-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]"
+                    className={`rounded-full text-baseColor-600 shadow-baseColor-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border ${
+                      error.status && error.errorType == "password"
+                        ? "border-red-500"
+                        : "border-baseColor-300"
+                    } focus:border-baseColor-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]`}
                     placeholder="Password"
                   />
                   <RiLockPasswordLine className="top-2 left-4 absolute text-baseColor-400"></RiLockPasswordLine>
@@ -183,8 +232,9 @@ function Login() {
               </div>
             </div>
             <div className="h-18 pt-4 ml-2">
-              <p className="text-red-500 text-sm">Something went wrong!</p>
-              {error.status && <p>adhasjkdh</p>}
+              {error.status && (
+                <p className="text-red-500 text-sm">{error.errorMessage}</p>
+              )}
             </div>
 
             <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-32">

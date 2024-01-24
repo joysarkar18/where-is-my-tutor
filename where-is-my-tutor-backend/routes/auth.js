@@ -95,12 +95,12 @@ router.post("/sign-up", [
 
             let foundUser = await Teacher.findOne({ where: { email: email } });
             if (foundUser != null) {
-                return res.json({ status: false, message: "User with this email already exists" });
+                return res.json({ status: false, message: "User with this email already exists", type: "email" });
             }
             let foundUser2 = await Teacher.findOne({ where: { userName: userName } });
 
             if (foundUser2 != null) {
-                return res.json({ status: false, message: "User with this username already exists" });
+                return res.json({ status: false, message: "User with this username already exists", type: "username" });
 
             }
 
@@ -182,9 +182,9 @@ router.post("/log-in", async (req, res) => {
                                 };
 
                                 let token = jwt.sign(tokenData, secret, options);
-                                return res.json({ status: true, message: "Student login successful", token: token })
+                                return res.json({ status: true, message: "Student login successful", token: token, email: foundUser.dataValues.email, userName: foundUser.dataValues.userName, })
                             } else {
-                                return res.json({ status: false, message: "Invalid Password", })
+                                return res.json({ status: false, message: "Invalid Password", type: "password" })
                             }
                         })
                         .catch((error) => {
@@ -195,7 +195,7 @@ router.post("/log-in", async (req, res) => {
                 }
 
                 else {
-                    return res.json({ status: false, error: "There is no Student with this username" })
+                    return res.json({ status: false, error: "user not exist!", message: "user not exist!", type: "email" })
                 }
 
 
@@ -219,9 +219,9 @@ router.post("/log-in", async (req, res) => {
                                 };
 
                                 let token = jwt.sign(tokenData, secret, options);
-                                return res.json({ status: true, message: "Student login successful", token: token })
+                                return res.json({ status: true, message: "Student login successful", token: token, email: foundUser.dataValues.email, userName: foundUser.dataValues.userName, })
                             } else {
-                                return res.json({ status: false, message: "Invalid Password", })
+                                return res.json({ status: false, message: "Invalid Password", type: "password" })
                             }
                         })
                         .catch((error) => {
@@ -233,7 +233,7 @@ router.post("/log-in", async (req, res) => {
 
 
                 else {
-                    return res.json({ status: false, error: "There is no Student with this email" })
+                    return res.json({ status: false, message: "user not exist!", type: "email" })
 
                 }
 
@@ -256,9 +256,9 @@ router.post("/log-in", async (req, res) => {
                                 };
 
                                 let token = jwt.sign(tokenData, secret, options);
-                                return res.json({ status: true, message: "Teacher login successful", token: token })
+                                return res.json({ status: true, message: "Teacher login successful", token: token, email: foundUser.dataValues.email, userName: foundUser.dataValues.userName, })
                             } else {
-                                return res.json({ status: false, message: "Invalid Password", })
+                                return res.json({ status: false, message: "Invalid Password", type: "password" })
                             }
                         })
                         .catch((error) => {
@@ -269,7 +269,7 @@ router.post("/log-in", async (req, res) => {
                 }
 
                 else {
-                    return res.json({ status: false, error: "There is no Teacher with this username" })
+                    return res.json({ status: false, message: "user not exist!", type: "email" })
                 }
 
 
@@ -293,7 +293,7 @@ router.post("/log-in", async (req, res) => {
                                 };
 
                                 let token = jwt.sign(tokenData, secret, options);
-                                return res.json({ status: true, message: "Teacher login successful", token: token })
+                                return res.json({ status: true, message: "Teacher login successful", email: foundUser.dataValues.email, userName: foundUser.dataValues.userName, })
                             } else {
                                 return res.json({ status: false, message: "Invalid Password", })
                             }
@@ -307,14 +307,14 @@ router.post("/log-in", async (req, res) => {
 
 
                 else {
-                    return res.json({ status: false, error: "There is no Teacher with this email" })
+                    return res.json({ status: false, message: "user not exist!", type: "email" })
 
                 }
 
             }
         }
     } catch (error) {
-        return res.json({ status: false, error: error })
+        return res.json({ status: false, error: error, message: "Something went wrong!" })
 
     }
 
