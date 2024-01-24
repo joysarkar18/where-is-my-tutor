@@ -37,7 +37,14 @@ function Register() {
         <div className="flex flex-col items-start justify-center">
           <div className="flex flex-row items-start justify-start space-x-8 sm:space-x-12 h-32 mx-10 sm:mx-6">
             <div className="flex flex-col items-start justify-start ">
-              <div className="flex flex-col items-start justify-center">
+              <div className="flex flex-col items-start justify-center -translate-y-12">
+                <div className="flex flex-col items-start justify-center -translate-y-20">
+                  <img
+                    className="h-16"
+                    src="src/assets/logo-no-background.png"
+                    alt="Logo"
+                  />
+                </div>
                 <div className="shadow-[rgba(5,_183,_186,_0.3)_0px_30px_90px] rounded-full flex justify-center w-64 sm:w-80">
                   <div className="relative">
                     <input
