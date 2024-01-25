@@ -256,6 +256,14 @@ function Login() {
               </button>
             </div>
           </div>
+          <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-14">
+            <a
+              className="text-baseColor-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer"
+              onClick={() => {}}
+            >
+              Do not have an account? Sign up
+            </a>
+          </div>
           <div className="relative hidden lg:block">
             <div className="h-[800px] w-[800px] fixed right-[-29rem] xl:right-[-19rem] top-[-4.0rem] bg-logIn-200 rounded-full">
               <div className="h-[700px] w-[700px] fixed right-[-30rem] xl:right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
