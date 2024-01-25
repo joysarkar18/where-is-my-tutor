@@ -1,10 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUrl } from "../constant/urls";
 
-
-
-
-
 const initialState = {
     status: true,
     token: "",
