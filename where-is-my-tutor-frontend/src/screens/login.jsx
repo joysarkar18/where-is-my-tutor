@@ -34,7 +34,7 @@ function Login() {
 
   function login() {
     validate(emailOrUsername);
-    if (password.length <= 6) {
+    if (password.length <= 5) {
       setError({
         status: true,
         errorMessage: "Password is to small!",

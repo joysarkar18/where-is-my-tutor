@@ -5,7 +5,11 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import { LuMail } from "react-icons/lu";
-import { FiPhone } from "react-icons/fi";
+import { CgProfile } from "react-icons/cg";
+import { validate, res } from "react-email-validator";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signup } from "../slices/authSlice";
 function Register() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
   const [isPasswordShowing2, setIsPasswordShowing2] = useState(true);
@@ -13,17 +17,80 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(true);
 
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+
+  const [error, setError] = useState({
+    errorType: "",
+    errorMessage: "",
+    status: false,
+  });
+
+  const loginState = useSelector((state) => state.auth);
+
+  let navigate = useNavigate();
+  function goHome() {
+    navigate("/");
+  }
+
+  function handleUserNameChange(event) {
+    setUserName(event.target.value);
+  }
+
+  function handleEmailChange(event) {
+    setEmail(event.target.value);
+  }
+
   const handlePasswordChange = (value) => {
     setPassword(value);
-    if (confirmPassword !== "") {
-      setPasswordsMatch(value === confirmPassword);
-    }
+    // if (confirmPassword !== "") {
+    //   setPasswordsMatch(value === confirmPassword);
+    // }
   };
 
   const handleConfirmPasswordChange = (value) => {
     setConfirmPassword(value);
-    setPasswordsMatch(value === password);
+    // setPasswordsMatch(value === password);
   };
+
+  function signupHandeler() {
+    console.log(loginState);
+    if (passwordsMatch) {
+      validate(email);
+
+      if (res) {
+        if (userName.length < 4) {
+          setError({
+            status: true,
+            errorMessage: "Username is very short!",
+            errorType: "userName",
+          });
+        } else {
+          dispatch(
+            signup({
+              email: email,
+              password: confirmPassword,
+              userName: userName,
+              type: 0,
+              setError: (error) => {
+                setError(error);
+              },
+              goHome: goHome,
+            })
+          );
+        }
+      } else {
+        setError({
+          status: true,
+          errorMessage: "Please enter a valid email!",
+          errorType: "email",
+        });
+      }
+    } else {
+      setPasswordsMatch(false);
+    }
+  }
 
   return (
     <div className="flex items-center justify-center w-screen h-screen overflow-hidden relative">
@@ -49,6 +116,8 @@ function Register() {
                       id="email"
                       name="email"
                       type="email"
+                      onChange={handleEmailChange}
+                      value={email}
                       className="rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border border-sky-300 focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm"
                       placeholder="Enter your email address"
                     />
@@ -63,10 +132,12 @@ function Register() {
                       id="phone"
                       name="phone"
                       type="tel"
+                      value={userName}
+                      onChange={handleUserNameChange}
                       className=" rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border border-sky-300 focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm"
-                      placeholder="Enter your phone number"
+                      placeholder="Enter username"
                     />
-                    <FiPhone className="top-2 left-4 absolute text-sky-400"></FiPhone>
+                    <CgProfile className="top-2 left-4 absolute text-sky-400"></CgProfile>
                   </div>
                 </div>
 
@@ -138,16 +209,26 @@ function Register() {
                       Passwords do not match
                     </p>
                   )}
+
+                  <div className="h-18 pt-4 ml-2">
+                    {error.status && (
+                      <p className="text-red-500 text-sm">
+                        {error.errorMessage}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 <button
                   type="submit"
+                  onClick={signupHandeler}
                   className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-sky-600 mt-4 space-y-7 hover:bg-sky-500  shadow-sky-100"
                 >
                   Register as a Tearcher
                 </button>
                 <button
                   type="submit"
+                  onClick={signupHandeler}
                   className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-sky-600 mt-4 space-y-7 hover:bg-sky-500 shadow-sky-100 "
                 >
                   Register as a Student
