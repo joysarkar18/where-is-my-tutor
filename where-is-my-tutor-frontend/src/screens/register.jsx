@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { CgProfile } from "react-icons/cg";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
-
+import { LuMail } from "react-icons/lu";
+import { FiPhone } from "react-icons/fi";
 function Register() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
+  const [isPasswordShowing2, setIsPasswordShowing2] = useState(true);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(true);
@@ -33,40 +33,40 @@ function Register() {
       <div className="h-[900px] w-[900px] absolute right-[-25rem] bottom-[-25rem] bg-sky-100 rounded-full"></div>
       <div className="h-[700px] w-[700px] absolute right-[-21rem] bottom-[-21rem] bg-sky-200 rounded-full"></div>
       <div className="h-[500px] w-[500px] absolute right-[-16rem] bottom-[-16rem] bg-sky-300 rounded-full"></div>
-      <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden h-4/6 w-3/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] p-8">
+      <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden h-4/6 w-5/6 sm:4/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(125,_211,_252,_0.7)_0px_0px_18px] p-8">
         <div className="flex flex-col items-start justify-center">
-          <div className="flex flex-row items-start justify-start space-x-8 sm:space-x-12 h-32 mx-10 sm:mx-6">
+          <div className="flex flex-row items-start justify-start space-x-8 sm:space-x-12 h-32 mx-10 sm:mx-6 mb-32">
             <div className="flex flex-col items-start justify-start ">
               <div className="flex flex-col items-start justify-center -translate-y-12">
-                <div className="flex flex-col items-start justify-center -translate-y-20">
-                  <img
-                    className="h-16"
-                    src="src/assets/logo-no-background.png"
-                    alt="Logo"
-                  />
+                <div className="ml-10 sm:ml-9 flex flex-row items-center justify-center -translate-y-10">
+                  <h2 className="text-xl sm:text-3xl font-semibold text-sky-600">
+                    Create an account
+                  </h2>
                 </div>
                 <div className="shadow-[rgba(5,_183,_186,_0.3)_0px_30px_90px] rounded-full flex justify-center w-64 sm:w-80">
                   <div className="relative">
                     <input
-                      id="Full Name"
-                      name="Full name"
-                      type="Full Name"
+                      id="email"
+                      name="email"
+                      type="email"
                       className="rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border border-sky-300 focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm"
-                      placeholder="Enter your Full Name"
+                      placeholder="Enter your email address"
                     />
-                    <MdOutlineDriveFileRenameOutline className="top-2 left-4 absolute text-sky-400" />
+                    <LuMail className="top-2 left-4 absolute text-sky-400">
+                      {" "}
+                    </LuMail>
                   </div>
                 </div>
                 <div className="shadow-[rgba(5,_183,_186,_0.3)_0px_30px_90px] rounded-full flex justify-center w-64 sm:w-80 mt-4 space-y-2">
                   <div className="relative">
                     <input
-                      id="Phone number"
-                      name="Phone number "
-                      type="Phone number"
+                      id="phone"
+                      name="phone"
+                      type="tel"
                       className=" rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border border-sky-300 focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm"
                       placeholder="Enter your phone number"
                     />
-                    <CgProfile className="top-2 left-4 absolute text-sky-400"></CgProfile>
+                    <FiPhone className="top-2 left-4 absolute text-sky-400"></FiPhone>
                   </div>
                 </div>
 
@@ -100,7 +100,7 @@ function Register() {
                     )}
                   </div>
                 </div>
-                <div className="mt-4 space-y-2 w-64 sm:w-80">
+                <div className="mt-4 space-y-2 w-64 sm:w-80 mb-4">
                   <div className="relative">
                     <input
                       id="confirmPassword"
@@ -116,19 +116,19 @@ function Register() {
                       placeholder="Confirm password"
                     />
                     <RiLockPasswordLine className="top-2 left-4 absolute text-sky-400"></RiLockPasswordLine>
-                    {!isPasswordShowing && (
+                    {!isPasswordShowing2 && (
                       <AiOutlineEye
                         className="top-2 right-4 absolute text-sky-400 cursor-pointer"
                         onClick={() => {
-                          setIsPasswordShowing((v) => !v);
+                          setIsPasswordShowing2((v) => !v);
                         }}
                       ></AiOutlineEye>
                     )}
-                    {isPasswordShowing && (
+                    {isPasswordShowing2 && (
                       <AiOutlineEyeInvisible
                         className="top-2 right-4 absolute text-sky-400 cursor-pointer"
                         onClick={() => {
-                          setIsPasswordShowing((v) => !v);
+                          setIsPasswordShowing2((v) => !v);
                         }}
                       ></AiOutlineEyeInvisible>
                     )}
@@ -157,8 +157,8 @@ function Register() {
           </div>
         </div>
         <div className="relative hidden lg:block">
-          <div className="h-[800px] w-[800px] fixed right-[-29rem] xl:right-[-19rem] top-[-4.0rem] bg-sky-100 rounded-full">
-            <div className="h-[700px] w-[700px] fixed right-[-30rem] xl:right-[-20rem] top-[-1.4rem] bg-sky-200 rounded-full">
+          <div className="h-[800px] w-[800px] fixed right-[-30rem] xl:right-[-19rem] top-[-4.0rem] bg-sky-100 rounded-full">
+            <div className="h-[700px] w-[700px] fixed right-[-31rem] xl:right-[-20rem] top-[-1.4rem] bg-sky-200 rounded-full">
               <div className="h-[640px] w-[640px] fixed right-[-32rem] xl:right-[-23rem] top-[0rem] bg-sky-300 rounded-full">
                 <div className="z-30 fixed h-[18rem] w-[18rem] xl:h-[25rem] xl:w-[25rem] right-[1.4rem] xl:right-[4.4rem] top-[6.9rem] xl:top-[6rem] ">
                   <DotLottiePlayer
