@@ -105,7 +105,7 @@ function Register() {
                     <input
                       id="confirmPassword"
                       name="confirmPassword"
-                      type={isPasswordShowing ? "password" : "text"}
+                      type={isPasswordShowing2 ? "password" : "text"}
                       value={confirmPassword}
                       onChange={(e) =>
                         handleConfirmPasswordChange(e.target.value)
