@@ -54,7 +54,7 @@ function Register() {
     // setPasswordsMatch(value === password);
   };
 
-  function signupHandeler() {
+  function signupHandeler(type) {
     console.log(loginState);
     if (passwordsMatch) {
       validate(email);
@@ -72,7 +72,7 @@ function Register() {
               email: email,
               password: confirmPassword,
               userName: userName,
-              type: 0,
+              type: type,
               setError: (error) => {
                 setError(error);
               },
@@ -118,7 +118,11 @@ function Register() {
                       type="email"
                       onChange={handleEmailChange}
                       value={email}
-                      className="rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border border-sky-300 focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm"
+                      className={`rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border ${
+                        error.status && error.errorType === "email"
+                          ? "border-red-500"
+                          : "border-sky-300"
+                      } focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm`}
                       placeholder="Enter your email address"
                     />
                     <LuMail className="top-2 left-4 absolute text-sky-400">
@@ -134,7 +138,11 @@ function Register() {
                       type="tel"
                       value={userName}
                       onChange={handleUserNameChange}
-                      className=" rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border border-sky-300 focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm"
+                      className={`rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border ${
+                        error.status && error.errorType === "userName"
+                          ? "border-red-500"
+                          : "border-sky-300"
+                      } focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm`}
                       placeholder="Enter username"
                     />
                     <CgProfile className="top-2 left-4 absolute text-sky-400"></CgProfile>
@@ -221,14 +229,18 @@ function Register() {
 
                 <button
                   type="submit"
-                  onClick={signupHandeler}
+                  onClick={() => {
+                    signupHandeler(1);
+                  }}
                   className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-sky-600 mt-4 space-y-7 hover:bg-sky-500  shadow-sky-100"
                 >
                   Register as a Tearcher
                 </button>
                 <button
                   type="submit"
-                  onClick={signupHandeler}
+                  onClick={() => {
+                    signupHandeler(0);
+                  }}
                   className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-sky-600 mt-4 space-y-7 hover:bg-sky-500 shadow-sky-100 "
                 >
                   Register as a Student

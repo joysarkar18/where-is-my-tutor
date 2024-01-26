@@ -238,7 +238,7 @@ const authSlice = createSlice({
 
                         else if (data.type == "userName") {
                             action.payload.setError({
-                                errorType: data.type,
+                                errorType: "userName",
                                 errorMessage: data.message,
                                 status: true,
                             })
