@@ -25,7 +25,8 @@ const Teacher = sequelize.define('teacher', {
 
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
+
 }, {
 
 });

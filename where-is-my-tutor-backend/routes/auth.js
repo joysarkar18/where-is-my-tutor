@@ -42,12 +42,12 @@ router.post("/sign-up", [
         if (type === 0) {
             let foundUser = await Student.findOne({ where: { email: email } });
             if (foundUser != null) {
-                return res.json({ status: false, message: "User with this email already exists" });
+                return res.json({ status: false, message: "User with this email already exists", type: "email" });
             }
             let foundUser2 = await Student.findOne({ where: { userName: userName } });
 
             if (foundUser2 != null) {
-                return res.json({ status: false, message: "User with this username already exists" });
+                return res.json({ status: false, message: "Username is already taken", type: "userName" });
 
             }
 
@@ -65,7 +65,7 @@ router.post("/sign-up", [
                                 const payload = {
                                     id: result.dataValues.id,
                                     email: email,
-                                    userName: userName
+                                    userName: userName,
 
                                 };
 
@@ -79,7 +79,8 @@ router.post("/sign-up", [
                     });
 
                 } catch (error) {
-                    return res.json({ status: false, error: error });
+                    console.log(error);
+                    return res.json({ status: false, error: error, message: "Something went wrong!", type: "" });
 
                 }
 
@@ -100,7 +101,7 @@ router.post("/sign-up", [
             let foundUser2 = await Teacher.findOne({ where: { userName: userName } });
 
             if (foundUser2 != null) {
-                return res.json({ status: false, message: "User with this username already exists", type: "username" });
+                return res.json({ status: false, message: "Username is already taken", type: "username" });
 
             }
 
@@ -132,7 +133,7 @@ router.post("/sign-up", [
                     });
 
                 } catch (error) {
-                    return res.json({ status: false, error: error });
+                    return res.json({ status: false, error: error, message: "Something went wrong!", type: "" });
 
                 }
 
@@ -148,7 +149,7 @@ router.post("/sign-up", [
 
     } catch (error) {
 
-        return res.json({ status: false, error: error });
+        return res.json({ status: false, error: error, message: "Something went wrong!", type: "" });
 
     }
 

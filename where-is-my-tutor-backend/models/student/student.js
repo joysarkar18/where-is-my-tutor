@@ -22,10 +22,9 @@ const Student = sequelize.define('student', {
   },
 
   password: {
-
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
 }, {
 
 });
