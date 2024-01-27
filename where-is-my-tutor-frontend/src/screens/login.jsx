@@ -29,7 +29,7 @@ function Login() {
   const loginState = useSelector((state) => state.auth);
   let navigate = useNavigate();
   function goHome() {
-    navigate("/");
+    navigate("/", { replace: true });
   }
 
   function login() {
@@ -54,7 +54,6 @@ function Login() {
             goHome: goHome,
           })
         );
-        history.push("/");
       } else {
         if (emailOrUsername.length < 1) {
           setError({
@@ -231,7 +230,7 @@ function Login() {
                 </div>
               </div>
             </div>
-            <div className="h-18 pt-4 ml-2">
+            <div className="h-18 pt-4 sm:ml-2 ml-7">
               {error.status && (
                 <p className="text-red-500 text-sm">{error.errorMessage}</p>
               )}

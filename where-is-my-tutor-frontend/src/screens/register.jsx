@@ -32,7 +32,7 @@ function Register() {
 
   let navigate = useNavigate();
   function goHome() {
-    navigate("/");
+    navigate("/", { replace: true });
   }
 
   function handleUserNameChange(event) {
@@ -219,7 +219,7 @@ function Register() {
                     </p>
                   )}
 
-                  <div className="h-18 pt-4 ml-2">
+                  <div className="h-18 pt-4 sm:ml-2 ml-7">
                     {error.status && (
                       <p className="text-red-500 text-sm">
                         {error.errorMessage}
