@@ -10,6 +10,7 @@ import { validate, res } from "react-email-validator";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../slices/authSlice";
+
 function Register() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
   const [isPasswordShowing2, setIsPasswordShowing2] = useState(true);
@@ -44,14 +45,14 @@ function Register() {
 
   const handlePasswordChange = (value) => {
     setPassword(value);
-    // if (confirmPassword !== "") {
-    //   setPasswordsMatch(value === confirmPassword);
-    // }
+    if (confirmPassword !== "") {
+      setPasswordsMatch(value === confirmPassword);
+    }
   };
 
   const handleConfirmPasswordChange = (value) => {
     setConfirmPassword(value);
-    // setPasswordsMatch(value === password);
+    setPasswordsMatch(value === password);
   };
 
   function signupHandeler(type) {
@@ -246,9 +247,20 @@ function Register() {
                   Register as a Student
                 </button>
               </div>
+              <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-20 h-4">
+                <a
+                  className="text-sky-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer"
+                  onClick={() => {
+                    navigate("/Login");
+                  }}
+                >
+                  Already have an account? Login
+                </a>
+              </div>
             </div>
           </div>
         </div>
+
         <div className="relative hidden lg:block">
           <div className="h-[800px] w-[800px] fixed right-[-30rem] xl:right-[-19rem] top-[-4.0rem] bg-sky-100 rounded-full">
             <div className="h-[700px] w-[700px] fixed right-[-31rem] xl:right-[-20rem] top-[-1.4rem] bg-sky-200 rounded-full">
