@@ -236,7 +236,7 @@ function Login() {
               )}
             </div>
 
-            <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-32">
+            <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-24">
               <a
                 className="text-baseColor-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer"
                 onClick={() => {
@@ -255,15 +255,19 @@ function Login() {
               </button>
             </div>
           </div>
-          <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-14">
-            <a
-              className="text-baseColor-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer"
-              onClick={() => {
-                navigate("/Register");
-              }}
-            >
-              Do not have an account? Sign up
-            </a>
+          <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-20 h-2">
+            <div className="text-black whitespace-nowrap ml-7 sm:ml-0 text-[12px] sm:text-sm">
+              {"Don't have any account?"}
+              <a
+                onClick={() => {
+                  navigate("/Register");
+                }}
+              >
+                <span className="text-blue-500 ml-4 text-sm cursor-pointer underline">
+                  Signup
+                </span>
+              </a>
+            </div>
           </div>
           <div className="relative hidden lg:block">
             <div className="h-[800px] w-[800px] fixed right-[-29rem] xl:right-[-19rem] top-[-4.0rem] bg-logIn-200 rounded-full">

@@ -105,9 +105,9 @@ function Register() {
         <div className="flex flex-col items-start justify-center">
           <div className="flex flex-row items-start justify-start space-x-8 sm:space-x-12 h-32 mx-10 sm:mx-6 mb-32">
             <div className="flex flex-col items-start justify-start ">
-              <div className="flex flex-col items-start justify-center -translate-y-12">
+              <div className="flex flex-col items-start justify-center -translate-y-8">
                 <div className="ml-10 sm:ml-9 flex flex-row items-center justify-center -translate-y-10">
-                  <h2 className="text-xl sm:text-3xl font-semibold text-sky-600">
+                  <h2 className="text-2xl sm:text-3xl font-semibold text-sky-600">
                     Create an account
                   </h2>
                 </div>
@@ -214,12 +214,12 @@ function Register() {
                     )}
                   </div>
                   {!passwordsMatch && (
-                    <p className="text-red-500 text-sm mt-1">
+                    <p className="text-red-500 text-sm mt-1 ml-3">
                       Passwords do not match
                     </p>
                   )}
 
-                  <div className="h-18 pt-4 sm:ml-2 ml-7">
+                  <div className="pt-2sm:ml-2 ml-3">
                     {error.status && (
                       <p className="text-red-500 text-sm">
                         {error.errorMessage}
@@ -247,15 +247,19 @@ function Register() {
                   Register as a Student
                 </button>
               </div>
-              <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-20 h-4">
-                <a
-                  className="text-sky-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer"
-                  onClick={() => {
-                    navigate("/Login");
-                  }}
-                >
-                  Already have an account? Login
-                </a>
+              <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-20 h-2">
+                <div className="text-black whitespace-nowrap ml-3 sm:ml-4 text-[12px] sm:text-sm">
+                  Already have an account?{" "}
+                  <a
+                    onClick={() => {
+                      navigate("/Login");
+                    }}
+                  >
+                    <span className="text-blue-500 ml-4 text-sm cursor-pointer underline">
+                      Login
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
