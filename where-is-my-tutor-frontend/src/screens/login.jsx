@@ -259,7 +259,9 @@ function Login() {
           <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-14">
             <a
               className="text-baseColor-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer"
-              onClick={() => {}}
+              onClick={() => {
+                navigate("/Register");
+              }}
             >
               Do not have an account? Sign up
             </a>
