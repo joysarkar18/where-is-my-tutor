@@ -29,15 +29,14 @@ function App() {
     <div>
       <Navbar></Navbar>
 
-      {localStorageData ? (
-        <p className="mx-11 mt-10">
-          {" "}
-          {`email =  ${localStorageData.email} 
-        userName = ${localStorageData.name} 
-        `}
-        </p>
-      ) : (
-        <p>No data found in localStorage</p>
+      <div className="text-center mb-10 mt-10 text-purple text-5xl font-bold">
+        Welcome
+      </div>
+      {localStorageData && (
+        <div className="flex flex-col text-3xl font-semibold justify-center items-center text-green-500">
+          <div>{`User email = ${localStorageData.email}`}</div>
+          <div>{`Username = ${localStorageData.name}`}</div>
+        </div>
       )}
     </div>
   );
