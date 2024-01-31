@@ -25,7 +25,7 @@ function Navbar() {
       )}
 
       <nav
-        className={`bg-white p-4 lg:mx-32 xl:mx-60 relative z-10 shadow-lg ${
+        className={`bg-white p-4 lg:mx-32 xl:mx-60 relative z-10 ${
           isSidebarOpen ? "opacity-50" : ""
         }`}
       >
@@ -83,22 +83,22 @@ function Navbar() {
             className="h-6 w-6 text-white cursor-pointer absolute top-4 right-4"
             onClick={closeSidebar}
           />
-          <Link to="#" className="block text-baseColor-400 mb-4">
+          <Link to="#" className="block text-black mb-4">
             Home
           </Link>
-          <Link to="#" className="block text-baseColor-400 mb-4">
+          <Link to="#" className="block text-black mb-4">
             About
           </Link>
-          <Link to="#" className="block text-baseColor-400 mb-4">
+          <Link to="#" className="block text-black mb-4">
             Register as Teacher
           </Link>
-          <Link to="#" className="block text-baseColor-400 mb-4">
+          <Link to="#" className="block text-black mb-4">
             Register as Student
           </Link>
-          <Link to="/Login" className="block text-baseColor-400 mb-4">
+          <Link to="/Login" className="block text-black mb-4">
             Login
           </Link>
-          <Link to="#" className="block text-baseColor-400 mb-4">
+          <Link to="#" className="block text-black mb-4">
             Contact
           </Link>
         </div>
