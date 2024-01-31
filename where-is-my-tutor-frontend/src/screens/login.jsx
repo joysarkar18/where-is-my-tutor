@@ -256,7 +256,7 @@ function Login() {
             </div>
           </div>
           <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-20 h-2">
-            <div className="text-black whitespace-nowrap ml-7 sm:ml-0 text-[12px] sm:text-sm">
+            <div className="text-baseColor-600 whitespace-nowrap ml-7 sm:ml-0 text-[12px] sm:text-sm">
               {"Don't have any account?"}
               <a
                 onClick={() => {

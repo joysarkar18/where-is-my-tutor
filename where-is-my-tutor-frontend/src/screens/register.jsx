@@ -248,7 +248,7 @@ function Register() {
                 </button>
               </div>
               <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-20 h-2">
-                <div className="text-black whitespace-nowrap ml-3 sm:ml-4 text-[12px] sm:text-sm">
+                <div className="text-sky-600 whitespace-nowrap ml-3 sm:ml-4 text-[12px] sm:text-sm">
                   Already have an account?{" "}
                   <a
                     onClick={() => {
