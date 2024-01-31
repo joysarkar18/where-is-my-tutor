@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiX } from "react-icons/fi";
 import { useState } from "react";
+import Welcomepage from "./screens/welcomepage";
 
 function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -24,7 +25,7 @@ function Navbar() {
       )}
 
       <nav
-        className={`bg-white p-4 lg:mx-32 xl:mx-60 relative z-10 ${
+        className={`bg-white p-4 lg:mx-32 xl:mx-60 relative z-10 shadow-lg ${
           isSidebarOpen ? "opacity-50" : ""
         }`}
       >
@@ -101,6 +102,9 @@ function Navbar() {
             Contact
           </Link>
         </div>
+      </div>
+      <div>
+        <Welcomepage></Welcomepage>
       </div>
     </div>
   );
