@@ -1,11 +1,15 @@
-import Image from "next/image";
+"use client"
+
 import { FaCirclePlay } from "react-icons/fa6";
+import { DotLottiePlayer } from "@dotlottie/react-player";
+import "@dotlottie/react-player/dist/index.css";
+
 
 
 export default function Home() {
   return (
     <main className="min-w-screen min-h-screen overflow-hidden">
-      <div className="flex flex-col overflow-hidden max-w-[1800px] w-full m-auto">
+      <div className="flex flex-col overflow-hidden max-w-[2000px] w-full m-auto">
 
         <div className="flex flex-row justify-between w-full  bg-transparent ">
           <div className="flex flex-col relative">
@@ -27,16 +31,16 @@ export default function Home() {
 
         </div>
 
-        <div className="absolute w-full max-w-[1800px] flex flex-row justify-between overflow-hidden z-10">
+        <div className="absolute w-full max-w-[2000px] flex flex-row justify-between overflow-hidden z-10">
           <div className=" bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FED6D4] from-10% to-transparent to-70% rounded-full min-w-[53.4vw] min-h-[53.4vw] h-[1200px] relative top-[331px] right-[203px]" />
           <div className=" bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#75D0C146] from-10% to-transparent to-70% rounded-full min-w-[53.4vw] min-h-[53.4vw] h-[1200px] relative top-[331px] left-[203px]" />
         </div>
-
-        <div className="absolute  top-0 z-10 w-full pl-[8.4vw] pr-[4.2vw] pt-[4vh] max-w-[1800px]">
+         {/* main cointain din */}
+        <div className="absolute  top-0 z-10 w-full pl-[8.4vw] pr-[4.2vw] pt-[4vh] max-w-[2000px]">
           <div className="navbar flex flex-row items-center justify-between w-full">
             <div className="text-[#FF3429] text-[32px] font-semibold leading-[40px]">MyTutor</div>
             <div className="flex flex-row items-center lg:gap-[76px] gap-[36px]">
-              <div className="text-[16px] lg:text-[20px] font-semibold leading-[30px] lg:w-[38vw] max-w-[600px] w-[40vw] flex flex-row justify-between ">
+              <div className="text-[16px] lg:text-[19px] font-semibold leading-[30px] lg:w-[40vw] max-w-[600px] w-[40vw] flex flex-row justify-between ">
                 <div className=" cursor-pointer">Home</div>
                 <div className=" cursor-pointer">Pricing</div>
                 <div className=" cursor-pointer">Courses</div>
@@ -50,8 +54,10 @@ export default function Home() {
           </div>
 
           {/* HERO  */}
-          <div className="mt-[20vh]">
-            <div className="text-[64px] leading-[80px] font-semibold">
+        <div className="flex flex-row items-center justify-between">
+
+        <div className="mt-[20vh]">
+            <div className="text-[62px] leading-[80px] font-semibold">
               Take Your <span className="text-[#FF3429]">Learning</span>
               <br />
               To The Next Level.
@@ -68,6 +74,16 @@ export default function Home() {
             </div>
 
           </div>
+
+          <div className="h-[30vw] w-[30vw] mt-[90px] mr-[1vw]">
+          <DotLottiePlayer
+                      src={"/animations/student_animation.lottie"}
+                      autoplay
+                      loop
+                    />
+
+          </div>
+        </div>
 
 
 
