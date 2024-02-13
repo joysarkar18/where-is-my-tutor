@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
@@ -13,17 +13,22 @@ import Link from "next/link";
 
 
 function Register() {
-  const [isPasswordShowing, setIsPasswordShowing] = useState(true);
-  const [isPasswordShowing2, setIsPasswordShowing2] = useState(true);
+  const [isPasswordShowing, setIsPasswordShowing] = useState<boolean>(true);
+  const [isPasswordShowing2, setIsPasswordShowing2] = useState<boolean>(true);
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
 
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
+interface LoginError {
+    errorType: string,
+    errorMessage: string,
+    status: boolean,
 
-  const [error, setError] = useState({
+}
+  const [error, setError] = useState<LoginError>({
     errorType: "",
     errorMessage: "",
     status: false,
@@ -33,12 +38,12 @@ function Register() {
 
 
 
-  function handleUserNameChange(event:any) {
-    setUserName(event.target.value);
+  function handleUserNameChange(event:React.FormEvent<HTMLInputElement>) {
+    setUserName(event.currentTarget.value);
   }
 
-  function handleEmailChange(event:any) {
-    setEmail(event.target.value);
+  function handleEmailChange(event:React.FormEvent<HTMLInputElement>) {
+    setEmail(event.currentTarget.value);
   }
 
   const handlePasswordChange = (value:any) => {
@@ -48,9 +53,9 @@ function Register() {
     }
   };
 
-  const handleConfirmPasswordChange = (value:any) => {
-    setConfirmPassword(value);
-    setPasswordsMatch(value === password);
+  const handleConfirmPasswordChange = (value:React.FormEvent<HTMLInputElement>) => {
+    setConfirmPassword(value.currentTarget.value);
+    setPasswordsMatch(value.currentTarget.value === password);
   };
 
   function signupHandeler(type:any) {
@@ -144,7 +149,7 @@ function Register() {
                       name="password"
                       type={isPasswordShowing ? "password" : "text"}
                       value={password}
-                      onChange={(e) => handlePasswordChange(e.target.value)}
+                      onChange={(e) => handlePasswordChange(e)}
                       className="rounded-full text-sky-600 shadow-sky-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border border-sky-300 focus:border-sky-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]"
                       placeholder="Enter Password"
                     />
@@ -175,7 +180,7 @@ function Register() {
                       type={isPasswordShowing2 ? "password" : "text"}
                       value={confirmPassword}
                       onChange={(e) =>
-                        handleConfirmPasswordChange(e.target.value)
+                        handleConfirmPasswordChange(e)
                       }
                       className={`rounded-full text-sky-600 shadow-sky-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border ${
                         passwordsMatch ? "border-sky-300" : "border-red-500"

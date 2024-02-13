@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require("../../utils/database")
 
-const StudentDetails = sequelize.define('studentDetail', {
+const StudentDetails = sequelize.define('studentdetail', {
   id: {
     primaryKey: true,
     type: DataTypes.INTEGER,
@@ -12,15 +12,63 @@ const StudentDetails = sequelize.define('studentDetail', {
   firstName: {
     type: DataTypes.STRING(20),
     allowNull: false,
-    unique: true,
   },
   lastName: {
     type: DataTypes.STRING(20),
     allowNull: false,
-    unique: true,
   },
+  phNumber: {
+    type: DataTypes.BIGINT,
+    allowNull: false,
+  },
+
+
+  gender: {
+    type: DataTypes.STRING(8),
+    allowNull: false,
+
+  },
+
+
+  latitude: {
+    type: DataTypes.DECIMAL(10, 8), // 10 total digits, 8 after the decimal point
+    allowNull: false
+  },
+  longitude: {
+    type: DataTypes.DECIMAL(11, 8), // 11 total digits, 8 after the decimal point
+    allowNull: false
+  },
+
+  pinCode: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+
+  },
+
+  address: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+
+  profileImage: {
+    type: DataTypes.TEXT,
+    allowNull: true
+
+  },
+
+  currentClass: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+
+  },
+
+  subjects: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+    allowNull: true,
+
+  }
 
 }, {
 });
 
-module.exports = Student
+module.exports = StudentDetails
