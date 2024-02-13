@@ -50,7 +50,7 @@ function Login() {
     }
   }
 
-  function emailController(event:any) {
+  function emailController(event:React.FormEvent<HTMLInputElement>) {
     if (error.status) {
       setError({
         status: false,
@@ -58,10 +58,10 @@ function Login() {
         errorType: "",
       });
     }
-    setEmailOrUsername(event.target.value);
+    setEmailOrUsername(event.currentTarget.value);
   }
-  function passwordController(event:any) {
-    setPassword(event.target.value);
+  function passwordController(event:React.FormEvent<HTMLInputElement>) {
+    setPassword(event.currentTarget.value);
     console.log(password);
   }
 

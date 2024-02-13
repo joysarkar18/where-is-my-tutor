@@ -11,10 +11,12 @@ const sequelize = require("./utils/database")
 //models
 const Teacher = require('./models/teacher/teacher')
 const Student = require('./models/student/student')
+const StudentDetails = require("./models/student/studentDetails")
 // routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const updateDetailsRouter = require('./routes/updateUserDetails')
 
 
 var app = express();
@@ -33,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/auth", authRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/update-details', updateDetailsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -40,7 +43,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -50,10 +53,12 @@ app.use(function (err, req, res, next) {
   res.json({ error: "path not found" })
 });
 
+Student.hasOne(StudentDetails);
+
 sequelize.sync({ force: true }).then((r) => {
   console.log("sync");
 }).catch((e) => {
-  console.log("error1");
+  console.log("error1", e);
 })
 
 module.exports = app;
