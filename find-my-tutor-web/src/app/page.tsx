@@ -1,113 +1,83 @@
 import Image from "next/image";
+import { FaCirclePlay } from "react-icons/fa6";
+
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="min-w-screen min-h-screen overflow-hidden">
+      <div className="flex flex-col overflow-hidden max-w-[1800px] w-full m-auto">
+
+        <div className="flex flex-row justify-between w-full  bg-transparent ">
+          <div className="flex flex-col relative">
+            <div className="w-[811px] h-[26.6vw] rotate-[58deg] relative z-1 top-[-58px] right-[82px] flex flex-row ">
+              <div className=" bg-[#FED6D4] bg-opacity-100 h-full w-[38%]"></div>
+              <div className="w-full h-full bg-gradient-to-r from-[#FED6D4] to-[#d9d9d900] "></div>
+            </div>
+            <div className="w-[800px] h-[21.8vw] bg-gradient-to-r from-[#FED6D4] to-[#d9d9d900] rotate-[58deg] relative right-[275px] top-[-188px] z-10 " />
+          </div>
+          <div className=" bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FED6D4] from-5% to-transparent to-70% rounded-full min-w-[35.5vw] min-h-[35.5vw] h-[35.5vw] ml-[-1036px] mt-[-343px] relative">
+          </div>
+          <div className="flex flex-col relative right-0">
+            <div className="w-[805px] h-[26.6vw] rotate-[130deg] absolute z-1 top-[16px] left-[-680px] flex flex-row ">
+              {/* <div className=" bg-[#75D0C1] bg-opacity-100 h-full w-[38%]"></div> */}
+              <div className="w-full h-full bg-gradient-to-r from-[#75D0C1] to-[#d9d9d900] "></div>
+            </div>
+            <div className="w-[680px] h-[21.8vw] bg-gradient-to-r from-[#75D0C1] to-[#d9d9d900] rotate-[130deg] absolute  top-[182px] left-[-442px] z-10 " />
+          </div>
+
         </div>
+
+        <div className="absolute w-full max-w-[1800px] flex flex-row justify-between overflow-hidden z-10">
+          <div className=" bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FED6D4] from-10% to-transparent to-70% rounded-full min-w-[53.4vw] min-h-[53.4vw] h-[1200px] relative top-[331px] right-[203px]" />
+          <div className=" bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#75D0C146] from-10% to-transparent to-70% rounded-full min-w-[53.4vw] min-h-[53.4vw] h-[1200px] relative top-[331px] left-[203px]" />
+        </div>
+
+        <div className="absolute  top-0 z-10 w-full pl-[8.4vw] pr-[4.2vw] pt-[4vh] max-w-[1800px]">
+          <div className="navbar flex flex-row items-center justify-between w-full">
+            <div className="text-[#FF3429] text-[32px] font-semibold leading-[40px]">MyTutor</div>
+            <div className="flex flex-row items-center lg:gap-[76px] gap-[36px]">
+              <div className="text-[16px] lg:text-[20px] font-semibold leading-[30px] lg:w-[38vw] max-w-[600px] w-[40vw] flex flex-row justify-between ">
+                <div className=" cursor-pointer">Home</div>
+                <div className=" cursor-pointer">Pricing</div>
+                <div className=" cursor-pointer">Courses</div>
+                <div className=" cursor-pointer">Learning Materials</div>
+              </div>
+              <div className="md:text-[18px] text-[1.4vw] font-semibold leading-[30px] w-auto flex flex-row gap-[32px] items-center">
+                <div className=" cursor-pointer">Log In</div>
+                <div className="text-white md:px-[30px] px-[20px] md:py-[10px] py-[5px] bg-[#75D0C1] hover:bg-[#66c9b8] rounded-full cursor-pointer">Sign Up</div>
+              </div>
+            </div>
+          </div>
+
+          {/* HERO  */}
+          <div className="mt-[20vh]">
+            <div className="text-[64px] leading-[80px] font-semibold">
+              Take Your <span className="text-[#FF3429]">Learning</span>
+              <br />
+              To The Next Level.
+            </div>
+            <div className="w-[494px] text-[20px] leading-[25px] mt-[7vh]">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa, sint. Earum, atque esse? Fuga enim
+            </div>
+            <div className="flex flex-row gap-[66px] font-semibold mt-[8vh]">
+              <div className="bg-[#FF3429] hover:bg-[#E92016] flex items-center justify-center w-[242px] h-[68px] text-[24px] leading-[30px] text-white rounded-r-[34px] rounded-bl-[34px]">Get Started</div>
+              <div className=" h-[68px] flex flex-row gap-8 items-center text-[#FF3429]">
+                <div className="rounded-full bg-[#FFF] border border-[#FF3429] text-[57px] w-[68px] h-[68px] flex justify-center items-center"><FaCirclePlay /></div>
+                <div className=" text-[24px] leading-[30px]">Play Video</div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+        </div>
+
+
+
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
     </main>
   );
 }
