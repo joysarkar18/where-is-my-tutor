@@ -174,8 +174,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-row gap-[100px] mb-[244px]">
-            <div className="w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025]">
+          <div className="flex flex-row gap-[100px] mb-[244px] overflow-x-scroll x-scrollbar">
+            <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025]">
               <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
                 <Image src={"/pictures/card_pic.png"} width={353} height={240} className="w-[263px] h-[240px] object-cover" />
               </div>
@@ -185,7 +185,7 @@ export default function Home() {
                 <div className="w-[228px] h-[52px] flex justify-center items-center bg-[#FF3429] hover:bg-[#E92016] text-white font-semibold shadow-[0_4px_12px_#00000025] rounded-full">Viwe Details</div>
               </div>
             </div>
-            <div className="w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025]">
+            <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025]">
               <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
                 <Image src={"/pictures/card_pic.png"} width={353} height={240} className="w-[263px] h-[240px] object-cover" />
               </div>
@@ -195,7 +195,7 @@ export default function Home() {
                 <div className="w-[228px] h-[52px] flex justify-center items-center bg-[#FF3429] hover:bg-[#E92016] text-white font-semibold shadow-[0_4px_12px_#00000025] rounded-full">Viwe Details</div>
               </div>
             </div>
-            <div className="w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025]">
+            <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025]">
               <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
                 <Image src={"/pictures/card_pic.png"} width={353} height={240} className="w-[263px] h-[240px] object-cover" />
               </div>
@@ -217,7 +217,7 @@ export default function Home() {
               <IoIosArrowDroprightCircle />
             </div>
           </div>
-           <div className="w-full flex flex-row gap-20 pt-[114px] overflow-x-scroll no-scrollbar pl-[10px]">
+           <div className="w-full flex flex-row gap-20 pt-[114px] overflow-x-scroll x-scrollbar pl-[10px]">
             <div className="px-[36px] pt-[36px] pb-[84px] shadow-[0_4px_12px_#00000025] min-w-[478px] h-[444px] rounded-[12px]">
               <div className="flex flex-row text-gray-300 text-[32px] gap-[8px] mb-[12px]">
                 <IoStar className="text-yellow-500" />
