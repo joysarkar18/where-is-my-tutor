@@ -8,7 +8,6 @@ import { IoMdHelpCircleOutline } from "react-icons/io";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoStar } from "react-icons/io5";
-
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import Image from "next/image";
@@ -177,7 +176,7 @@ export default function Home() {
           <div className="flex flex-row gap-[100px] mb-[244px] overflow-x-scroll x-scrollbar">
             <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025]">
               <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
-                <Image src={"/pictures/card_pic.png"} width={353} height={240} className="w-[263px] h-[240px] object-cover" />
+                <Image alt="" src={"/pictures/card_pic.png"} width={353} height={240} className="w-[263px] h-[240px] object-cover" />
               </div>
               <div className="h-auto flex flex-col items-center pt-5 pb-10">
                 <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">Joy Sarkar</div>
@@ -187,7 +186,7 @@ export default function Home() {
             </div>
             <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025]">
               <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
-                <Image src={"/pictures/card_pic.png"} width={353} height={240} className="w-[263px] h-[240px] object-cover" />
+                <Image alt="" src={"/pictures/card_pic.png"} width={353} height={240} className="w-[263px] h-[240px] object-cover" />
               </div>
               <div className="h-auto flex flex-col items-center pt-5 pb-10">
                 <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">Joy Sarkar</div>
@@ -197,7 +196,7 @@ export default function Home() {
             </div>
             <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025]">
               <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
-                <Image src={"/pictures/card_pic.png"} width={353} height={240} className="w-[263px] h-[240px] object-cover" />
+                <Image alt="" src={"/pictures/card_pic.png"} width={353} height={240} className="w-[263px] h-[240px] object-cover" />
               </div>
               <div className="h-auto flex flex-col items-center pt-5 pb-10">
                 <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">Joy Sarkar</div>
@@ -230,7 +229,7 @@ export default function Home() {
                 accusamus sit nihil, adipisci ex quod sint doloribus architecto iure obcaecati minima recusandae quidem numquam nam? Ipsa consequatur nobis, aspernatur mollitia recusandae et, provident, animi sunt corrupti saepe earum.
               </div>
               <div className="flex flex-row gap-4 ">
-                <Image src={"/pictures/card_pic.png"} width={50} height={50} className="rounded-full w-[50px] h-[50px]" />
+                <Image alt="" src={"/pictures/card_pic.png"} width={50} height={50} className="rounded-full w-[50px] h-[50px]" />
                 <div>
                   <div className="text-[24px] leading-[30px] font-bold text-[#162764]">Joy Sarkar</div>
                   <div className="text-[20px] font-semibold text-[#FF3429]">Co - Founder</div>
@@ -249,7 +248,7 @@ export default function Home() {
                 accusamus sit nihil, adipisci ex quod sint doloribus architecto iure obcaecati minima recusandae quidem numquam nam? Ipsa consequatur nobis, aspernatur mollitia recusandae et, provident, animi sunt corrupti saepe earum.
               </div>
               <div className="flex flex-row gap-4 ">
-                <Image src={"/pictures/card_pic.png"} width={50} height={50} className="rounded-full w-[50px] h-[50px]" />
+                <Image alt="" src={"/pictures/card_pic.png"} width={50} height={50} className="rounded-full w-[50px] h-[50px]" />
                 <div>
                   <div className="text-[24px] leading-[30px] font-bold text-[#162764]">Joy Sarkar</div>
                   <div className="text-[20px] font-semibold text-[#FF3429]">Co - Founder</div>
@@ -268,7 +267,7 @@ export default function Home() {
                 accusamus sit nihil, adipisci ex quod sint doloribus architecto iure obcaecati minima recusandae quidem numquam nam? Ipsa consequatur nobis, aspernatur mollitia recusandae et, provident, animi sunt corrupti saepe earum.
               </div>
               <div className="flex flex-row gap-4 ">
-                <Image src={"/pictures/card_pic.png"} width={50} height={50} className="rounded-full w-[50px] h-[50px]" />
+                <Image alt="" src={"/pictures/card_pic.png"} width={50} height={50} className="rounded-full w-[50px] h-[50px]" />
                 <div>
                   <div className="text-[24px] leading-[30px] font-bold text-[#162764]">Joy Sarkar</div>
                   <div className="text-[20px] font-semibold text-[#FF3429]">Co - Founder</div>

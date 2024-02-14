@@ -71,13 +71,13 @@ function Login() {
       <div className="h-[700px] w-[700px] absolute left-[-20rem] top-[-20rem] bg-baseColor-200 rounded-full"></div>
       <div className="h-[500px] w-[500px] absolute left-[-15rem] top-[-15rem] bg-baseColor-300 rounded-full"></div>
       <div className="h-[900px] w-[900px] absolute right-[-25rem] bottom-[-25rem] bg-baseColor-100 rounded-full"></div>
-      <div className="h-[700px] w-[700px] absolute right-[-21rem] bottom-[-21rem] bg-baseColor-200 rounded-full"></div>
-      <div className="h-[500px] w-[500px] absolute right-[-16rem] bottom-[-16rem] bg-baseColor-300 rounded-full"></div>
+      <div className="h-[700px] w-[700px] absolute right-[-21rem] bottom-[-21rem]  bg-baseColor-200 rounded-full"></div>
+      <div className="h-[500px] w-[500px] absolute right-[-16rem] bottom-[-16rem]  bg-baseColor-300 rounded-full"></div>
 
       {/* Login Box */}
-      <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden h-4/6 w-5/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] p-8">
+      <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden h-[70vh] w-5/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] p-8">
         <div className="flex flex-col items-start justify-center">
-          <div className="text-4xl sm:text-5xl font-semibold text-baseColor-600 sm:ml-2 ml-12">
+          <div className="text-4xl sm:text-5xl font-semibold text-baseColor-600 sm:ml-2 ml-8">
             Welcome back
           </div>
           {/* <div className="text-sm font-light text-baseColor-600 ml-3">
@@ -239,8 +239,8 @@ function Login() {
           </div>
           <div className="relative hidden lg:block">
             <div className="h-[800px] w-[800px] fixed right-[-29rem] xl:right-[-19rem] top-[-4.0rem] bg-logIn-200 rounded-full">
-              <div className="h-[700px] w-[700px] fixed right-[-30rem] xl:right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
-                <div className="h-[640px] w-[640px] fixed right-[-32rem] xl:right-[-23rem] top-[0rem] bg-logIn-500 rounded-full">
+              <div className="h-[720px] w-[720px] fixed right-[-28rem] xl:right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
+                <div className="h-[670px] w-[670px] fixed right-[-36rem] xl:right-[-23rem] top-[0rem] bg-logIn-500 rounded-full">
                   <div className="z-30 fixed h-[18rem] w-[18rem] xl:h-[25rem] xl:w-[25rem] right-[1.4rem] xl:right-[4.4rem] top-[6.9rem] xl:top-[6rem]">
                     <DotLottiePlayer
                       src={
