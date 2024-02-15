@@ -16,7 +16,8 @@ const StudentDetails = require("./models/student/studentDetails")
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
-const updateDetailsRouter = require('./routes/updateUserDetails')
+const updateDetailsRouter = require('./routes/updateUserDetails');
+const TeacherDetails = require('./models/teacher/teacherDetails');
 
 
 var app = express();
@@ -54,6 +55,8 @@ app.use(function (err, req, res) {
 });
 
 Student.hasOne(StudentDetails);
+Teacher.hasOne(TeacherDetails, { foreignKey: 'teacherId' })
+TeacherDetails.belongsTo(Teacher, { foreignKey: 'teacherId' })
 
 sequelize.sync({ force: true }).then((r) => {
   console.log("sync");

@@ -69,6 +69,7 @@ const StudentDetails = sequelize.define('studentdetail', {
   }
 
 }, {
+  
 });
 
 module.exports = StudentDetails
