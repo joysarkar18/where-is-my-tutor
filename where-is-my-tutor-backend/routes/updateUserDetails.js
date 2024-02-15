@@ -18,10 +18,11 @@ router.post("/student-details", tokenAuthentication, (req, res) => {
     let profileImage = req.body.profileImage;
     let currentClass = req.body.currentClass;
     let subjects = req.body.subjects;
+    let stdId = req.user.id;
 
 
 
-    StudentDetails.create({ firstName: firstName, lastName: lastName, phNumber: phNumber, gender: gender, latitude: latitude, longitude: longitude, pinCode: pinCode, address: address, profileImage: profileImage, currentClass: currentClass, subjects: subjects, })
+    StudentDetails.create({ firstName: firstName, lastName: lastName, phNumber: phNumber, gender: gender, latitude: latitude, longitude: longitude, pinCode: pinCode, address: address, profileImage: profileImage, currentClass: currentClass, subjects: subjects, stdId: stdId })
         .then((result) => {
 
             console.log("student details entered");

@@ -53,7 +53,7 @@ app.use(function (err, req, res) {
   res.json({ error: "path not found" })
 });
 
-Student.hasOne(StudentDetails);
+Student.hasOne(StudentDetails, { foreignKey: "stdId", sourceKey: "id", constraints: true, foreignKeyConstraint: true });
 
 sequelize.sync({ force: true }).then((r) => {
   console.log("sync");

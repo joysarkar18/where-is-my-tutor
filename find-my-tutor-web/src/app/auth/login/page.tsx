@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { CgProfile } from "react-icons/cg";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -8,9 +8,10 @@ import { useState } from "react";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import Link from "next/link";
+import { login } from "../../slices/authSlice";
+import { UseDispatch, useDispatch } from "react-redux";
 
-
-
+import * as EmailValidator from "email-validator";
 
 function Login() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
@@ -22,10 +23,9 @@ function Login() {
     status: false,
   });
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-
-  function login() {
-    // validate(emailOrUsername);
+  function loginUser() {
     if (password.length <= 5) {
       setError({
         status: true,
@@ -33,8 +33,16 @@ function Login() {
         errorType: "password",
       });
     } else {
-      if (true) {
-        
+      if (EmailValidator.validate(emailOrUsername)) {
+        dispatch(
+          login({
+            email: emailOrUsername,
+            password: password,
+            userName: "",
+            userType: selectedUserType,
+            setError: setError,
+          })
+        );
       } else {
         if (emailOrUsername.length < 1) {
           setError({
@@ -43,14 +51,22 @@ function Login() {
             errorType: "email",
           });
         } else {
-          
+          console.log("username");
+          dispatch(
+            login({
+              email: "",
+              password: password,
+              userName: emailOrUsername,
+              userType: selectedUserType,
+              setError: setError,
+            })
+          );
         }
-        console.log("username");
       }
     }
   }
 
-  function emailController(event:React.FormEvent<HTMLInputElement>) {
+  function emailController(event: React.FormEvent<HTMLInputElement>) {
     if (error.status) {
       setError({
         status: false,
@@ -60,7 +76,7 @@ function Login() {
     }
     setEmailOrUsername(event.currentTarget.value);
   }
-  function passwordController(event:React.FormEvent<HTMLInputElement>) {
+  function passwordController(event: React.FormEvent<HTMLInputElement>) {
     setPassword(event.currentTarget.value);
     console.log(password);
   }
@@ -210,16 +226,14 @@ function Login() {
             <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-24">
               <a
                 className="text-baseColor-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer"
-                onClick={() => {
-                  
-                }}
+                onClick={() => {}}
               >
                 Forgot Password?
               </a>
 
               <button
                 type="submit"
-                onClick={login}
+                onClick={loginUser}
                 className="group relative w-24 sm:w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 "
               >
                 Login
@@ -230,11 +244,9 @@ function Login() {
             <div className="text-baseColor-600 whitespace-nowrap ml-7 sm:ml-0 text-[12px] sm:text-sm">
               {"Don't have any account?"}
 
-                <span className="text-blue-500 ml-4 text-sm cursor-pointer underline">
-                    <Link href={"/auth/signup"}>Signup</Link>
-              
-                </span>
-
+              <span className="text-blue-500 ml-4 text-sm cursor-pointer underline">
+                <Link href={"/auth/signup"}>Signup</Link>
+              </span>
             </div>
           </div>
           <div className="relative hidden lg:block">
