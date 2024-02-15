@@ -33,15 +33,17 @@ router.post("/student-details", tokenAuthentication, (req, res) => {
         profileImage: profileImage,
         currentClass: currentClass,
         subjects: subjects,
+        studentId: req.user.id
     })
         .then((result) => {
-
-            console.log("student details entered");
-            return res.json({ status: true, message: "student details entered" });
-
-        }).catch((err) => {
-            console.log("error in details", err);
-            return res.json({ status: false, message: "Something went wrong" });
+            console.log("Teacher details entered");
+            return res.json({ status: true, message: "Student details entered" });
+        }).catch((error) => {
+            console.log("ERROR HAPPENS: ", error.name);
+            if (error.name === 'SequelizeUniqueConstraintError') {
+                return res.json({ status: false, message: "You can not have more than dataset!" });
+            }
+            return res.json({ status: false, message: "Something went wrong!" });
         })
 })
 
@@ -83,7 +85,7 @@ router.post("/teacher-details", tokenAuthentication, (req, res) => {
             return res.json({ status: true, message: "Teacher details entered" });
         }).catch((error) => {
             console.log("ERROR HAPPENS: ", error.name);
-            if(error.name === 'SequelizeUniqueConstraintError') {
+            if (error.name === 'SequelizeUniqueConstraintError') {
                 return res.json({ status: false, message: "You can not have more than dataset!" });
             }
             return res.json({ status: false, message: "Something went wrong!" });

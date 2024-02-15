@@ -66,10 +66,15 @@ const StudentDetails = sequelize.define('studentdetail', {
     type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: true,
 
+  },
+  studentId: {
+    type: DataTypes.INTEGER,
+    unique: true,
+    allowNull: false
   }
 
 }, {
-  
+
 });
 
 module.exports = StudentDetails

@@ -54,7 +54,8 @@ app.use(function (err, req, res) {
   res.json({ error: "path not found" })
 });
 
-Student.hasOne(StudentDetails);
+Student.hasOne(StudentDetails, { foreignKey: 'studentId' });
+StudentDetails.belongsTo(Student, { foreignKey: 'studentId' });
 Teacher.hasOne(TeacherDetails, { foreignKey: 'teacherId' })
 TeacherDetails.belongsTo(Teacher, { foreignKey: 'teacherId' })
 
