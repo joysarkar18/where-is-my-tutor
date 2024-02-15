@@ -10,11 +10,6 @@ const saltRounds = 10;
 const secret = 'please-fuck-yourself';
 const options = { expiresIn: '60d' };
 
-router.get("/", (req, res) => {
-
-    res.json({ hi: "hii" })
-
-})
 
 router.post("/sign-up", [
     // Validate email
@@ -83,11 +78,6 @@ router.post("/sign-up", [
                     return res.json({ status: false, error: error, message: "Something went wrong!", type: "" });
 
                 }
-
-
-
-
-
 
             }
         }

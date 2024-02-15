@@ -58,6 +58,7 @@ Student.hasOne(StudentDetails);
 Teacher.hasOne(TeacherDetails, { foreignKey: 'teacherId' })
 TeacherDetails.belongsTo(Teacher, { foreignKey: 'teacherId' })
 
+
 sequelize.sync({ force: true }).then((r) => {
   console.log("sync");
 }).catch((e) => {

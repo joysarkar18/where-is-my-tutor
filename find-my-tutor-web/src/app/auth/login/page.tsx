@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { CgProfile } from "react-icons/cg";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -8,9 +8,10 @@ import { useState } from "react";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import Link from "next/link";
+import { login } from "../../slices/authSlice";
+import { UseDispatch, useDispatch } from "react-redux";
 
-
-
+import * as EmailValidator from "email-validator";
 
 function Login() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
@@ -22,10 +23,9 @@ function Login() {
     status: false,
   });
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-
-  function login() {
-    // validate(emailOrUsername);
+  function loginUser() {
     if (password.length <= 5) {
       setError({
         status: true,
@@ -33,8 +33,16 @@ function Login() {
         errorType: "password",
       });
     } else {
-      if (true) {
-        
+      if (EmailValidator.validate(emailOrUsername)) {
+        dispatch(
+          login({
+            email: emailOrUsername,
+            password: password,
+            userName: "",
+            userType: selectedUserType,
+            setError: setError,
+          })
+        );
       } else {
         if (emailOrUsername.length < 1) {
           setError({
@@ -43,14 +51,22 @@ function Login() {
             errorType: "email",
           });
         } else {
-          
+          console.log("username");
+          dispatch(
+            login({
+              email: "",
+              password: password,
+              userName: emailOrUsername,
+              userType: selectedUserType,
+              setError: setError,
+            })
+          );
         }
-        console.log("username");
       }
     }
   }
 
-  function emailController(event:React.FormEvent<HTMLInputElement>) {
+  function emailController(event: React.FormEvent<HTMLInputElement>) {
     if (error.status) {
       setError({
         status: false,
@@ -60,7 +76,7 @@ function Login() {
     }
     setEmailOrUsername(event.currentTarget.value);
   }
-  function passwordController(event:React.FormEvent<HTMLInputElement>) {
+  function passwordController(event: React.FormEvent<HTMLInputElement>) {
     setPassword(event.currentTarget.value);
     console.log(password);
   }
@@ -71,13 +87,13 @@ function Login() {
       <div className="h-[700px] w-[700px] absolute left-[-20rem] top-[-20rem] bg-baseColor-200 rounded-full"></div>
       <div className="h-[500px] w-[500px] absolute left-[-15rem] top-[-15rem] bg-baseColor-300 rounded-full"></div>
       <div className="h-[900px] w-[900px] absolute right-[-25rem] bottom-[-25rem] bg-baseColor-100 rounded-full"></div>
-      <div className="h-[700px] w-[700px] absolute right-[-21rem] bottom-[-21rem] bg-baseColor-200 rounded-full"></div>
-      <div className="h-[500px] w-[500px] absolute right-[-16rem] bottom-[-16rem] bg-baseColor-300 rounded-full"></div>
+      <div className="h-[700px] w-[700px] absolute right-[-21rem] bottom-[-21rem]  bg-baseColor-200 rounded-full"></div>
+      <div className="h-[500px] w-[500px] absolute right-[-16rem] bottom-[-16rem]  bg-baseColor-300 rounded-full"></div>
 
       {/* Login Box */}
-      <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden h-4/6 w-5/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] p-8">
+      <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden h-[70vh] w-5/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(5,_183,_186,_0.4)_0px_0px_18px] p-8">
         <div className="flex flex-col items-start justify-center">
-          <div className="text-4xl sm:text-5xl font-semibold text-baseColor-600 sm:ml-2 ml-12">
+          <div className="text-4xl sm:text-5xl font-semibold text-baseColor-600 sm:ml-2 ml-8">
             Welcome back
           </div>
           {/* <div className="text-sm font-light text-baseColor-600 ml-3">
@@ -210,16 +226,14 @@ function Login() {
             <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-28 h-24">
               <a
                 className="text-baseColor-600 whitespace-nowrap text-[12px] sm:text-sm cursor-pointer"
-                onClick={() => {
-                  
-                }}
+                onClick={() => {}}
               >
                 Forgot Password?
               </a>
 
               <button
                 type="submit"
-                onClick={login}
+                onClick={loginUser}
                 className="group relative w-24 sm:w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 "
               >
                 Login
@@ -230,17 +244,15 @@ function Login() {
             <div className="text-baseColor-600 whitespace-nowrap ml-7 sm:ml-0 text-[12px] sm:text-sm">
               {"Don't have any account?"}
 
-                <span className="text-blue-500 ml-4 text-sm cursor-pointer underline">
-                    <Link href={"/auth/signup"}>Signup</Link>
-              
-                </span>
-
+              <span className="text-blue-500 ml-4 text-sm cursor-pointer underline">
+                <Link href={"/auth/signup"}>Signup</Link>
+              </span>
             </div>
           </div>
           <div className="relative hidden lg:block">
             <div className="h-[800px] w-[800px] fixed right-[-29rem] xl:right-[-19rem] top-[-4.0rem] bg-logIn-200 rounded-full">
-              <div className="h-[700px] w-[700px] fixed right-[-30rem] xl:right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
-                <div className="h-[640px] w-[640px] fixed right-[-32rem] xl:right-[-23rem] top-[0rem] bg-logIn-500 rounded-full">
+              <div className="h-[720px] w-[720px] fixed right-[-28rem] xl:right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
+                <div className="h-[670px] w-[670px] fixed right-[-36rem] xl:right-[-23rem] top-[0rem] bg-logIn-500 rounded-full">
                   <div className="z-30 fixed h-[18rem] w-[18rem] xl:h-[25rem] xl:w-[25rem] right-[1.4rem] xl:right-[4.4rem] top-[6.9rem] xl:top-[6rem]">
                     <DotLottiePlayer
                       src={
