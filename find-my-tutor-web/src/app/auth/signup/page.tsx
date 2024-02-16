@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { SetStateAction, useState } from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -9,8 +9,11 @@ import "@dotlottie/react-player/dist/index.css";
 import { LuMail } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import Link from "next/link";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../../store/store";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { authState, loginPayload } from "@/app/slices/authSlice";
+import * as EmailValidator from "email-validator";
 
 function Register() {
   const [isPasswordShowing, setIsPasswordShowing] = useState<boolean>(true);
@@ -18,67 +21,42 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
-
   const [userName, setUserName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
-interface LoginError {
-    errorType: string,
-    errorMessage: string,
-    status: boolean,
+  const error = useSelector((state: RootState) => state.auth.error);
+  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+  const dispatch = useDispatch<ThunkDispatch<authState, loginPayload, any>>();
 
-}
-  const [error, setError] = useState<LoginError>({
-    errorType: "",
-    errorMessage: "",
-    status: false,
-  });
-
-
-
-
-
-  function handleUserNameChange(event:React.FormEvent<HTMLInputElement>) {
+  function handleUserNameChange(event: React.FormEvent<HTMLInputElement>) {
     setUserName(event.currentTarget.value);
   }
 
-  function handleEmailChange(event:React.FormEvent<HTMLInputElement>) {
+  function handleEmailChange(event: React.FormEvent<HTMLInputElement>) {
     setEmail(event.currentTarget.value);
   }
 
-  const handlePasswordChange = (value:any) => {
+  const handlePasswordChange = (value: any) => {
     setPassword(value);
     if (confirmPassword !== "") {
       setPasswordsMatch(value === confirmPassword);
     }
   };
 
-  const handleConfirmPasswordChange = (value:React.FormEvent<HTMLInputElement>) => {
+  const handleConfirmPasswordChange = (
+    value: React.FormEvent<HTMLInputElement>
+  ) => {
     setConfirmPassword(value.currentTarget.value);
     setPasswordsMatch(value.currentTarget.value === password);
   };
 
-  function signupHandeler(type:any) {
-   
+  function signupHandeler(type: any) {
     if (passwordsMatch) {
-
-
-      if (true) {
+      if (EmailValidator.validate(email)) {
         if (userName.length < 4) {
-          setError({
-            status: true,
-            errorMessage: "Username is very short!",
-            errorType: "userName",
-          });
         } else {
-          
         }
       } else {
-        setError({
-          status: true,
-          errorMessage: "Please enter a valid email!",
-          errorType: "email",
-        });
       }
     } else {
       setPasswordsMatch(false);
@@ -179,9 +157,7 @@ interface LoginError {
                       name="confirmPassword"
                       type={isPasswordShowing2 ? "password" : "text"}
                       value={confirmPassword}
-                      onChange={(e) =>
-                        handleConfirmPasswordChange(e)
-                      }
+                      onChange={(e) => handleConfirmPasswordChange(e)}
                       className={`rounded-full text-sky-600 shadow-sky-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border ${
                         passwordsMatch ? "border-sky-300" : "border-red-500"
                       } focus:border-sky-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]`}
@@ -242,11 +218,9 @@ interface LoginError {
               <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-20 h-2">
                 <div className="text-sky-600 whitespace-nowrap ml-3 sm:ml-4 text-[12px] sm:text-sm">
                   Already have an account?{" "}
-                 
-                    <span className="text-blue-500 ml-4 text-sm cursor-pointer underline">
+                  <span className="text-blue-500 ml-4 text-sm cursor-pointer underline">
                     <Link href={"/auth/login"}>Login</Link>
-                    </span>
-                 
+                  </span>
                 </div>
               </div>
             </div>

@@ -24,6 +24,7 @@ function Login() {
 
   const dispatch = useDispatch<ThunkDispatch<authState, loginPayload, any>>();
   const error = useSelector((state: RootState) => state.auth.error);
+  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
 
   function loginUser() {
     if (password.length <= 5) {
@@ -237,12 +238,44 @@ function Login() {
                 Forgot Password?
               </a>
 
+              {/* <div className="flex items-center justify-center">
+                <button
+                  type="button"
+                  className="inline-flex items-center px-4 py-2 text-sm font-semibold leading-6 text-white transition duration-150 ease-in-out bg-red-500 rounded-md shadow cursor-not-allowed hover:bg-red-400"
+                  disabled={true}
+                >
+                  
+                </button>
+              </div> */}
+
               <button
                 type="submit"
                 onClick={loginUser}
                 className="group relative w-24 sm:w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 "
               >
-                Login
+                {isLoading && (
+                  <svg
+                    className="w-5 h-5 mr-[9px] ml-[9px] text-white animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth={4}
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                )}
+                {isLoading ? "" : "Login"}
               </button>
             </div>
           </div>
@@ -259,7 +292,7 @@ function Login() {
             <div className="h-[800px] w-[800px] fixed right-[-29rem] xl:right-[-19rem] top-[-4.0rem] bg-logIn-200 rounded-full">
               <div className="h-[720px] w-[720px] fixed right-[-28rem] xl:right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
                 <div className="h-[670px] w-[670px] fixed right-[-36rem] xl:right-[-23rem] top-[0rem] bg-logIn-500 rounded-full">
-                  <div className="z-30 fixed h-[18rem] w-[18rem] xl:h-[25rem] xl:w-[25rem] right-[1.4rem] xl:right-[4.4rem] top-[6.9rem] xl:top-[6rem]">
+                  <div className="z-30 fixed h-[18rem] w-[18rem] xl:h-[25rem] xl:w-[25rem] right-[1.4rem] xl:right-[4.4rem] top-[6.9rem] xl:top-[7rem]">
                     <DotLottiePlayer
                       src={
                         selectedUserType == 0

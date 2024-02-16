@@ -32,15 +32,55 @@ const initialState: authState = {
 export const loginAsync = createAsyncThunk(
   "auth/loginAsync",
   async (payload: loginPayload) => {
-    console.log("jdlkasjdlkasj");
-    
-    const response = await axios.post(
-      loginUrl,
-      {
+    let body ; 
+    if(payload.email===""){
+      body = {
         email: payload.email,
         password: payload.password,
         type: payload.userType,
-      },
+      };
+
+    }else{
+
+      body = {
+        userName: payload.userName,
+        password: payload.password,
+        type: payload.userType,
+      };
+
+    }
+    
+    const response = await axios.post(
+      loginUrl,
+      body,
+      
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log(response);
+    
+    return response.data;
+  }
+);
+
+
+export const singupAsync = createAsyncThunk(
+  "auth/signupAsync",
+  async (payload: loginPayload) => {
+    let body = {
+      email:payload.email,
+      userName :payload.userName,
+      type:payload.userType,
+      password : payload.password,
+
+    } ; 
+  
+    
+    const response = await axios.post(
+      loginUrl,
+      body,
+      
       {
         headers: { "Content-Type": "application/json" },
       }
@@ -61,6 +101,7 @@ const authSlice = createSlice({
   },
 
   extraReducers:(builder)=>{
+    //For login 
     builder.addCase(loginAsync.pending, (state) => {
         state.isLoading = true;
     });
@@ -81,8 +122,43 @@ const authSlice = createSlice({
     });
     builder.addCase(loginAsync.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = {errorMessage: "Something went wrong!" , errorType: "any" , status: true }
         // Handle error if necessary
     });
+
+
+    //For signup
+
+
+    builder.addCase(singupAsync.pending, (state) => {
+      state.isLoading = true;
+  });
+  builder.addCase(singupAsync.fulfilled, (state, action) => {
+      state.isLoading = false;
+      // Update state with response data if needed
+      if(action.payload.status){
+
+          console.log(action.payload);
+          
+
+      }
+      else{
+        console.log(action.payload);
+          state.error = {errorMessage: action.payload.message , errorType: action.payload.type , status: true }
+
+      }
+  });
+  builder.addCase(singupAsync.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = {errorMessage: "Something went wrong!" , errorType: "any" , status: true }
+      // Handle error if necessary
+  });
+
+
+
+
+
+
   }
 });
 
