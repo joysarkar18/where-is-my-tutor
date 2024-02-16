@@ -12,7 +12,12 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../../store/store";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { authState, loginPayload } from "@/app/slices/authSlice";
+import {
+  authState,
+  loginPayload,
+  setLoginError,
+  singupAsync,
+} from "@/app/slices/authSlice";
 import * as EmailValidator from "email-validator";
 
 function Register() {
@@ -23,40 +28,116 @@ function Register() {
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
   const [userName, setUserName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [selectedUserType, setSelectedUserType] = useState(0);
 
   const error = useSelector((state: RootState) => state.auth.error);
   const isLoading = useSelector((state: RootState) => state.auth.isLoading);
   const dispatch = useDispatch<ThunkDispatch<authState, loginPayload, any>>();
 
   function handleUserNameChange(event: React.FormEvent<HTMLInputElement>) {
+    if (error.status) {
+      dispatch(
+        setLoginError({
+          status: false,
+          errorMessage: "",
+          errorType: "",
+        })
+      );
+    }
     setUserName(event.currentTarget.value);
   }
 
   function handleEmailChange(event: React.FormEvent<HTMLInputElement>) {
+    if (error.status) {
+      dispatch(
+        setLoginError({
+          status: false,
+          errorMessage: "",
+          errorType: "",
+        })
+      );
+    }
     setEmail(event.currentTarget.value);
   }
 
-  const handlePasswordChange = (value: any) => {
-    setPassword(value);
+  const handlePasswordChange = (value: React.FormEvent<HTMLInputElement>) => {
+    if (error.status) {
+      dispatch(
+        setLoginError({
+          status: false,
+          errorMessage: "",
+          errorType: "",
+        })
+      );
+    }
+    setPassword(value.currentTarget.value);
     if (confirmPassword !== "") {
-      setPasswordsMatch(value === confirmPassword);
+      setPasswordsMatch(value.currentTarget.value === confirmPassword);
     }
   };
 
   const handleConfirmPasswordChange = (
     value: React.FormEvent<HTMLInputElement>
   ) => {
+    if (error.status) {
+      dispatch(
+        setLoginError({
+          status: false,
+          errorMessage: "",
+          errorType: "",
+        })
+      );
+    }
     setConfirmPassword(value.currentTarget.value);
     setPasswordsMatch(value.currentTarget.value === password);
   };
 
-  function signupHandeler(type: any) {
+  function signupHandeler(type: number) {
+    dispatch(
+      setLoginError({
+        status: false,
+        errorMessage: "",
+        errorType: "",
+      })
+    );
     if (passwordsMatch) {
-      if (EmailValidator.validate(email)) {
-        if (userName.length < 4) {
+      if (password.length > 6) {
+        if (EmailValidator.validate(email)) {
+          if (userName.length < 4) {
+            dispatch(
+              setLoginError({
+                status: true,
+                errorMessage: "Username is too short!",
+                errorType: "userName",
+              })
+            );
+          } else {
+            dispatch(
+              singupAsync({
+                email: email,
+                password: password,
+                userName: userName,
+                userType: type,
+              })
+            );
+          }
         } else {
+          dispatch(
+            setLoginError({
+              status: true,
+              errorMessage: "Please enter a valid email!",
+              errorType: "email",
+            })
+          );
         }
       } else {
+        dispatch(
+          setLoginError({
+            status: true,
+            errorMessage: "Please enter a long password!",
+            errorType: "password",
+          })
+        );
       }
     } else {
       setPasswordsMatch(false);
@@ -71,7 +152,7 @@ function Register() {
       <div className="h-[900px] w-[900px] absolute right-[-25rem] bottom-[-25rem] bg-sky-100 rounded-full"></div>
       <div className="h-[700px] w-[700px] absolute right-[-21rem] bottom-[-21rem] bg-sky-200 rounded-full"></div>
       <div className="h-[500px] w-[500px] absolute right-[-16rem] bottom-[-16rem] bg-sky-300 rounded-full"></div>
-      <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden h-4/6 w-5/6 sm:4/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(125,_211,_252,_0.7)_0px_0px_18px] p-8">
+      <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden  h-[70vh] w-5/6 sm:4/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(125,_211,_252,_0.7)_0px_0px_18px] p-8">
         <div className="flex flex-col items-start justify-center">
           <div className="flex flex-row items-start justify-start space-x-8 sm:space-x-12 h-32 mx-10 sm:mx-6 mb-32">
             <div className="flex flex-col items-start justify-start ">
@@ -199,19 +280,68 @@ function Register() {
                 <button
                   type="submit"
                   onClick={() => {
+                    setSelectedUserType(1);
+                    console.log("pressed");
                     signupHandeler(1);
                   }}
                   className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-sky-600 mt-4 space-y-7 hover:bg-sky-500  shadow-sky-100"
                 >
-                  Register as a Tearcher
+                  {isLoading && selectedUserType == 1 && (
+                    <svg
+                      className="w-5 h-5 mr-[9px] ml-[9px] text-white animate-spin"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth={4}
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                  )}
+                  Register as a Teacher
                 </button>
                 <button
                   type="submit"
                   onClick={() => {
+                    setSelectedUserType(0);
+                    console.log("pressed");
+
                     signupHandeler(0);
                   }}
                   className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-sky-600 mt-4 space-y-7 hover:bg-sky-500 shadow-sky-100 "
                 >
+                  {isLoading && selectedUserType == 0 && (
+                    <svg
+                      className="w-5 h-5 mr-[9px] ml-[9px] text-white animate-spin"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth={4}
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                  )}
                   Register as a Student
                 </button>
               </div>

@@ -27,6 +27,13 @@ function Login() {
   const isLoading = useSelector((state: RootState) => state.auth.isLoading);
 
   function loginUser() {
+    dispatch(
+      setLoginError({
+        status: false,
+        errorMessage: "",
+        errorType: "",
+      })
+    );
     if (password.length <= 5) {
       dispatch(
         setLoginError({
@@ -84,6 +91,15 @@ function Login() {
     setEmailOrUsername(event.currentTarget.value);
   }
   function passwordController(event: React.FormEvent<HTMLInputElement>) {
+    if (error.status) {
+      dispatch(
+        setLoginError({
+          status: false,
+          errorMessage: "",
+          errorType: "",
+        })
+      );
+    }
     setPassword(event.currentTarget.value);
     console.log(password);
   }

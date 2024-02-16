@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { loginUrl } from "../constants/urls";
+import { loginUrl, signupUrl } from "../constants/urls";
 
 export type authState = {
   status: boolean;
@@ -78,7 +78,7 @@ export const singupAsync = createAsyncThunk(
   
     
     const response = await axios.post(
-      loginUrl,
+      signupUrl,
       body,
       
       {
