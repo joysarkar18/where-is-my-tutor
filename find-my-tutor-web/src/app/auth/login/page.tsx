@@ -8,57 +8,61 @@ import { useState } from "react";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import Link from "next/link";
-import { login } from "../../slices/authSlice";
-import { UseDispatch, useDispatch } from "react-redux";
+import { loginAsync, setLoginError } from "../../slices/authSlice";
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState } from "../../../store/store";
 
 import * as EmailValidator from "email-validator";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { authState, loginPayload } from "../../slices/authSlice";
 
 function Login() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
   const [selectedUserType, setSelectedUserType] = useState(0);
   const [emailOrUsername, setEmailOrUsername] = useState("");
-  const [error, setError] = useState({
-    errorType: "",
-    errorMessage: "",
-    status: false,
-  });
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+
+  const dispatch = useDispatch<ThunkDispatch<authState, loginPayload, any>>();
+  const error = useSelector((state: RootState) => state.auth.error);
 
   function loginUser() {
     if (password.length <= 5) {
-      setError({
-        status: true,
-        errorMessage: "Password is to small!",
-        errorType: "password",
-      });
+      dispatch(
+        setLoginError({
+          status: true,
+          errorMessage: "Password is to small!",
+          errorType: "password",
+        })
+      );
     } else {
       if (EmailValidator.validate(emailOrUsername)) {
+        console.log("requested");
+
         dispatch(
-          login({
+          loginAsync({
             email: emailOrUsername,
             password: password,
             userName: "",
-            userType: selectedUserType,
-            setError: setError,
+            userType: 0,
           })
         );
       } else {
         if (emailOrUsername.length < 1) {
-          setError({
-            status: true,
-            errorMessage: "Email or username can't be empty!",
-            errorType: "email",
-          });
+          dispatch(
+            setLoginError({
+              status: true,
+              errorMessage: "Email or username can't be empty!",
+              errorType: "email",
+            })
+          );
         } else {
           console.log("username");
           dispatch(
-            login({
+            loginAsync({
               email: "",
               password: password,
               userName: emailOrUsername,
               userType: selectedUserType,
-              setError: setError,
             })
           );
         }
@@ -68,11 +72,13 @@ function Login() {
 
   function emailController(event: React.FormEvent<HTMLInputElement>) {
     if (error.status) {
-      setError({
-        status: false,
-        errorMessage: "",
-        errorType: "",
-      });
+      dispatch(
+        setLoginError({
+          status: false,
+          errorMessage: "",
+          errorType: "",
+        })
+      );
     }
     setEmailOrUsername(event.currentTarget.value);
   }

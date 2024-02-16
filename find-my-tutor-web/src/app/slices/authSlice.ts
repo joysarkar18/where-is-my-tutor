@@ -1,68 +1,91 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { loginUrl } from "../constants/urls";
-import { error } from "console";
 
+export type authState = {
+  status: boolean;
+  token: string;
+  isLoading: boolean;
+  error: errorState;
+};
 
-type authState = {
-    status: boolean,
-    token: string
+ type errorState = {
+  errorType: string;
+  errorMessage: string;
+  status: boolean;
+};
 
-}
+export type loginPayload = {
+  email: string;
+  userName: string;
+  password: string;
+  userType: number;
+};
 
-type loginPayload = {
-    email: string,
-    userName: string,
-    password: string,
-    userType: number,
-    setError : Function,
-}
+const initialState: authState = {
+  status: false,
+  token: "",
+  isLoading: false,
+  error: { errorType: "", errorMessage: "", status: false },
+};
 
+export const loginAsync = createAsyncThunk(
+  "auth/loginAsync",
+  async (payload: loginPayload) => {
+    console.log("jdlkasjdlkasj");
+    
+    const response = await axios.post(
+      loginUrl,
+      {
+        email: payload.email,
+        password: payload.password,
+        type: payload.userType,
+      },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log(response);
+    
+    return response.data;
+  }
+);
 
-const initialState = {
-    status: false,
-    token: "",
-} as authState;
+const authSlice = createSlice({
+  initialState,
+  name: "auth",
+  reducers: {
+    setLoginError(state, action: PayloadAction<errorState>) {
+      state.error = action.payload;
+    },
+  },
 
-const authSlice = createSlice({initialState , name:"auth" , reducers:{
+  extraReducers:(builder)=>{
+    builder.addCase(loginAsync.pending, (state) => {
+        state.isLoading = true;
+    });
+    builder.addCase(loginAsync.fulfilled, (state, action) => {
+        state.isLoading = false;
+        // Update state with response data if needed
+        if(action.payload.status){
 
-    login(state , action : PayloadAction<loginPayload>){
-        console.log(state);
-        console.log(action);
-        const body = {
-
-            userName: action.payload.email,
-            password: action.payload.password,
-            type: action.payload.userType,
+            console.log(action.payload);
+            
 
         }
-        axios.post(loginUrl , body ,{ headers:{
-            'Content-Type': 'application/json',
+        else{
+          console.log(action.payload);
+            state.error = {errorMessage: action.payload.message , errorType: action.payload.type , status: true }
 
-        }}).then((response)=>{
-            console.log(response);
-            if(response.data.status){
-
-            }else{
-                action.payload.setError({
-                    status: true,
-                    errorMessage:response.data.message,
-                    errorType: response.data.type,
-                })
-            }
-            
-        }).catch(error=>{
-            console.log(error);
-            
-        })
-
-
-        
-        
-
-    }
-}})
+        }
+    });
+    builder.addCase(loginAsync.rejected, (state, action) => {
+        state.isLoading = false;
+        // Handle error if necessary
+    });
+  }
+});
 
 export default authSlice.reducer;
 
-export const {login} = authSlice.actions;
+export const { setLoginError } = authSlice.actions;
