@@ -170,11 +170,11 @@ function Register() {
                       type="email"
                       onChange={handleEmailChange}
                       value={email}
-                      className={`rounded-full w-64 sm:w-80 h-8 text-baseColor-600 shadow-sky-100 relative block px-10 py-1 border ${
+                      className={`rounded-full w-64 sm:w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block px-10 py-1 border ${
                         error.status && error.errorType === "email"
                           ? "border-red-500"
                           : "border-baseColor-300"
-                      } focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm`}
+                      } focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                       placeholder="Enter your email address"
                     />
                     <LuMail className="top-2 left-4 absolute text-baseColor-400">
@@ -194,7 +194,7 @@ function Register() {
                         error.status && error.errorType === "userName"
                           ? "border-red-500"
                           : "border-baseColor-300"
-                      } focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm`}
+                      } focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                       placeholder="Enter username"
                     />
                     <CgProfile className="top-2 left-4 absolute text-baseColor-400"></CgProfile>
@@ -243,13 +243,13 @@ function Register() {
                         passwordsMatch
                           ? "border-baseColor-300"
                           : "border-red-500"
-                      } focus:border-sky-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]`}
+                      } focus:border-baseColor-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]`}
                       placeholder="Confirm password"
                     />
                     <RiLockPasswordLine className="top-2 left-4 absolute text-baseColor-400"></RiLockPasswordLine>
                     {!isPasswordShowing2 && (
                       <AiOutlineEye
-                        className="top-2 right-4 absolute text-sky-400 cursor-pointer"
+                        className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
                         onClick={() => {
                           setIsPasswordShowing2((v) => !v);
                         }}
@@ -360,12 +360,12 @@ function Register() {
         </div>
 
         <div className="relative hidden lg:block">
-          <div className="h-[800px] w-[800px] fixed right-[-30rem] xl:right-[-19rem] top-[-4.0rem] bg-baseColor-100 rounded-full">
-            <div className="h-[700px] w-[700px] fixed right-[-31rem] xl:right-[-20rem] top-[-1.4rem] bg-baseColor-200 rounded-full">
-              <div className="h-[640px] w-[640px] fixed right-[-32rem] xl:right-[-23rem] top-[0rem] bg-baseColor-300 rounded-full">
+          <div className="h-[800px] w-[800px] fixed right-[-30rem] xl:right-[-19rem] top-[-4.0rem] bg-logIn-200 rounded-full">
+            <div className="h-[700px] w-[700px] fixed right-[-31rem] xl:right-[-20rem] top-[-1.4rem] bg-logIn-300 rounded-full">
+              <div className="h-[640px] w-[640px] fixed right-[-32rem] xl:right-[-23rem] top-[0rem] bg-logIn-500 rounded-full">
                 <div className="z-30 fixed h-[18rem] w-[18rem] xl:h-[25rem] xl:w-[25rem] right-[1.4rem] xl:right-[4.4rem] top-[6.9rem] xl:top-[6rem] ">
                   <DotLottiePlayer
-                    src="/animations/signuppage.lottie"
+                    src="/animations/signup (1).lottie"
                     autoplay
                     loop
                   ></DotLottiePlayer>
