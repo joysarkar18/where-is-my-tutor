@@ -146,19 +146,19 @@ function Register() {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen overflow-hidden relative">
-      <div className="h-[900px] w-[900px] absolute left-[-24rem] top-[-24rem] bg-sky-100 rounded-full"></div>
-      <div className="h-[700px] w-[700px] absolute left-[-20rem] top-[-20rem] bg-sky-200 rounded-full"></div>
-      <div className="h-[500px] w-[500px] absolute left-[-15rem] top-[-15rem] bg-sky-300 rounded-full"></div>
-      <div className="h-[900px] w-[900px] absolute right-[-25rem] bottom-[-25rem] bg-sky-100 rounded-full"></div>
-      <div className="h-[700px] w-[700px] absolute right-[-21rem] bottom-[-21rem] bg-sky-200 rounded-full"></div>
-      <div className="h-[500px] w-[500px] absolute right-[-16rem] bottom-[-16rem] bg-sky-300 rounded-full"></div>
+      <div className="h-[900px] w-[900px] absolute left-[-24rem] top-[-24rem] bg-baseColor-100 rounded-full"></div>
+      <div className="h-[700px] w-[700px] absolute left-[-20rem] top-[-20rem] bg-baseColor-200 rounded-full"></div>
+      <div className="h-[500px] w-[500px] absolute left-[-15rem] top-[-15rem] bg-baseColor-300 rounded-full"></div>
+      <div className="h-[900px] w-[900px] absolute right-[-25rem] bottom-[-25rem] bg-baseColor-100 rounded-full"></div>
+      <div className="h-[700px] w-[700px] absolute right-[-21rem] bottom-[-21rem] bg-baseColor-200 rounded-full"></div>
+      <div className="h-[500px] w-[500px] absolute right-[-16rem] bottom-[-16rem] bg-baseColor-300 rounded-full"></div>
       <div className="pl-6 2xl:pl-36 flex flex-row items-center justify-center lg:justify-between overflow-hidden  h-[70vh] w-5/6 sm:4/6 sm:w-4/6 bg-gray-100 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-md shadow-[rgba(125,_211,_252,_0.7)_0px_0px_18px] p-8">
         <div className="flex flex-col items-start justify-center">
           <div className="flex flex-row items-start justify-start space-x-8 sm:space-x-12 h-32 mx-10 sm:mx-6 mb-32">
             <div className="flex flex-col items-start justify-start ">
               <div className="flex flex-col items-start justify-center -translate-y-8">
                 <div className="ml-10 sm:ml-9 flex flex-row items-center justify-center -translate-y-10">
-                  <h2 className="text-2xl sm:text-3xl font-semibold text-sky-600">
+                  <h2 className="text-2xl sm:text-3xl font-semibold text-baseColor-600">
                     Create an account
                   </h2>
                 </div>
@@ -170,14 +170,14 @@ function Register() {
                       type="email"
                       onChange={handleEmailChange}
                       value={email}
-                      className={`rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border ${
+                      className={`rounded-full w-64 sm:w-80 h-8 text-baseColor-600 shadow-sky-100 relative block px-10 py-1 border ${
                         error.status && error.errorType === "email"
                           ? "border-red-500"
-                          : "border-sky-300"
+                          : "border-baseColor-300"
                       } focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm`}
                       placeholder="Enter your email address"
                     />
-                    <LuMail className="top-2 left-4 absolute text-sky-400">
+                    <LuMail className="top-2 left-4 absolute text-baseColor-400">
                       {" "}
                     </LuMail>
                   </div>
@@ -190,14 +190,14 @@ function Register() {
                       type="tel"
                       value={userName}
                       onChange={handleUserNameChange}
-                      className={`rounded-full w-64 sm:w-80 h-8 text-sky-600 shadow-sky-100 relative block px-10 py-1 border ${
+                      className={`rounded-full w-64 sm:w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block px-10 py-1 border ${
                         error.status && error.errorType === "userName"
                           ? "border-red-500"
-                          : "border-sky-300"
+                          : "border-baseColor-300"
                       } focus:border-sky-600 focus:ring-0 focus:outline-none sm:text-sm`}
                       placeholder="Enter username"
                     />
-                    <CgProfile className="top-2 left-4 absolute text-sky-400"></CgProfile>
+                    <CgProfile className="top-2 left-4 absolute text-baseColor-400"></CgProfile>
                   </div>
                 </div>
 
@@ -209,13 +209,13 @@ function Register() {
                       type={isPasswordShowing ? "password" : "text"}
                       value={password}
                       onChange={(e) => handlePasswordChange(e)}
-                      className="rounded-full text-sky-600 shadow-sky-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border border-sky-300 focus:border-sky-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]"
+                      className="rounded-full text-baseColor-600 shadow-sky-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border border-baseColor-300 focus:border-baseColor-400 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]"
                       placeholder="Enter Password"
                     />
-                    <RiLockPasswordLine className="top-2 left-4 absolute text-sky-400"></RiLockPasswordLine>
+                    <RiLockPasswordLine className="top-2 left-4 absolute text-baseColor-400"></RiLockPasswordLine>
                     {!isPasswordShowing && (
                       <AiOutlineEye
-                        className="top-2 right-4 absolute text-sky-400 cursor-pointer"
+                        className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
                         onClick={() => {
                           setIsPasswordShowing((v) => !v);
                         }}
@@ -223,7 +223,7 @@ function Register() {
                     )}
                     {isPasswordShowing && (
                       <AiOutlineEyeInvisible
-                        className="top-2 right-4 absolute text-sky-400 cursor-pointer"
+                        className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
                         onClick={() => {
                           setIsPasswordShowing((v) => !v);
                         }}
@@ -239,12 +239,14 @@ function Register() {
                       type={isPasswordShowing2 ? "password" : "text"}
                       value={confirmPassword}
                       onChange={(e) => handleConfirmPasswordChange(e)}
-                      className={`rounded-full text-sky-600 shadow-sky-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border ${
-                        passwordsMatch ? "border-sky-300" : "border-red-500"
+                      className={`rounded-full text-baseColor-600 shadow-sky-100 relative block w-64 sm:w-80 h-8 px-10 py-1 sm:text-sm border ${
+                        passwordsMatch
+                          ? "border-baseColor-300"
+                          : "border-red-500"
                       } focus:border-sky-600 focus:ring-0 focus:outline-none shadow-[5,_183,_186,_0.9)]`}
                       placeholder="Confirm password"
                     />
-                    <RiLockPasswordLine className="top-2 left-4 absolute text-sky-400"></RiLockPasswordLine>
+                    <RiLockPasswordLine className="top-2 left-4 absolute text-baseColor-400"></RiLockPasswordLine>
                     {!isPasswordShowing2 && (
                       <AiOutlineEye
                         className="top-2 right-4 absolute text-sky-400 cursor-pointer"
@@ -255,7 +257,7 @@ function Register() {
                     )}
                     {isPasswordShowing2 && (
                       <AiOutlineEyeInvisible
-                        className="top-2 right-4 absolute text-sky-400 cursor-pointer"
+                        className="top-2 right-4 absolute text-baseColor-400 cursor-pointer"
                         onClick={() => {
                           setIsPasswordShowing2((v) => !v);
                         }}
@@ -284,7 +286,7 @@ function Register() {
                     console.log("pressed");
                     signupHandeler(1);
                   }}
-                  className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-sky-600 mt-4 space-y-7 hover:bg-sky-500  shadow-sky-100"
+                  className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 mt-4 space-y-7 hover:bg-baseColor-400  shadow-baseColor-100"
                 >
                   {isLoading && selectedUserType == 1 && (
                     <svg
@@ -318,7 +320,7 @@ function Register() {
 
                     signupHandeler(0);
                   }}
-                  className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-sky-600 mt-4 space-y-7 hover:bg-sky-500 shadow-sky-100 "
+                  className="group relative w-64 sm:w-80 flex justify-center py-1  border border-transparent text-sm font-semibold rounded-full text-white bg-baseColor-600 mt-4 space-y-7 hover:bg-baseColor-400 shadow-baseColor-100 "
                 >
                   {isLoading && selectedUserType == 0 && (
                     <svg
@@ -346,7 +348,7 @@ function Register() {
                 </button>
               </div>
               <div className="flex flex-row items-center sm:justify-between justify-around space-x-1 sm:space-x-20 h-2">
-                <div className="text-sky-600 whitespace-nowrap ml-3 sm:ml-4 text-[12px] sm:text-sm">
+                <div className="text-baseColor-600 whitespace-nowrap ml-3 sm:ml-4 text-[12px] sm:text-sm">
                   Already have an account?{" "}
                   <span className="text-blue-500 ml-4 text-sm cursor-pointer underline">
                     <Link href={"/auth/login"}>Login</Link>
@@ -358,9 +360,9 @@ function Register() {
         </div>
 
         <div className="relative hidden lg:block">
-          <div className="h-[800px] w-[800px] fixed right-[-30rem] xl:right-[-19rem] top-[-4.0rem] bg-sky-100 rounded-full">
-            <div className="h-[700px] w-[700px] fixed right-[-31rem] xl:right-[-20rem] top-[-1.4rem] bg-sky-200 rounded-full">
-              <div className="h-[640px] w-[640px] fixed right-[-32rem] xl:right-[-23rem] top-[0rem] bg-sky-300 rounded-full">
+          <div className="h-[800px] w-[800px] fixed right-[-30rem] xl:right-[-19rem] top-[-4.0rem] bg-baseColor-100 rounded-full">
+            <div className="h-[700px] w-[700px] fixed right-[-31rem] xl:right-[-20rem] top-[-1.4rem] bg-baseColor-200 rounded-full">
+              <div className="h-[640px] w-[640px] fixed right-[-32rem] xl:right-[-23rem] top-[0rem] bg-baseColor-300 rounded-full">
                 <div className="z-30 fixed h-[18rem] w-[18rem] xl:h-[25rem] xl:w-[25rem] right-[1.4rem] xl:right-[4.4rem] top-[6.9rem] xl:top-[6rem] ">
                   <DotLottiePlayer
                     src="/animations/signuppage.lottie"
