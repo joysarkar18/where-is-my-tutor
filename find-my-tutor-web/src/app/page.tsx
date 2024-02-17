@@ -11,11 +11,18 @@ import { IoStar } from "react-icons/io5";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import Image from "next/image";
-import React from "react";
+import React, { useRef, useState } from "react";
 
 export default function Home() {
+  const [scrollPos, setScrollPos] = useState(0);
+  const containerRef = useRef<any>();
+  const handleScroll = (scrollAmount: number) => {
+    const newPos = scrollPos + scrollAmount;
+    setScrollPos(newPos);
+    containerRef.current.scrollLeft = newPos;
+  };
   return (
-    <div className="min-w-screen min-h-screen overflow-y-hidden">
+    <div className="min-w-screen min-h-screen overflow-hidden">
       <div className="flex flex-col overflow-hidden max-w-[2000px] w-full m-auto">
         <div className="flex flex-row justify-between w-full  bg-transparent ">
           <div className="flex flex-col relative">
@@ -209,11 +216,29 @@ export default function Home() {
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                   Culpa, sint. Earum, atque esse? Fuga enim
                 </div>
-                <div className="w-[116px] flex flex-row justify-between text-[46px] text-[#FF3429]"></div>
+                <div className="w-[116px] flex flex-row justify-between text-[46px] text-[#FF3429]">
+                  <IoIosArrowDropleft
+                    onClick={() => {
+                      console.log("right clicked");
+
+                      handleScroll(-200);
+                    }}
+                  />
+                  <IoIosArrowDroprightCircle
+                    onClick={() => {
+                      console.log("right clicked");
+
+                      handleScroll(200);
+                    }}
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-row gap-[100px] mb-[244px] py-5 x-scrollbar pl-[4.4vw] pr-[4.2vw] ">
+            <div
+              ref={containerRef}
+              className="flex flex-row gap-[100px] mb-[244px] py-5 x-scrollbar pl-[4.4vw] pr-[4.2vw] overflow-hidden"
+            >
               <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025] mr-8 mb-6 ml-[4vh]">
                 <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
                   <Image
