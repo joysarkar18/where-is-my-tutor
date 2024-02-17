@@ -15,7 +15,6 @@ const StudentDetails = require("./models/student/studentDetails")
 // routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const uploadRouter = require('./routes/uploadRouter')
 const authRouter = require('./routes/auth');
 const updateDetailsRouter = require('./routes/updateUserDetails');
 const TeacherDetails = require('./models/teacher/teacherDetails');
@@ -33,11 +32,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/auth", authRouter);
 app.use('/', indexRouter);
-app.use('/', uploadRouter);
 app.use('/users', usersRouter);
 app.use('/update-details', updateDetailsRouter);
 
