@@ -163,8 +163,7 @@ export default function Home() {
               <div className="text-[24px] leading-[30px] ">
                 <div className="font-semibold">Accuracy Track</div>
                 <div className="text-[16px] leading-[20px] text-[#00000050]">
-                  {" "}
-                  Track your tuotor's profile{" "}
+                  {"Track your tuotor's profile"}
                 </div>
               </div>
             </div>

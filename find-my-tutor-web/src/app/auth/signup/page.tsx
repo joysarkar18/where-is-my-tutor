@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
@@ -19,6 +19,7 @@ import {
   singupAsync,
 } from "@/app/slices/authSlice";
 import * as EmailValidator from "email-validator";
+import { redirect } from "next/navigation";
 
 function Register() {
   const [isPasswordShowing, setIsPasswordShowing] = useState<boolean>(true);
@@ -32,6 +33,7 @@ function Register() {
 
   const error = useSelector((state: RootState) => state.auth.error);
   const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+  const loginStatus = useSelector((state: RootState) => state.auth.status);
   const dispatch = useDispatch<ThunkDispatch<authState, loginPayload, any>>();
 
   function handleUserNameChange(event: React.FormEvent<HTMLInputElement>) {
@@ -143,6 +145,12 @@ function Register() {
       setPasswordsMatch(false);
     }
   }
+
+  useEffect(() => {
+    if (loginStatus) {
+      redirect("/");
+    }
+  }, [loginStatus]);
 
   return (
     <div className="flex items-center justify-center w-screen h-screen overflow-hidden relative">

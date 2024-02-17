@@ -1,6 +1,8 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { loginUrl, signupUrl } from "../constants/urls";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies(null, { path: '/' });
 
 export type authState = {
   status: boolean;
@@ -111,6 +113,8 @@ const authSlice = createSlice({
         if(action.payload.status){
 
             console.log(action.payload);
+            cookies.set('fmt', action.payload.token);
+            
             
 
         }
@@ -139,6 +143,9 @@ const authSlice = createSlice({
       if(action.payload.status){
 
           console.log(action.payload);
+          state.status = true;
+          cookies.set('fmt', action.payload.token);
+       
           
 
       }

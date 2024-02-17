@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 // database
-const sequelize = require("./utils/database")
+const sequelize = require("./db/database")
 
 //models
 const Teacher = require('./models/teacher/teacher')

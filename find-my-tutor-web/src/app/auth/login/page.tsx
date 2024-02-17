@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import Link from "next/link";
@@ -15,6 +15,7 @@ import type { RootState } from "../../../store/store";
 import * as EmailValidator from "email-validator";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { authState, loginPayload } from "../../slices/authSlice";
+import { redirect } from "next/navigation";
 
 function Login() {
   const [isPasswordShowing, setIsPasswordShowing] = useState(true);
@@ -25,6 +26,7 @@ function Login() {
   const dispatch = useDispatch<ThunkDispatch<authState, loginPayload, any>>();
   const error = useSelector((state: RootState) => state.auth.error);
   const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+  const loginStatus = useSelector((state: RootState) => state.auth.status);
 
   function loginUser() {
     dispatch(
@@ -103,6 +105,12 @@ function Login() {
     setPassword(event.currentTarget.value);
     console.log(password);
   }
+
+  useEffect(() => {
+    if (loginStatus) {
+      redirect("/");
+    }
+  }, [loginStatus]);
 
   return (
     <div className="flex items-center justify-center w-screen h-screen overflow-hidden relative">
