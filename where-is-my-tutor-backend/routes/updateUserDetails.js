@@ -1,6 +1,6 @@
 const StudentDetails = require("../models/student/studentDetails");
 const TeacherDetails = require("../models/teacher/teacherDetails");
-const tokenAuthentication = require("../utils/tokenAuthentication")
+const tokenAuthentication = require("../middleware/tokenAuthentication")
 
 const router = require("express").Router()
 
