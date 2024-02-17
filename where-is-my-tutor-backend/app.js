@@ -15,6 +15,7 @@ const StudentDetails = require("./models/student/studentDetails")
 // routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const forgetpasswordRouter = require('./routes/otpGenerate')
 const authRouter = require('./routes/auth');
 const updateDetailsRouter = require('./routes/updateUserDetails');
 const TeacherDetails = require('./models/teacher/teacherDetails');
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/auth", authRouter);
 app.use('/', indexRouter);
+app.use('/', forgetpasswordRouter);
 app.use('/users', usersRouter);
 app.use('/update-details', updateDetailsRouter);
 

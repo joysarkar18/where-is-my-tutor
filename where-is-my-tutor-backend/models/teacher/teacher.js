@@ -26,6 +26,10 @@ const Teacher = sequelize.define('teacher', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  OTP: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  }
 
 }, {
 

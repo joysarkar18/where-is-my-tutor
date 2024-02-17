@@ -25,6 +25,11 @@ const Student = sequelize.define('student', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
+  OTP: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  }
 }, {
 
 });
