@@ -33,7 +33,7 @@ export const loginAsync = createAsyncThunk(
   "auth/loginAsync",
   async (payload: loginPayload) => {
     let body ; 
-    if(payload.email===""){
+    if(payload.userName===""){
       body = {
         email: payload.email,
         password: payload.password,
