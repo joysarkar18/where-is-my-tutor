@@ -30,7 +30,7 @@ router.post('/upload', (req, res) => {
         const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.fieldname + '-' + req.body.time + path.extname(req.file.originalname)}`;
         console.log(imageUrl)
         res.json({
-          "status":200,
+          "status": 200,
           "pic-url": imageUrl
         });
         // res.status(200).json({ message: 'File uploaded successfully', filename: req.file.filename });
