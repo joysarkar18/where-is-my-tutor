@@ -7,6 +7,8 @@ const options = { expiresIn: '60d' };
 
 const Student = require("../models/student/student");
 const Teacher = require("../models/teacher/teacher");
+const { sendEmailFunc } = require("../node_mailer/send_mail");
+
 
 const otpGenerator = (length) => {
     otp = Math.floor(Math.random() * 10);
@@ -33,7 +35,10 @@ router.post("/forget-password", async (req, res) => {
         if (user) {
             user.OTP = OTP;
             await user.save();
-            return res.json({ status: true, message: "OTP sent!", otp: OTP });
+
+            const sent = await sendEmailFunc(email, OTP)
+            if (sent) return res.json({ status: true, message: "OTP sent!", otp: OTP });
+            else return res.json({ status: false, message: "OTP not sent!" });
         } else {
             return res.json({ status: false, message: "User not found!" });
         }
