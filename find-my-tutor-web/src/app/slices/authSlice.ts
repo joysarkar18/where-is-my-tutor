@@ -11,7 +11,7 @@ export type authState = {
   error: errorState;
 };
 
- type errorState = {
+export type errorState = {
   errorType: string;
   errorMessage: string;
   status: boolean;
