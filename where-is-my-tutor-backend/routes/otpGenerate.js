@@ -19,7 +19,7 @@ const otpGenerator = (length) => {
     return otp
 }
 
-router.post("/forget-password", async (req, res) => {
+router.post("/request-otp", async (req, res) => {
 
     try {
         const email = req.body.email;

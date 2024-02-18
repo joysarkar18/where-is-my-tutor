@@ -1,19 +1,47 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { loginUrl } from "../constants/urls";
+import { requestOtpUrl } from "../constants/urls";
 import { errorState } from "./authSlice";
-import { error, log } from "console";
-enum forgotPasswordStateEnum {
+export enum forgotPasswordStateEnum {
   OtpNotSent = 1,
   OtpSent,
   ResetPassword,
 }
+
+export type forgotPasswordPayload = {
+  email: string;
+  password: string;
+  otp: number;
+  type: number;
+};
+
+export type forgotPasswordState = {
+  email: string;
+  otpState: forgotPasswordStateEnum;
+  error: errorState;
+  isLoading: boolean;
+  type: number;
+};
+
+const initialState: forgotPasswordState = {
+  email: "",
+  otpState: forgotPasswordStateEnum.OtpNotSent,
+  isLoading: false,
+  type: 0,
+  error: { errorMessage: "", errorType: "", status: false },
+};
+
 export const requestOtpThunk = createAsyncThunk(
   "auth/requestOtp",
-  async (payload: string) => {
+  async (payload: any) => {
     let body;
+    body = {
+      email: payload.email,
+      type: payload.type,
+    };
+
     const response = await axios.post(
-      loginUrl,
+      requestOtpUrl,
       body,
 
       {
@@ -25,26 +53,19 @@ export const requestOtpThunk = createAsyncThunk(
     return response.data;
   }
 );
-
-type forgotPasswordState = {
-  email: string;
-  otpState: forgotPasswordStateEnum;
-  error: errorState;
-  isLoading: boolean;
-};
-
-const initialState: forgotPasswordState = {
-  email: "",
-  otpState: forgotPasswordStateEnum.OtpNotSent,
-  isLoading: false,
-  error: { errorMessage: "", errorType: "", status: false },
-};
-export const forgotPasswordSlice = createSlice({
+const forgotPasswordSlice = createSlice({
   name: "forgotPassword",
   initialState,
   reducers: {
     setForgotPasswordError(state, action: PayloadAction<errorState>) {
       state.error = action.payload;
+    },
+    setEmailAndType(
+      state,
+      action: PayloadAction<{ email: string; type: number }>
+    ) {
+      state.email = action.payload.email;
+      state.type = action.payload.type;
     },
   },
   extraReducers: (builder) => {
@@ -55,6 +76,9 @@ export const forgotPasswordSlice = createSlice({
 
     builder.addCase(requestOtpThunk.fulfilled, (state, action) => {
       state.isLoading = false;
+      if (action.payload.status) {
+        state.otpState = forgotPasswordStateEnum.OtpSent;
+      }
       console.log(action.payload);
     });
 
@@ -70,3 +94,7 @@ export const forgotPasswordSlice = createSlice({
     //Verify OTP
   },
 });
+
+export default forgotPasswordSlice.reducer;
+export const { setForgotPasswordError, setEmailAndType } =
+  forgotPasswordSlice.actions;

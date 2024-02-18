@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/auth", authRouter);
 app.use('/', indexRouter);
-app.use('/', forgetpasswordRouter);
+app.use('/forgot-password', forgetpasswordRouter);
 app.use('/users', usersRouter);
 app.use('/update-details', updateDetailsRouter);
 
