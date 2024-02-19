@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { requestOtpUrl } from "../constants/urls";
+import { requestOtpUrl, verifyOtpUrl } from "../constants/urls";
 import { errorState } from "./authSlice";
 export enum forgotPasswordStateEnum {
   OtpNotSent = 1,
@@ -53,6 +53,31 @@ export const requestOtpThunk = createAsyncThunk(
     return response.data;
   }
 );
+
+export const verifyOtpThunk = createAsyncThunk(
+  "auth/verifyOtp",
+  async (payload: any) => {
+    let body;
+    body = {
+      email: payload.email,
+      type: payload.type,
+      otp: payload.otp,
+    };
+
+    const response = await axios.post(
+      verifyOtpUrl,
+      body,
+
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log(response);
+
+    return response.data;
+  }
+);
+
 const forgotPasswordSlice = createSlice({
   name: "forgotPassword",
   initialState,
@@ -92,6 +117,27 @@ const forgotPasswordSlice = createSlice({
     });
 
     //Verify OTP
+
+    builder.addCase(verifyOtpThunk.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(verifyOtpThunk.fulfilled, (state, action) => {
+      state.isLoading = false;
+      if (action.payload.status) {
+        state.otpState = forgotPasswordStateEnum.ResetPassword;
+      }
+      console.log(action.payload);
+    });
+
+    builder.addCase(verifyOtpThunk.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = {
+        errorMessage: "Something went wrong!",
+        errorType: "any",
+        status: true,
+      };
+    });
   },
 });
 

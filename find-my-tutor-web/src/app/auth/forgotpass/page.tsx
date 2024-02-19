@@ -50,10 +50,12 @@ const ForgotPassword = () => {
             className="px-8"
           ></Image>
         </div>
-        {/* {currentStep === forgotPasswordStateEnum.OtpNotSent && (
+        {currentStep === forgotPasswordStateEnum.OtpNotSent && (
           <EnterEmailSection></EnterEmailSection>
-        )} */}
-        <EnterOtpSection></EnterOtpSection>
+        )}
+        {currentStep === forgotPasswordStateEnum.OtpSent && (
+          <EnterOtpSection></EnterOtpSection>
+        )}
       </div>
     </div>
   );
