@@ -11,7 +11,7 @@ const { sendEmailFunc } = require("../node_mailer/send_mail");
 
 
 const otpGenerator = (length) => {
-    otp = Math.floor(Math.random() * 10);
+    otp = Math.floor(Math.random() * 9) + 1;
     for (let i = 1; i < length; i++) {
         const randomIndex = Math.floor(Math.random() * 10);
         otp = otp * 10 + randomIndex;

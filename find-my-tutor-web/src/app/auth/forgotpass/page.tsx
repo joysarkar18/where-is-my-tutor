@@ -15,6 +15,7 @@ import {
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import EnterEmailSection from "./componants/EnterEmailSection";
 import EnterOtpSection from "./componants/EnterOtpSection";
+import ResetPasswordSection from "./componants/ResetPasswordSection";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -55,6 +56,9 @@ const ForgotPassword = () => {
         )}
         {currentStep === forgotPasswordStateEnum.OtpSent && (
           <EnterOtpSection></EnterOtpSection>
+        )}
+        {currentStep === forgotPasswordStateEnum.ResetPassword && (
+          <ResetPasswordSection />
         )}
       </div>
     </div>

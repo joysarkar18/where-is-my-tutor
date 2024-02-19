@@ -114,6 +114,7 @@ const authSlice = createSlice({
 
             console.log(action.payload);
             cookies.set('fmt', action.payload.token);
+            state.status = true
             
             
 

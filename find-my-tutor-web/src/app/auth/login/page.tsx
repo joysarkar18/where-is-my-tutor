@@ -111,6 +111,7 @@ function Login() {
       redirect("/");
     }
   }, [loginStatus]);
+  console.log('login status', loginStatus)
 
   return (
     <div className="flex items-center justify-center w-screen h-screen overflow-hidden relative">

@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { requestOtpUrl, verifyOtpUrl } from "../constants/urls";
+import { requestOtpUrl, verifyOtpUrl, resetPasswordUrl } from "../constants/urls";
 import { errorState } from "./authSlice";
 export enum forgotPasswordStateEnum {
   OtpNotSent = 1,
@@ -78,6 +78,30 @@ export const verifyOtpThunk = createAsyncThunk(
   }
 );
 
+export const resetPasswordThunk = createAsyncThunk(
+  "auth/resetPassword",
+  async (payload: any) => {
+    let body;
+    body = {
+      email: payload.email,
+      type: payload.type,
+      password: payload.password,
+    };
+    console.log(body)
+    const response = await axios.post(
+      resetPasswordUrl,
+      body,
+
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log(response);
+
+    return response.data;
+  }
+);
+
 const forgotPasswordSlice = createSlice({
   name: "forgotPassword",
   initialState,
@@ -95,6 +119,7 @@ const forgotPasswordSlice = createSlice({
   },
   extraReducers: (builder) => {
     // OTP Request
+
     builder.addCase(requestOtpThunk.pending, (state) => {
       state.isLoading = true;
     });
@@ -131,6 +156,29 @@ const forgotPasswordSlice = createSlice({
     });
 
     builder.addCase(verifyOtpThunk.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = {
+        errorMessage: "Something went wrong!",
+        errorType: "any",
+        status: true,
+      };
+    });
+
+    //Reset Password
+
+    builder.addCase(resetPasswordThunk.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(resetPasswordThunk.fulfilled, (state, action) => {
+      state.isLoading = false;
+      if (action.payload.status) {
+        state.otpState = forgotPasswordStateEnum.ResetPassword;
+      }
+      console.log(action.payload);
+    });
+
+    builder.addCase(resetPasswordThunk.rejected, (state, action) => {
       state.isLoading = false;
       state.error = {
         errorMessage: "Something went wrong!",
