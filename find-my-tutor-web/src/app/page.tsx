@@ -12,14 +12,28 @@ import { DotLottiePlayer } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
+  const arr = [1,2,3,4,5]
   const [scrollPos, setScrollPos] = useState(0);
   const containerRef = useRef<any>();
   const handleScroll = (scrollAmount: number) => {
     const newPos = scrollPos + scrollAmount;
+    console.log(newPos)
+    if (newPos < 0) {
+      setScrollPos(0);
+      containerRef.current.scrollLeft = 0;
+      return
+    }
+    if(newPos > arr.length*300){
+      setScrollPos(0);
+      containerRef.current.scrollLeft = 0;
+      return
+    }
     setScrollPos(newPos);
     containerRef.current.scrollLeft = newPos;
+    return
   };
   return (
     <div className="min-w-screen min-h-screen overflow-hidden">
@@ -61,10 +75,10 @@ export default function Home() {
                   <div className=" cursor-pointer">Learning Materials</div>
                 </div>
                 <div className="md:text-[18px] text-[1.4vw] font-semibold leading-[30px] w-auto flex flex-row gap-[32px] items-center">
-                  <div className=" cursor-pointer">Log In</div>
-                  <div className="text-white md:px-[30px] px-[20px] md:py-[10px] py-[5px] bg-[#75D0C1] hover:bg-[#66c9b8] rounded-full cursor-pointer">
+                  <Link href={"/auth/login"} className=" cursor-pointer">Log In</Link>
+                  <Link href={"/auth/signup"} className="text-white shadow-[0_4px_15px_#00000025] md:px-[30px] px-[20px] md:py-[10px] py-[5px] bg-[#75D0C1] hover:bg-[#66c9b8] rounded-full cursor-pointer">
                     Sign Up
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -221,14 +235,14 @@ export default function Home() {
                     onClick={() => {
                       console.log("right clicked");
 
-                      handleScroll(-200);
+                      handleScroll(-300);
                     }}
                   />
                   <IoIosArrowDroprightCircle
                     onClick={() => {
                       console.log("right clicked");
 
-                      handleScroll(200);
+                      handleScroll(300);
                     }}
                   />
                 </div>
@@ -239,138 +253,36 @@ export default function Home() {
               ref={containerRef}
               className="flex flex-row gap-[100px] mb-[244px] py-5 x-scrollbar pl-[4.4vw] pr-[4.2vw] overflow-hidden"
             >
-              <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025] mr-8 mb-6 ml-[4vh]">
-                <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
-                  <Image
-                    alt=""
-                    src={"/pictures/card_pic.png"}
-                    width={353}
-                    height={240}
-                    className="w-[263px] h-[240px] object-cover"
-                  />
-                </div>
-                <div className="h-auto flex flex-col items-center pt-5 pb-10">
-                  <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">
-                    Joy Sarkar
-                  </div>
-                  <div className="text-[#FF3429] text-[20px] leading-[40px] font-semibold mb-5">
-                    Co - Founder
-                  </div>
-                  <div className="w-[228px] h-[52px] flex justify-center items-center bg-[#FF3429] hover:bg-[#E92016] text-white font-semibold shadow-[0_4px_12px_#00000025] rounded-full">
-                    Viwe Details
-                  </div>
-                </div>
-              </div>
-              <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025] mr-8 mb-6">
-                <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
-                  <Image
-                    alt=""
-                    src={"/pictures/card_pic.png"}
-                    width={353}
-                    height={240}
-                    className="w-[263px] h-[240px] object-cover"
-                  />
-                </div>
-                <div className="h-auto flex flex-col items-center pt-5 pb-10">
-                  <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">
-                    Joy Sarkar
-                  </div>
-                  <div className="text-[#FF3429] text-[20px] leading-[40px] font-semibold mb-5">
-                    Co - Founder
-                  </div>
-                  <div className="w-[228px] h-[52px] flex justify-center items-center bg-[#FF3429] hover:bg-[#E92016] text-white font-semibold shadow-[0_4px_12px_#00000025] rounded-full">
-                    Viwe Details
-                  </div>
-                </div>
-              </div>
-              <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025] mr-8 mb-6">
-                <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
-                  <Image
-                    alt=""
-                    src={"/pictures/card_pic.png"}
-                    width={353}
-                    height={240}
-                    className="w-[263px] h-[240px] object-cover"
-                  />
-                </div>
-                <div className="h-auto flex flex-col items-center pt-5 pb-10">
-                  <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">
-                    Joy Sarkar
-                  </div>
-                  <div className="text-[#FF3429] text-[20px] leading-[40px] font-semibold mb-5">
-                    Co - Founder
-                  </div>
-                  <div className="w-[228px] h-[52px] flex justify-center items-center bg-[#FF3429] hover:bg-[#E92016] text-white font-semibold shadow-[0_4px_12px_#00000025] rounded-full">
-                    Viwe Details
-                  </div>
-                </div>
-              </div>
-              <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025] mr-8 mb-6">
-                <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
-                  <Image
-                    alt=""
-                    src={"/pictures/card_pic.png"}
-                    width={353}
-                    height={240}
-                    className="w-[263px] h-[240px] object-cover"
-                  />
-                </div>
-                <div className="h-auto flex flex-col items-center pt-5 pb-10">
-                  <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">
-                    Joy Sarkar
-                  </div>
-                  <div className="text-[#FF3429] text-[20px] leading-[40px] font-semibold mb-5">
-                    Co - Founder
-                  </div>
-                  <div className="w-[228px] h-[52px] flex justify-center items-center bg-[#FF3429] hover:bg-[#E92016] text-white font-semibold shadow-[0_4px_12px_#00000025] rounded-full">
-                    Viwe Details
-                  </div>
-                </div>
-              </div>
-              <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025] mr-8 mb-6">
-                <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
-                  <Image
-                    alt=""
-                    src={"/pictures/card_pic.png"}
-                    width={353}
-                    height={240}
-                    className="w-[263px] h-[240px] object-cover"
-                  />
-                </div>
-                <div className="h-auto flex flex-col items-center pt-5 pb-10">
-                  <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">
-                    Joy Sarkar
-                  </div>
-                  <div className="text-[#FF3429] text-[20px] leading-[40px] font-semibold mb-5">
-                    Co - Founder
-                  </div>
-                  <div className="w-[228px] h-[52px] flex justify-center items-center bg-[#FF3429] hover:bg-[#E92016] text-white font-semibold shadow-[0_4px_12px_#00000025] rounded-full">
-                    Viwe Details
-                  </div>
-                </div>
-              </div>
-              <div className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025] mr-8 mb-6">
-                <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
-                  <Image
-                    alt=""
-                    src={"/pictures/card_pic.png"}
-                    width={353}
-                    height={240}
-                    className="w-[263px] h-[240px] object-cover"
-                  />
-                </div>
-                <div className="h-auto flex flex-col items-center pt-5 pb-10">
-                  <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">
-                    Joy Sarkar
-                  </div>
-                  <div className="text-[#FF3429] text-[20px] leading-[40px] font-semibold mb-5">
-                    Co - Founder
-                  </div>
-                  <div className="w-[228px] h-[52px] flex justify-center items-center bg-[#FF3429] hover:bg-[#E92016] text-white font-semibold shadow-[0_4px_12px_#00000025] rounded-full">
-                    Viwe Details
-                  </div>
-                </div>
-              </div>
+              {
+                arr.map((data, idx) => {
+                  return (
+                    <div key={idx} className="min-w-[353px] h-[448px] rounded-[12px] shadow-[0_4px_17px_#00000025] mr-8 mb-6 ml-[4vh]">
+                      <div className="bg-gradient-to-b from-[#7BDDCD] to-transparent rounded-t-[12px] flex justify-center items-center w-full">
+                        <Image
+                          alt=""
+                          src={"/pictures/card_pic.png"}
+                          width={353}
+                          height={240}
+                          className="w-[263px] h-[240px] object-cover"
+                        />
+                      </div>
+                      <div className="h-auto flex flex-col items-center pt-5 pb-10">
+                        <div className="text-[24px] leading-[30px] text-[#162764] font-semibold">
+                          Joy Sarkar
+                        </div>
+                        <div className="text-[#FF3429] text-[20px] leading-[40px] font-semibold mb-5">
+                          Co - Founder
+                        </div>
+                        <div className="w-[228px] h-[52px] flex justify-center items-center bg-[#FF3429] hover:bg-[#E92016] text-white font-semibold shadow-[0_4px_12px_#00000025] rounded-full">
+                          Viwe Details
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+
+
             </div>
           </div>
 
