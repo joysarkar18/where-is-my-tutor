@@ -40,7 +40,7 @@ router.post("/request-otp", async (req, res) => {
             if (sent) return res.json({ status: true, message: "OTP sent!", otp: OTP });
             else return res.json({ status: false, message: "OTP not sent!" });
         } else {
-            return res.json({ status: false, message: "User not found!" });
+            res.json({ status: false, errorType: "email", message: "User does not exist!" });
         }
 
 
@@ -97,13 +97,13 @@ router.post("/reset-password", async (req, res) => {
                 })
             })
         } else {
-            return res.json({ status: false, message: "User does not exist!" });
+            return res.json({ status: false, errorType: "email", message: "User does not exist!" });
         }
 
 
     } catch (error) {
         console.log(error)
-        return res.json({ status: false, message: error });
+        return res.json({ status: false, errorType: "somehing", message: error });
     }
 })
 

@@ -13,10 +13,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 const EnterEmailSection = () => {
   const [email, setEmail] = useState("");
-  const [type, setType] = useState(-1);
+  const [type, setType] = useState(0);
   const dispatch = useDispatch<ThunkDispatch<forgotPasswordState, any, any>>();
   const isLoading: boolean = useSelector(
     (state: RootState) => state.forgotPassword.isLoading
+  );
+
+  const error: errorState = useSelector(
+    (state: RootState) => state.forgotPassword.error
   );
   const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
@@ -41,12 +45,6 @@ const EnterEmailSection = () => {
           Forgot Password?
         </h3>
 
-        {/* {message && (
-              <div className="bg-green-100 text-green-800 p-3 mb-6 rounded-md text-center">
-                {message}
-              </div>
-            )} */}
-
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
           <div className="mb-4 w-full flex flex-col items-start">
             <label htmlFor="email" className="text-gray-700 text-sm mb-2">
@@ -65,10 +63,10 @@ const EnterEmailSection = () => {
               <div className="text-md mr-3 font-semibold text-baseColor-400">
                 <h4>I am a </h4>
               </div>
-              <div className="flex items-center me-4">
+              <div className="flex items-center mr-4">
                 <input
                   id="inline-checkbox"
-                  type="radio"
+                  type="checkbox"
                   onChange={(e) => {}}
                   onClick={() => {
                     console.log("radio clicked");
@@ -76,24 +74,24 @@ const EnterEmailSection = () => {
                     setType(0);
                   }}
                   checked={type === 0}
-                  className="w-4 h-4"
+                  className="h-[14px] w-[14px] accent-baseColor-400"
                 />
                 <label className="ms-2 text-sm font-medium text-baseColor-400">
                   Student
                 </label>
               </div>
 
-              <div className="flex items-center me-4">
+              <div className="flex items-center mr-4">
                 <input
                   id="inline-checkbox"
-                  type="radio"
+                  type="checkbox"
                   checked={type == 1}
                   onChange={(e) => {}}
                   onClick={() => {
                     console.log("radio clicked");
                     setType(1);
                   }}
-                  className="h-4 w-4"
+                  className="h-[14px] w-[14px] accent-baseColor-400"
                 />
                 <label className="ms-2 text-sm font-medium text-baseColor-400">
                   Teacher
@@ -110,11 +108,18 @@ const EnterEmailSection = () => {
                 onChange={emailChange}
                 required
                 className={`rounded-md w-64 sm:w-80 h-8 text-baseColor-600 shadow-baseColor-100 relative block pl-10 pr-4 lg:pr-10 py-1 border ${
-                  false ? "border-red-500" : "border-baseColor-300"
+                  error.status && error.errorType == "email"
+                    ? "border-red-500"
+                    : "border-baseColor-300"
                 } focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                 placeholder="Enter your E-mail"
               />
               <MdOutlineEmail className="top-2 left-4 absolute text-baseColor-400"></MdOutlineEmail>
+            </div>
+            <div className="h-18 pt-4">
+              {error.status && (
+                <p className="text-red-500 text-sm">{error.errorMessage}</p>
+              )}
             </div>
             <button
               type="submit"
