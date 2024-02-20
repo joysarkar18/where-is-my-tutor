@@ -4,7 +4,7 @@ import {
 } from "@/app/slices/forgotPasswordSlice";
 import { RootState } from "@/store/store";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { useState, useRef, ChangeEvent } from "react";
+import { useState, useRef, ChangeEvent, KeyboardEvent } from "react";
 import { MdOutlineEmail } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -36,13 +36,40 @@ const EnterOtpSection = () => {
     index: number
   ) => {
     const value: string = e.target.value;
+    console.log(parseInt(value))
     // Update your state or perform other operations if needed
     if (value !== "") {
       focusNextInput(index);
       otp[index] = value;
       console.log(otp);
     }
+    return
+
   };
+
+  const BackSpaceHandle = (
+    e: any,
+    index: number
+  ) => {
+    if (e.key === 'Backspace') {
+      if (index === 0) {
+        otp[index] = "";
+        otpInputs.current[index].focus()
+        return
+      }
+      console.log(e)
+      if (e.target.value === "") {
+        otp[index - 1] = "";
+        otpInputs.current[index - 1].focus()
+        return
+      }
+      else {
+        otp[index] = "";
+        otpInputs.current[index].focus()
+        return
+      }
+    }
+  }
 
   const verifyOtp = (e: React.FormEvent<HTMLElement>): void => {
     e.preventDefault();
@@ -89,10 +116,11 @@ const EnterOtpSection = () => {
                   ref={(el) => (otpInputs.current[index] = el!)}
                   key={index}
                   className="mr-3 focus:border-baseColor-600 focus:ring-0 focus:outline-none border border-baseColor-300 h-10 w-10 text-center form-control rounded"
-                  type="text"
+                  type="number"
                   id={`otp-${index}`}
                   maxLength={1}
                   onChange={(e) => handleInputChange(e, index)}
+                  onKeyDown={(e) => BackSpaceHandle(e, index)}
                 />
               ))}
             </div>
