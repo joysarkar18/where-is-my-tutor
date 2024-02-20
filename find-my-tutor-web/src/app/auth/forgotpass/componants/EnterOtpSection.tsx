@@ -1,3 +1,4 @@
+import { errorState } from "@/app/slices/authSlice";
 import {
   forgotPasswordState,
   verifyOtpThunk,
@@ -15,6 +16,10 @@ const EnterOtpSection = () => {
   const dispatch = useDispatch<ThunkDispatch<forgotPasswordState, any, any>>();
   const isLoading: boolean = useSelector(
     (state: RootState) => state.forgotPassword.isLoading
+  );
+
+  const error: errorState = useSelector(
+    (state: RootState) => state.forgotPassword.error
   );
 
   const email: string = useSelector(
@@ -88,7 +93,11 @@ const EnterOtpSection = () => {
                 <input
                   ref={(el) => (otpInputs.current[index] = el!)}
                   key={index}
-                  className="mr-3 focus:border-baseColor-600 focus:ring-0 focus:outline-none border border-baseColor-300 h-10 w-10 text-center form-control rounded"
+                  className={`mr-3 focus:border-baseColor-600 focus:ring-0 focus:outline-none border ${
+                    error.status && error.errorType === "otp"
+                      ? "border-red-600"
+                      : "border-baseColor-300"
+                  } h-10 w-10 text-center form-control rounded`}
                   type="text"
                   id={`otp-${index}`}
                   maxLength={1}

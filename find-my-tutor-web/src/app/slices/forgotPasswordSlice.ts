@@ -1,6 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { requestOtpUrl, verifyOtpUrl, resetPasswordUrl } from "../constants/urls";
+import {
+  requestOtpUrl,
+  verifyOtpUrl,
+  resetPasswordUrl,
+} from "../constants/urls";
 import { errorState } from "./authSlice";
 export enum forgotPasswordStateEnum {
   OtpNotSent = 1,
@@ -87,7 +91,7 @@ export const resetPasswordThunk = createAsyncThunk(
       type: payload.type,
       password: payload.password,
     };
-    console.log(body)
+    console.log(body);
     const response = await axios.post(
       resetPasswordUrl,
       body,
@@ -126,8 +130,23 @@ const forgotPasswordSlice = createSlice({
 
     builder.addCase(requestOtpThunk.fulfilled, (state, action) => {
       state.isLoading = false;
+      console.log(action.payload);
       if (action.payload.status) {
         state.otpState = forgotPasswordStateEnum.OtpSent;
+      } else {
+        if (action.payload.errorType === "email") {
+          state.error = {
+            errorMessage: action.payload.message,
+            errorType: "email",
+            status: true,
+          };
+        } else {
+          state.error = {
+            errorMessage: "Something went wrong!",
+            errorType: "something",
+            status: true,
+          };
+        }
       }
       console.log(action.payload);
     });
@@ -151,6 +170,20 @@ const forgotPasswordSlice = createSlice({
       state.isLoading = false;
       if (action.payload.status) {
         state.otpState = forgotPasswordStateEnum.ResetPassword;
+      } else {
+        if (action.payload.errorType === "otp") {
+          state.error = {
+            errorMessage: "Wrong OTP!",
+            errorType: "otp",
+            status: true,
+          };
+        } else {
+          state.error = {
+            errorMessage: "Something went wrong!",
+            errorType: "any",
+            status: true,
+          };
+        }
       }
       console.log(action.payload);
     });
