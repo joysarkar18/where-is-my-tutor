@@ -6,12 +6,24 @@ export default function StudentDetatilsForm() {
         <div className="absolute right-[-30vh] top-[-20vh] lg:right-[-20vh] lg:top-[-14vh] w-[80vh] h-[80vh] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-logIn-300 from-10% to-transparent to-70% rounded-full"></div>
       </div>
       <div className="relative h-[100vh] w-[100vw] flex-col flex items-center lg:pl-10 lg:pr-10  pr-4 pl-4">
-        <p className="text-baseColor-400 mt-10 text-2xl font-semibold">
-          Please fill out the following details carefully
-        </p>
-        <div className="flex gap-[6vw] mt-[4vh]">
+        <div className="flex flex-col items-center">
+          <p className="text-baseColor-400 mt-10 text-4xl font-semibold">
+            Hi! student welcome to Mytutor 👋🏻
+          </p>
+          <p className="mr-3 text-sm font-medium">
+            Let’s help you to find your dream tutor
+          </p>
+        </div>
+        <div className="flex justify-start w-[66vw] mt-10">
+          <p className="text-lg font-semibold">
+            <span className="text-[#FF3429]">*</span>Please fill out the
+            following details carefully
+          </p>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-[6vw] mt-[2vh]">
           <div>
-            <h6 className="font-medium mb-2">First Name</h6>
+            <h6 className="font-medium mb-2">First Name </h6>
             <input
               type="text"
               autoComplete="email"
@@ -33,7 +45,7 @@ export default function StudentDetatilsForm() {
           </div>
         </div>
 
-        <div className="flex gap-[6vw] mt-[3.6vh]">
+        <div className="flex flex-col lg:flex-row gap-[6vw] mt-[3.6vh]">
           <div>
             <h6 className="font-medium mb-2">Gender</h6>
             <select
@@ -67,7 +79,7 @@ export default function StudentDetatilsForm() {
           </div>
         </div>
 
-        <div className="flex gap-[6vw] mt-[3.6vh] ">
+        <div className="flex flex-col lg:flex-row gap-[6vw] mt-[3.6vh] ">
           <div className="">
             <h6 className="font-medium mb-2">Address</h6>
             <textarea
@@ -105,6 +117,50 @@ export default function StudentDetatilsForm() {
                 Pick location from map
               </button>
             </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-[6vw] mt-[3.6vh]">
+          <div>
+            <h6 className="font-medium mb-2">Current class</h6>
+            <select
+              required
+              className={`rounded-md bg-white w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+            >
+              <option value="" disabled selected>
+                Select your current class
+              </option>
+              <option className="text-baseColor-400" value="male">
+                Male
+              </option>
+              <option className="text-baseColor-400" value="female">
+                Female
+              </option>
+              <option className="text-baseColor-400" value="other">
+                Other
+              </option>
+            </select>
+          </div>
+
+          <div>
+            <h6 className="font-medium mb-2">Stream</h6>
+            <select
+              required
+              className={`rounded-md bg-white w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+            >
+              <option value="" disabled selected>
+                Select your current stream
+              </option>
+              <option className="text-baseColor-400" value="male">
+                Male
+              </option>
+              <option className="text-baseColor-400" value="female">
+                Female
+              </option>
+              <option className="text-baseColor-400" value="other">
+                Other
+              </option>
+            </select>
           </div>
         </div>
       </div>
