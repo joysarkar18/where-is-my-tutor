@@ -66,7 +66,7 @@ router.post("/check-otp", async (req, res) => {
         if (otp === user.OTP) {
             return res.json({ status: true, message: "Verification successful!" });
         } else {
-            return res.json({ status: false, message: "Wrong OTP!" });
+            return res.json({ status: false,  errorType:"otp", message: "Wrong OTP!" });
         }
 
 
