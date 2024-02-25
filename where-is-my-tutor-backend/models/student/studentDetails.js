@@ -34,6 +34,7 @@ const StudentDetails = sequelize.define('studentdetail', {
     type: DataTypes.DECIMAL(10, 8), // 10 total digits, 8 after the decimal point
     allowNull: false
   },
+
   longitude: {
     type: DataTypes.DECIMAL(11, 8), // 11 total digits, 8 after the decimal point
     allowNull: false
@@ -47,6 +48,11 @@ const StudentDetails = sequelize.define('studentdetail', {
 
   address: {
     type: DataTypes.TEXT,
+    allowNull: false,
+  },
+
+  stream: {
+    type: DataTypes.STRING(20),
     allowNull: false,
   },
 
