@@ -1,4 +1,32 @@
+'use client'
+
+import { useEffect, useState } from "react";
+
 export default function StudentDetatilsForm() {
+  const [classCondition, setClassCondition] = useState<boolean>(true)
+  const [selectedClass, setSelectedClass] = useState<string>('');
+  const [selectedStream, setSelectedStream] = useState<string>('');
+
+  const handleClass = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedClass(event.target.value);
+  };
+
+  const handleStream = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedStream(event.target.value);
+  };
+
+  useEffect(() => {
+    if (selectedClass === '1' || selectedClass === '2' || selectedClass === '3' || selectedClass === '4' || selectedClass === '5' || selectedClass === '') {
+      setSelectedStream("")
+      setClassCondition(false)
+    }
+    else {
+
+      setClassCondition(true)
+    }
+  }, [selectedClass])
+
+
   return (
     <div>
       <div className="flex absolute w-screen overflow-hidden">
@@ -52,7 +80,7 @@ export default function StudentDetatilsForm() {
               required
               className={`rounded-md bg-white w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
             >
-              <option value="" disabled selected>
+              <option value="" disabled >
                 Select your gender
               </option>
               <option className="text-baseColor-400" value="male">
@@ -125,43 +153,78 @@ export default function StudentDetatilsForm() {
             <h6 className="font-medium mb-2">Current class</h6>
             <select
               required
-              className={`rounded-md bg-white w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+              value={selectedClass} onChange={handleClass}
+              className={`rounded-md bg-white w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm `}
             >
-              <option value="" disabled selected>
+              <option value="" disabled >
                 Select your current class
               </option>
-              <option className="text-baseColor-400" value="male">
-                Male
+              <option className="text-baseColor-400" value='1'>
+                1
               </option>
-              <option className="text-baseColor-400" value="female">
-                Female
+              <option className="text-baseColor-400" value='2'>
+                2
               </option>
-              <option className="text-baseColor-400" value="other">
-                Other
+              <option className="text-baseColor-400" value='3'>
+                3
               </option>
+              <option className="text-baseColor-400" value='4'>
+                4
+              </option>
+              <option className="text-baseColor-400" value='5'>
+                5
+              </option>
+              <option className="text-baseColor-400" value='6'>
+                6
+              </option>
+              <option className="text-baseColor-400" value='7'>
+                7
+              </option>
+              <option className="text-baseColor-400" value='8'>
+                8
+              </option>
+              <option className="text-baseColor-400" value='9'>
+                9
+              </option>
+              <option className="text-baseColor-400" value='10'>
+                10
+              </option>
+              <option className="text-baseColor-400" value='11'>
+                11
+              </option>
+              <option className="text-baseColor-400" value='12'>
+                12
+              </option>
+              <option className="text-baseColor-400" value='college'>
+                College
+              </option>
+
             </select>
           </div>
 
           <div>
             <h6 className="font-medium mb-2">Stream</h6>
             <select
-              required
+              disabled={!classCondition}
+              value={selectedStream} onChange={handleStream}
               className={`rounded-md bg-white w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
             >
-              <option value="" disabled selected>
+              <option value="" disabled >
                 Select your current stream
               </option>
-              <option className="text-baseColor-400" value="male">
-                Male
+              <option className="text-baseColor-400" value="sceince">
+                Sceince
               </option>
-              <option className="text-baseColor-400" value="female">
-                Female
+              <option className="text-baseColor-400" value="arts">
+                Arts
               </option>
-              <option className="text-baseColor-400" value="other">
-                Other
+              <option className="text-baseColor-400" value="commerce">
+                Commerce
               </option>
             </select>
           </div>
+
+
         </div>
       </div>
     </div>
