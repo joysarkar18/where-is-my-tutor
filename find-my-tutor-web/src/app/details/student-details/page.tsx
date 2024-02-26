@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
 import { useEffect, useState } from "react";
 
 export default function StudentDetatilsForm() {
-  const [classCondition, setClassCondition] = useState<boolean>(true)
-  const [selectedClass, setSelectedClass] = useState<string>('');
-  const [selectedStream, setSelectedStream] = useState<string>('');
+  const [classCondition, setClassCondition] = useState<boolean>(true);
+  const [selectedClass, setSelectedClass] = useState<string>("");
+  const [selectedStream, setSelectedStream] = useState<string>("");
 
   const handleClass = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedClass(event.target.value);
@@ -16,16 +16,20 @@ export default function StudentDetatilsForm() {
   };
 
   useEffect(() => {
-    if (selectedClass === '1' || selectedClass === '2' || selectedClass === '3' || selectedClass === '4' || selectedClass === '5' || selectedClass === '') {
-      setSelectedStream("")
-      setClassCondition(false)
+    if (
+      selectedClass === "1" ||
+      selectedClass === "2" ||
+      selectedClass === "3" ||
+      selectedClass === "4" ||
+      selectedClass === "5" ||
+      selectedClass === ""
+    ) {
+      setSelectedStream("");
+      setClassCondition(false);
+    } else {
+      setClassCondition(true);
     }
-    else {
-
-      setClassCondition(true)
-    }
-  }, [selectedClass])
-
+  }, [selectedClass]);
 
   return (
     <div>
@@ -35,15 +39,15 @@ export default function StudentDetatilsForm() {
       </div>
       <div className="relative h-[100vh] w-[100vw] flex-col flex items-center lg:pl-10 lg:pr-10  pr-4 pl-4">
         <div className="flex flex-col items-center">
-          <p className="text-baseColor-400 mt-10 text-4xl font-semibold">
+          <p className="text-baseColor-400 mt-10 text-[5.2vw] lg:text-4xl font-semibold">
             Hi! student welcome to Mytutor 👋🏻
           </p>
-          <p className="mr-3 text-sm font-medium">
+          <p className="mr-3 text-[3vw] lg:text-sm font-medium">
             Let’s help you to find your dream tutor
           </p>
         </div>
-        <div className="flex justify-start w-[66vw] mt-10">
-          <p className="text-lg font-semibold">
+        <div className="flex justify-start w-[90vw] lg:w-[66vw] mt-10">
+          <p className="text-[3.5vw] sm:text-lg font-semibold">
             <span className="text-[#FF3429]">*</span>Please fill out the
             following details carefully
           </p>
@@ -56,7 +60,7 @@ export default function StudentDetatilsForm() {
               type="text"
               autoComplete="email"
               required
-              className={`rounded-md w-[30vw] h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+              className={`rounded-md w-[90vw] lg:w-[30vw] h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
               placeholder="Enter your first name"
             />
           </div>
@@ -67,7 +71,7 @@ export default function StudentDetatilsForm() {
               type="text"
               autoComplete="email"
               required
-              className={`rounded-md w-[30vw] h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+              className={`rounded-md w-[90vw] lg:w-[30vw]  h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
               placeholder="Enter your last name"
             />
           </div>
@@ -78,9 +82,9 @@ export default function StudentDetatilsForm() {
             <h6 className="font-medium mb-2">Gender</h6>
             <select
               required
-              className={`rounded-md bg-white w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+              className={`rounded-md bg-white w-[90vw] lg:w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
             >
-              <option value="" disabled >
+              <option value="" disabled>
                 Select your gender
               </option>
               <option className="text-baseColor-400" value="male">
@@ -101,7 +105,7 @@ export default function StudentDetatilsForm() {
               type="text"
               autoComplete="email"
               required
-              className={`rounded-md w-[30vw] h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+              className={`rounded-md w-[90vw] lg:w-[30vw]  h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
               placeholder="Enter your phone number"
             />
           </div>
@@ -113,7 +117,7 @@ export default function StudentDetatilsForm() {
             <textarea
               autoComplete="email"
               required
-              className={`rounded-md w-[30vw] h-32 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+              className={`rounded-md w-[90vw] lg:w-[30vw]  h-32 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
               placeholder="Enter your full address"
             ></textarea>
           </div>
@@ -125,22 +129,22 @@ export default function StudentDetatilsForm() {
                 type="text"
                 autoComplete="email"
                 required
-                className={`rounded-md w-[30vw] h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+                className={`rounded-md w-[90vw] lg:w-[30vw]  h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                 placeholder="Enter your phone number"
               />
             </div>
 
-            <div className="flex flex-col gap-0 items-center">
+            <div className="flex mt-6 lg:mt-3 flex-col gap-0 items-center">
               <button
                 type="submit"
-                className="group relative w-24 sm:w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-baseColor-600 "
+                className="group relative w-[90vw] sm:w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-baseColor-600 "
               >
                 Use your current location
               </button>
               <p className="font-medium">or</p>
               <button
                 type="submit"
-                className="group relative w-24 sm:w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-baseColor-600 "
+                className="group relative w-[90vw] sm:w-full flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-baseColor-600 "
               >
                 Pick location from map
               </button>
@@ -153,52 +157,52 @@ export default function StudentDetatilsForm() {
             <h6 className="font-medium mb-2">Current class</h6>
             <select
               required
-              value={selectedClass} onChange={handleClass}
-              className={`rounded-md bg-white w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm `}
+              value={selectedClass}
+              onChange={handleClass}
+              className={`rounded-md bg-white w-[90vw] lg:w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm `}
             >
-              <option value="" disabled >
+              <option value="" disabled>
                 Select your current class
               </option>
-              <option className="text-baseColor-400" value='1'>
+              <option className="text-baseColor-400" value="1">
                 1
               </option>
-              <option className="text-baseColor-400" value='2'>
+              <option className="text-baseColor-400" value="2">
                 2
               </option>
-              <option className="text-baseColor-400" value='3'>
+              <option className="text-baseColor-400" value="3">
                 3
               </option>
-              <option className="text-baseColor-400" value='4'>
+              <option className="text-baseColor-400" value="4">
                 4
               </option>
-              <option className="text-baseColor-400" value='5'>
+              <option className="text-baseColor-400" value="5">
                 5
               </option>
-              <option className="text-baseColor-400" value='6'>
+              <option className="text-baseColor-400" value="6">
                 6
               </option>
-              <option className="text-baseColor-400" value='7'>
+              <option className="text-baseColor-400" value="7">
                 7
               </option>
-              <option className="text-baseColor-400" value='8'>
+              <option className="text-baseColor-400" value="8">
                 8
               </option>
-              <option className="text-baseColor-400" value='9'>
+              <option className="text-baseColor-400" value="9">
                 9
               </option>
-              <option className="text-baseColor-400" value='10'>
+              <option className="text-baseColor-400" value="10">
                 10
               </option>
-              <option className="text-baseColor-400" value='11'>
+              <option className="text-baseColor-400" value="11">
                 11
               </option>
-              <option className="text-baseColor-400" value='12'>
+              <option className="text-baseColor-400" value="12">
                 12
               </option>
-              <option className="text-baseColor-400" value='college'>
+              <option className="text-baseColor-400" value="college">
                 College
               </option>
-
             </select>
           </div>
 
@@ -206,10 +210,11 @@ export default function StudentDetatilsForm() {
             <h6 className="font-medium mb-2">Stream</h6>
             <select
               disabled={!classCondition}
-              value={selectedStream} onChange={handleStream}
-              className={`rounded-md bg-white w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+              value={selectedStream}
+              onChange={handleStream}
+              className={`rounded-md bg-white w-[90vw] lg:w-[30vw]  h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
             >
-              <option value="" disabled >
+              <option value="" disabled>
                 Select your current stream
               </option>
               <option className="text-baseColor-400" value="sceince">
@@ -223,8 +228,6 @@ export default function StudentDetatilsForm() {
               </option>
             </select>
           </div>
-
-
         </div>
       </div>
     </div>
