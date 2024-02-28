@@ -118,7 +118,7 @@ export default function StudentDetatilsForm() {
               <textarea
                 autoComplete="email"
                 required
-                className={`rounded-md w-[90vw] lg:w-[30vw]  h-32 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+                className={`rounded-md w-[90vw] lg:w-[30vw]  h-36 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                 placeholder="Enter your full address"
               ></textarea>
             </div>
@@ -243,8 +243,14 @@ export default function StudentDetatilsForm() {
               />
             </div>
           </div>
-
         </div>
+
+        <button
+          type="submit"
+          className="mt-10 group relative lg:w-[16vw] w-[90vw] flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-[#FF3429]"
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
