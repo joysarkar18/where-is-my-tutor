@@ -1,12 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { RxCross2 } from "react-icons/rx";
 
 export default function StudentDetatilsForm() {
   const [classCondition, setClassCondition] = useState<boolean>(true);
   const [selectedClass, setSelectedClass] = useState<string>("");
   const [selectedStream, setSelectedStream] = useState<string>("");
+  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([
+    "bengali",
+    "english",
+  ]);
 
+  const [searchedSubjectText, setSearchedSubjectText] = useState<string>("");
+
+  function handleSearchSubject(e: React.FormEvent<HTMLInputElement>): void {
+    setSearchedSubjectText(e.currentTarget.value);
+  }
   const handleClass = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedClass(event.target.value);
   };
@@ -118,7 +128,7 @@ export default function StudentDetatilsForm() {
               <textarea
                 autoComplete="email"
                 required
-                className={`rounded-md w-[90vw] lg:w-[30vw]  h-36 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
+                className={`rounded-md w-[90vw] resize-none lg:w-[30vw]  h-36 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                 placeholder="Enter your full address"
               ></textarea>
             </div>
@@ -231,26 +241,42 @@ export default function StudentDetatilsForm() {
             </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-[6vw] mt-[2vh]">
-            <div>
-              <h6 className="font-medium mb-2">Subjects </h6>
+          <div className="flex flex-col mt-[2vh]">
+            <h6 className="font-medium mb-2">Subjects </h6>
+            <div className="border border-baseColor-300 rounded-md">
+              <div className="flex gap-3 pt-1.5 pl-4 pr-4">
+                {selectedSubjects.map((subject, index) => (
+                  <div
+                    key={index}
+                    className="px-2 text-sm py-1 bg-baseColor-300 rounded-md flex items-center"
+                  >
+                    {subject}
+                    <RxCross2 className="pl-1 cursor-pointer" size={20} />
+                  </div>
+                ))}
+              </div>
               <input
                 type="text"
                 autoComplete="text"
-                required
-                className={`rounded-md w-[90vw] lg:w-[30vw] h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
-                placeholder="Enter your first name"
+                onChange={handleSearchSubject}
+                className={`rounded-md w-[90vw] lg:w-[66vw] h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 focus:ring-0 focus:outline-none sm:text-sm`}
+                placeholder="Search subjects"
               />
             </div>
+            {searchedSubjectText.length > 0 && (
+              <div className="h-60 w-44 bg-baseColor-200 ml-2"></div>
+            )}
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="mt-10 group relative lg:w-[16vw] w-[90vw] flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-[#FF3429]"
-        >
-          Submit
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="group relative lg:w-[16vw] w-[90vw] flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-[#FF3429]"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );
