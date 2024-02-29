@@ -9,20 +9,19 @@ export default function StudentDetatilsForm() {
   const [classCondition, setClassCondition] = useState<boolean>(true);
   const [selectedClass, setSelectedClass] = useState<string>("");
   const [selectedStream, setSelectedStream] = useState<string>("");
-  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([
-    "bengali",
-    "english",
-  ]);
+  const [subjectInput, setSubjectInput] = useState<string>("");
+  const [selectedSubjects, setSelectedSubjects] = useState<subject[]>([]);
   type subject = {
     id: number;
-    subject: string;
+    subjectName: string;
   };
-  let subjects: subject[] = [];
+  const [subjects, setSubjects] = useState<subject[]>([])
 
   const [searchedSubjectText, setSearchedSubjectText] = useState<string>("");
 
   function handleSearchSubject(e: React.FormEvent<HTMLInputElement>): void {
     setSearchedSubjectText(e.currentTarget.value);
+    setSubjectInput(e.currentTarget.value)
   }
   const handleClass = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedClass(event.target.value);
@@ -32,17 +31,18 @@ export default function StudentDetatilsForm() {
     setSelectedStream(event.target.value);
   };
 
+  const selectSubjectOption = (value: subject) => {
+    setSubjects((prev) => prev.filter(arr => arr.id != value.id))
+    setSelectedSubjects((prev) => [...prev, value])
+  }
+
+  const deleteSubject = (subject: subject) => {
+    setSubjects((prev) => [...prev, subject])
+    setSelectedSubjects((prev) => prev.filter(arr => arr.id != subject.id))
+  }
+
   useEffect(() => {
-    axios
-      .get(getAllSubjectsUrl)
-      .then((res) => {
-        subjects = res.data["subjects"];
-        console.log(subjects);
-      })
-      .catch((err) => {
-        console.log("something went wrong");
-        console.log(err);
-      });
+
     if (
       selectedClass === "1" ||
       selectedClass === "2" ||
@@ -57,6 +57,21 @@ export default function StudentDetatilsForm() {
       setClassCondition(true);
     }
   }, [selectedClass]);
+
+  useEffect(() => {
+    axios
+      .get(getAllSubjectsUrl)
+      .then((res) => {
+        setSubjects(res.data.subjects);
+
+      })
+      .catch((err) => {
+        console.log("something went wrong");
+        console.log(err);
+      });
+  }, [])
+
+  console.log(subjects);
 
   return (
     <div className="min-w-screen min-h-screen overflow-hidden">
@@ -260,14 +275,15 @@ export default function StudentDetatilsForm() {
 
           <div className="flex flex-col mt-[2vh]">
             <h6 className="font-medium mb-2">Subjects </h6>
-            <div className="border border-baseColor-300 rounded-md">
-              <div className="flex gap-3 pt-1.5 pl-4 pr-4">
+            <div className="border border-baseColor-300 rounded-md ">
+              <div className="flex flex-wrap gap-3 pt-1.5 pl-4 pr-4 w-[90vw] lg:w-[66vw]">
                 {selectedSubjects.map((subject, index) => (
                   <div
                     key={index}
                     className="px-2 text-sm py-1 bg-baseColor-300 rounded-md flex items-center"
+                    onClick={() => deleteSubject(subject)}
                   >
-                    {subject}
+                    {subject.subjectName}
                     <RxCross2 className="pl-1 cursor-pointer" size={20} />
                   </div>
                 ))}
@@ -275,24 +291,27 @@ export default function StudentDetatilsForm() {
               <input
                 type="text"
                 autoComplete="text"
+                value={subjectInput}
                 onChange={handleSearchSubject}
                 className={`rounded-md w-[90vw] lg:w-[66vw] h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 focus:ring-0 focus:outline-none sm:text-sm`}
                 placeholder="Search subjects"
               />
             </div>
-            {searchedSubjectText.length > 0 && (
-              <div className="h-60 w-44 bg-baseColor-200 ml-2 flex flex-col">
-                {subjects.map((value, index) => {
+            {
+              searchedSubjectText.length > 0 &&
+
+              <div className="max-h-60 w-44 bg-baseColor-200 ml-2 flex flex-col gap-1 overflow-y-auto ">
+                {subjects.filter((subject) => subject.subjectName.startsWith(subjectInput)).map((value, index) => {
                   return (
-                    <p key={value.id} className="text-black">
-                      {" "}
-                      joy
-                    </p>
+                    <div key={value.id} className="text-black relative text-xs px-4 py-2 hover:bg-baseColor-400 cursor-pointer" onClick={() => selectSubjectOption(value)}>
+                      {value.subjectName}
+                    </div>
                   );
                 })}
               </div>
-            )}
+            }
           </div>
+
 
           <div className="flex justify-center my-6">
             <button
