@@ -17,11 +17,12 @@ export default function StudentDetatilsForm() {
   };
   const [subjects, setSubjects] = useState<subject[]>([])
 
-  const [searchedSubjectText, setSearchedSubjectText] = useState<string>("");
 
   function handleSearchSubject(e: React.FormEvent<HTMLInputElement>): void {
-    setSearchedSubjectText(e.currentTarget.value);
-    setSubjectInput(e.currentTarget.value)
+    let searchText = e.currentTarget.value;
+    searchText = searchText.charAt(0).toUpperCase() + searchText.slice(1);
+    console.log(searchText)
+    setSubjectInput(searchText)
   }
   const handleClass = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedClass(event.target.value);
@@ -298,7 +299,7 @@ export default function StudentDetatilsForm() {
               />
             </div>
             {
-              searchedSubjectText.length > 0 &&
+              subjectInput.length > 0 &&
 
               <div className="max-h-60 w-44 bg-baseColor-200 ml-2 flex flex-col gap-1 overflow-y-auto ">
                 {subjects.filter((subject) => subject.subjectName.startsWith(subjectInput)).map((value, index) => {
