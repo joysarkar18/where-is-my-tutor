@@ -7,6 +7,9 @@ export const requestOtpUrl = `${baseUrl}/forgot-password/request-otp`;
 export const verifyOtpUrl = `${baseUrl}/forgot-password/check-otp`;
 export const resetPasswordUrl = `${baseUrl}/forgot-password/reset-password`;
 
+//submit details url
+export const submitStudentDetailsUrl = `${baseUrl}/update-details/student-details`;
+
 //Upload file urls
 export const uploadURL = `${baseUrl}/upload`;
 

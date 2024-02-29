@@ -1,31 +1,39 @@
 "use client";
 
 import { getAllSubjectsUrl } from "@/app/constants/urls";
+import { submitStudentDetails } from "@/app/slices/detailsSumbitSlice";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 
 export default function StudentDetatilsForm() {
   const [classCondition, setClassCondition] = useState<boolean>(true);
-  const [selectedClass, setSelectedClass] = useState<string>("");
+  const [selectedClass, setSelectedClass] = useState<number>(0);
   const [selectedStream, setSelectedStream] = useState<string>("");
   const [subjectInput, setSubjectInput] = useState<string>("");
   const [selectedSubjects, setSelectedSubjects] = useState<subject[]>([]);
+
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+  const genderRef = useRef<HTMLSelectElement>(null);
+  const phoneNumberRef = useRef<HTMLInputElement>(null);
+  const addressRef = useRef<HTMLTextAreaElement>(null);
+  const pinCodeRef = useRef<HTMLInputElement>(null);
+
   type subject = {
     id: number;
     subjectName: string;
   };
-  const [subjects, setSubjects] = useState<subject[]>([])
-
+  const [subjects, setSubjects] = useState<subject[]>([]);
 
   function handleSearchSubject(e: React.FormEvent<HTMLInputElement>): void {
     let searchText = e.currentTarget.value;
     searchText = searchText.charAt(0).toUpperCase() + searchText.slice(1);
-    console.log(searchText)
-    setSubjectInput(searchText)
+    console.log(searchText);
+    setSubjectInput(searchText);
   }
   const handleClass = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedClass(event.target.value);
+    setSelectedClass(parseInt(event.target.value));
   };
 
   const handleStream = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,24 +41,42 @@ export default function StudentDetatilsForm() {
   };
 
   const selectSubjectOption = (value: subject) => {
-    setSubjects((prev) => prev.filter(arr => arr.id != value.id))
-    setSelectedSubjects((prev) => [...prev, value])
-  }
+    setSubjects((prev) => prev.filter((arr) => arr.id != value.id));
+    setSelectedSubjects((prev) => [...prev, value]);
+  };
 
   const deleteSubject = (subject: subject) => {
-    setSubjects((prev) => [...prev, subject])
-    setSelectedSubjects((prev) => prev.filter(arr => arr.id != subject.id))
+    setSubjects((prev) => [...prev, subject]);
+    setSelectedSubjects((prev) => prev.filter((arr) => arr.id != subject.id));
+  };
+
+  function handleSubmit() {
+    console.log("submit clicked");
+
+    submitStudentDetails({
+      address: addressRef.current?.value!,
+      currentClass: selectedClass,
+      firstName: firstNameRef.current?.value!,
+      gender: genderRef.current?.value!,
+      lastName: lastNameRef.current?.value!,
+      latitude: 21.085411100364865,
+      longitude: 81.12212500000003,
+      phoneNumber: 9064983473,
+      pinCode: 733124,
+      profileImage: "",
+      stream: "science",
+      subjects: ["joy", "shreyo"],
+    });
   }
 
   useEffect(() => {
-
     if (
-      selectedClass === "1" ||
-      selectedClass === "2" ||
-      selectedClass === "3" ||
-      selectedClass === "4" ||
-      selectedClass === "5" ||
-      selectedClass === ""
+      selectedClass === 1 ||
+      selectedClass === 2 ||
+      selectedClass === 3 ||
+      selectedClass === 4 ||
+      selectedClass === 5 ||
+      selectedClass === 0
     ) {
       setSelectedStream("");
       setClassCondition(false);
@@ -64,13 +90,12 @@ export default function StudentDetatilsForm() {
       .get(getAllSubjectsUrl)
       .then((res) => {
         setSubjects(res.data.subjects);
-
       })
       .catch((err) => {
         console.log("something went wrong");
         console.log(err);
       });
-  }, [])
+  }, []);
 
   console.log(subjects);
 
@@ -101,8 +126,8 @@ export default function StudentDetatilsForm() {
             <div>
               <h6 className="font-medium mb-2">First Name </h6>
               <input
+                ref={firstNameRef}
                 type="text"
-                autoComplete="email"
                 required
                 className={`rounded-md w-[90vw] lg:w-[30vw] h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                 placeholder="Enter your first name"
@@ -112,8 +137,8 @@ export default function StudentDetatilsForm() {
             <div>
               <h6 className="font-medium mb-2">Last Name</h6>
               <input
+                ref={lastNameRef}
                 type="text"
-                autoComplete="email"
                 required
                 className={`rounded-md w-[90vw] lg:w-[30vw]  h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                 placeholder="Enter your last name"
@@ -125,6 +150,7 @@ export default function StudentDetatilsForm() {
             <div>
               <h6 className="font-medium mb-2">Gender</h6>
               <select
+                ref={genderRef}
                 required
                 className={`rounded-md bg-white w-[90vw] lg:w-[30vw] h-8 text-gray-400 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
               >
@@ -146,8 +172,8 @@ export default function StudentDetatilsForm() {
             <div>
               <h6 className="font-medium mb-2">Phone Number</h6>
               <input
-                type="text"
-                autoComplete="email"
+                ref={phoneNumberRef}
+                type="number"
                 required
                 className={`rounded-md w-[90vw] lg:w-[30vw]  h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                 placeholder="Enter your phone number"
@@ -159,7 +185,7 @@ export default function StudentDetatilsForm() {
             <div className="">
               <h6 className="font-medium mb-2">Address</h6>
               <textarea
-                autoComplete="email"
+                ref={addressRef}
                 required
                 className={`rounded-md w-[90vw] resize-none lg:w-[30vw]  h-36 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                 placeholder="Enter your full address"
@@ -170,8 +196,8 @@ export default function StudentDetatilsForm() {
               <div>
                 <h6 className="font-medium mb-2">Pin Code</h6>
                 <input
-                  type="text"
-                  autoComplete="email"
+                  ref={pinCodeRef}
+                  type="number"
                   required
                   className={`rounded-md w-[90vw] lg:w-[30vw]  h-8 text-baseColor-600 shadow-baseColor-100 relative block px-4 py-1 border border-baseColor-300 focus:border-baseColor-600 focus:ring-0 focus:outline-none sm:text-sm`}
                   placeholder="Enter your phone number"
@@ -298,24 +324,30 @@ export default function StudentDetatilsForm() {
                 placeholder="Search subjects"
               />
             </div>
-            {
-              subjectInput.length > 0 &&
-
+            {subjectInput.length > 0 && (
               <div className="max-h-60 w-44 bg-baseColor-200 ml-2 flex flex-col gap-1 overflow-y-auto ">
-                {subjects.filter((subject) => subject.subjectName.startsWith(subjectInput)).map((value, index) => {
-                  return (
-                    <div key={value.id} className="text-black relative text-xs px-4 py-2 hover:bg-baseColor-400 cursor-pointer" onClick={() => selectSubjectOption(value)}>
-                      {value.subjectName}
-                    </div>
-                  );
-                })}
+                {subjects
+                  .filter((subject) =>
+                    subject.subjectName.startsWith(subjectInput)
+                  )
+                  .map((value, index) => {
+                    return (
+                      <div
+                        key={value.id}
+                        className="text-black relative text-xs px-4 py-2 hover:bg-baseColor-400 cursor-pointer"
+                        onClick={() => selectSubjectOption(value)}
+                      >
+                        {value.subjectName}
+                      </div>
+                    );
+                  })}
               </div>
-            }
+            )}
           </div>
-
 
           <div className="flex justify-center my-6">
             <button
+              onClick={handleSubmit}
               type="submit"
               className="  relative lg:w-[16vw] w-[90vw] flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-[#FF3429]"
             >

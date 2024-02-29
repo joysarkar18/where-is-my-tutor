@@ -1,12 +1,49 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { errorState } from "./authSlice";
+import axios from "axios";
+import { submitStudentDetailsUrl } from "../constants/urls";
 
 export type updateDetailsState = {
   status: boolean;
   isLoading: boolean;
   error: errorState;
 };
+
+export type studentDetailsPayload = {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  phoneNumber: number;
+  latitude: number;
+  longitude: number;
+  pinCode: number;
+  address: string;
+  stream: string;
+  profileImage: string;
+  currentClass: number;
+  subjects: string[];
+};
+
+export const submitStudentDetails = createAsyncThunk(
+  "details/student",
+  async (payload: studentDetailsPayload) => {
+    let body;
+    body = payload;
+
+    const response = await axios.post(
+      submitStudentDetailsUrl,
+      body,
+
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log(response);
+
+    return response.data;
+  }
+);
 
 const initialState: updateDetailsState = {
   isLoading: false,
@@ -17,7 +54,32 @@ const initialState: updateDetailsState = {
 const detailsUpdateSlice = createSlice({
   initialState,
   name: "details",
-  reducers: {},
+  reducers: {
+    setDetailsError(state, action: PayloadAction<errorState>) {
+      state.error = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(submitStudentDetails.pending, (state) => {
+      state.isLoading = true;
+    });
+
+    builder.addCase(submitStudentDetails.fulfilled, (state, action) => {
+      state.isLoading = false;
+      console.log(action);
+    });
+
+    builder.addCase(submitStudentDetails.rejected, (state) => {
+      state.isLoading = false;
+      state.error = {
+        errorMessage: "Something went wrong!",
+        errorType: "any",
+        status: true,
+      };
+    });
+  },
 });
 
 export default detailsUpdateSlice.reducer;
+
+export const { setDetailsError } = detailsUpdateSlice.actions;
