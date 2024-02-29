@@ -267,15 +267,15 @@ export default function StudentDetatilsForm() {
               <div className="h-60 w-44 bg-baseColor-200 ml-2"></div>
             )}
           </div>
-        </div>
 
-        <div className="flex justify-center my-4">
-          <button
-            type="submit"
-            className="  relative lg:w-[16vw] w-[90vw] flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-[#FF3429]"
-          >
-            Submit
-          </button>
+          <div className="flex justify-center my-6">
+            <button
+              type="submit"
+              className="  relative lg:w-[16vw] w-[90vw] flex justify-center  py-1 px-8 border border-transparent text-sm font-semibold rounded-md text-white bg-[#FF3429]"
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </div>

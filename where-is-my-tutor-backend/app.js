@@ -12,14 +12,15 @@ const sequelize = require("./db/database")
 const Teacher = require('./models/teacher/teacher')
 const Student = require('./models/student/student')
 const StudentDetails = require("./models/student/studentDetails")
+const insertSubject = require("./models/subject/insertSubject")
 // routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const subjectRouter = require("./routes/getSubjects")
 const forgetpasswordRouter = require('./routes/otpGenerate')
 const authRouter = require('./routes/auth');
 const updateDetailsRouter = require('./routes/updateUserDetails');
 const TeacherDetails = require('./models/teacher/teacherDetails');
-
 
 var app = express();
 app.use(function (req, res, next) {
@@ -39,6 +40,7 @@ app.use('/', indexRouter);
 app.use('/forgot-password', forgetpasswordRouter);
 app.use('/users', usersRouter);
 app.use('/update-details', updateDetailsRouter);
+app.use('/subjects', subjectRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -63,6 +65,7 @@ TeacherDetails.belongsTo(Teacher, { foreignKey: 'teacherId' })
 
 
 sequelize.sync({ force: true }).then((r) => {
+  insertSubject();
   console.log("sync");
 }).catch((e) => {
   console.log("error1", e);
