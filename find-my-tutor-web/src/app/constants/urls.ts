@@ -9,3 +9,7 @@ export const resetPasswordUrl = `${baseUrl}/forgot-password/reset-password`;
 
 //Upload file urls
 export const uploadURL = `${baseUrl}/upload`;
+
+//get all subjects
+
+export const getAllSubjectsUrl = `${baseUrl}/subjects/all-subjects`;

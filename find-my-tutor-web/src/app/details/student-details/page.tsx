@@ -1,5 +1,7 @@
 "use client";
 
+import { getAllSubjectsUrl } from "@/app/constants/urls";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 
@@ -11,6 +13,11 @@ export default function StudentDetatilsForm() {
     "bengali",
     "english",
   ]);
+  type subject = {
+    id: number;
+    subject: string;
+  };
+  let subjects: subject[] = [];
 
   const [searchedSubjectText, setSearchedSubjectText] = useState<string>("");
 
@@ -26,6 +33,16 @@ export default function StudentDetatilsForm() {
   };
 
   useEffect(() => {
+    axios
+      .get(getAllSubjectsUrl)
+      .then((res) => {
+        subjects = res.data["subjects"];
+        console.log(subjects);
+      })
+      .catch((err) => {
+        console.log("something went wrong");
+        console.log(err);
+      });
     if (
       selectedClass === "1" ||
       selectedClass === "2" ||
@@ -264,7 +281,16 @@ export default function StudentDetatilsForm() {
               />
             </div>
             {searchedSubjectText.length > 0 && (
-              <div className="h-60 w-44 bg-baseColor-200 ml-2"></div>
+              <div className="h-60 w-44 bg-baseColor-200 ml-2 flex flex-col">
+                {subjects.map((value, index) => {
+                  return (
+                    <p key={value.id} className="text-black">
+                      {" "}
+                      joy
+                    </p>
+                  );
+                })}
+              </div>
             )}
           </div>
 
