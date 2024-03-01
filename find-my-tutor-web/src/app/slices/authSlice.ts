@@ -1,8 +1,8 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { loginUrl, signupUrl } from "../constants/urls";
-import Cookies from 'universal-cookie';
-const cookies = new Cookies(null, { path: '/' });
+import Cookies from "universal-cookie";
+const cookies = new Cookies(null, { path: "/" });
 
 export type authState = {
   status: boolean;
@@ -34,61 +34,55 @@ const initialState: authState = {
 export const loginAsync = createAsyncThunk(
   "auth/loginAsync",
   async (payload: loginPayload) => {
-    let body ; 
-    if(payload.userName===""){
+    let body;
+    if (payload.userName === "") {
       body = {
         email: payload.email,
         password: payload.password,
         type: payload.userType,
       };
-
-    }else{
-
+    } else {
       body = {
         userName: payload.userName,
         password: payload.password,
         type: payload.userType,
       };
-
     }
-    
+
     const response = await axios.post(
       loginUrl,
       body,
-      
+
       {
         headers: { "Content-Type": "application/json" },
       }
     );
     console.log(response);
-    
+
     return response.data;
   }
 );
-
 
 export const singupAsync = createAsyncThunk(
   "auth/signupAsync",
   async (payload: loginPayload) => {
     let body = {
-      email:payload.email,
-      userName :payload.userName,
-      type:payload.userType,
-      password : payload.password,
+      email: payload.email,
+      userName: payload.userName,
+      type: payload.userType,
+      password: payload.password,
+    };
 
-    } ; 
-  
-    
     const response = await axios.post(
       signupUrl,
       body,
-      
+
       {
         headers: { "Content-Type": "application/json" },
       }
     );
     console.log(response);
-    
+
     return response.data;
   }
 );
@@ -102,72 +96,68 @@ const authSlice = createSlice({
     },
   },
 
-  extraReducers:(builder)=>{
-    //For login 
+  extraReducers: (builder) => {
+    //For login
     builder.addCase(loginAsync.pending, (state) => {
-        state.isLoading = true;
+      state.isLoading = true;
     });
     builder.addCase(loginAsync.fulfilled, (state, action) => {
-        state.isLoading = false;
-        // Update state with response data if needed
-        if(action.payload.status){
-
-            console.log(action.payload);
-            cookies.set('fmt', action.payload.token);
-            state.status = true
-            
-            
-
-        }
-        else{
-          console.log(action.payload);
-            state.error = {errorMessage: action.payload.message , errorType: action.payload.type , status: true }
-
-        }
+      state.isLoading = false;
+      // Update state with response data if needed
+      if (action.payload.status) {
+        console.log(action.payload);
+        cookies.set("fmt", action.payload.token);
+        state.status = true;
+      } else {
+        console.log(action.payload);
+        state.error = {
+          errorMessage: action.payload.message,
+          errorType: action.payload.type,
+          status: true,
+        };
+      }
     });
     builder.addCase(loginAsync.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = {errorMessage: "Something went wrong!" , errorType: "any" , status: true }
-        // Handle error if necessary
+      state.isLoading = false;
+      state.error = {
+        errorMessage: "Something went wrong!",
+        errorType: "any",
+        status: true,
+      };
+      // Handle error if necessary
     });
-
 
     //For signup
 
-
     builder.addCase(singupAsync.pending, (state) => {
       state.isLoading = true;
-  });
-  builder.addCase(singupAsync.fulfilled, (state, action) => {
+    });
+    builder.addCase(singupAsync.fulfilled, (state, action) => {
       state.isLoading = false;
       // Update state with response data if needed
-      if(action.payload.status){
-
-          console.log(action.payload);
-          state.status = true;
-          cookies.set('fmt', action.payload.token);
-       
-          
-
-      }
-      else{
+      if (action.payload.status) {
         console.log(action.payload);
-          state.error = {errorMessage: action.payload.message , errorType: action.payload.type , status: true }
-
+        state.status = true;
+        cookies.set("fmt", action.payload.token);
+      } else {
+        console.log(action.payload);
+        state.error = {
+          errorMessage: action.payload.message,
+          errorType: action.payload.type,
+          status: true,
+        };
       }
-  });
-  builder.addCase(singupAsync.rejected, (state, action) => {
+    });
+    builder.addCase(singupAsync.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = {errorMessage: "Something went wrong!" , errorType: "any" , status: true }
+      state.error = {
+        errorMessage: "Something went wrong!",
+        errorType: "any",
+        status: true,
+      };
       // Handle error if necessary
-  });
-
-
-
-
-
-
-  }
+    });
+  },
 });
 
 export default authSlice.reducer;

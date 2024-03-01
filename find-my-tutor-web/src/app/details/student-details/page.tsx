@@ -1,11 +1,16 @@
 "use client";
 
 import { getAllSubjectsUrl } from "@/app/constants/urls";
-import { submitStudentDetails } from "@/app/slices/detailsSumbitSlice";
+import {
+  studentDetailsPayload,
+  submitStudentDetails,
+  updateDetailsState,
+} from "@/app/slices/detailsSumbitSlice";
+import { ThunkDispatch } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-
+import { useDispatch, useSelector } from "react-redux";
 export default function StudentDetatilsForm() {
   const [classCondition, setClassCondition] = useState<boolean>(true);
   const [selectedClass, setSelectedClass] = useState<number>(0);
@@ -24,6 +29,11 @@ export default function StudentDetatilsForm() {
     id: number;
     subjectName: string;
   };
+
+  const dispatch =
+    useDispatch<
+      ThunkDispatch<updateDetailsState, studentDetailsPayload, any>
+    >();
   const [subjects, setSubjects] = useState<subject[]>([]);
 
   function handleSearchSubject(e: React.FormEvent<HTMLInputElement>): void {
@@ -53,20 +63,22 @@ export default function StudentDetatilsForm() {
   function handleSubmit() {
     console.log("submit clicked");
 
-    submitStudentDetails({
-      address: addressRef.current?.value!,
-      currentClass: selectedClass,
-      firstName: firstNameRef.current?.value!,
-      gender: genderRef.current?.value!,
-      lastName: lastNameRef.current?.value!,
-      latitude: 21.085411100364865,
-      longitude: 81.12212500000003,
-      phoneNumber: 9064983473,
-      pinCode: 733124,
-      profileImage: "",
-      stream: "science",
-      subjects: ["joy", "shreyo"],
-    });
+    dispatch(
+      submitStudentDetails({
+        address: addressRef.current?.value!,
+        currentClass: selectedClass,
+        firstName: firstNameRef.current?.value!,
+        gender: genderRef.current?.value!,
+        lastName: lastNameRef.current?.value!,
+        latitude: 21.085411100364865,
+        longitude: 81.12212500000003,
+        phNumber: 9064983473,
+        pinCode: 733124,
+        profileImage: "",
+        stream: "science",
+        subjects: ["joy", "shreyo"],
+      })
+    );
   }
 
   useEffect(() => {
@@ -96,8 +108,6 @@ export default function StudentDetatilsForm() {
         console.log(err);
       });
   }, []);
-
-  console.log(subjects);
 
   return (
     <div className="min-w-screen min-h-screen overflow-hidden">

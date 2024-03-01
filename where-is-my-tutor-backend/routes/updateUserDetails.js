@@ -19,6 +19,7 @@ router.post("/student-details", tokenAuthentication, (req, res) => {
     let profileImage = req.body.profileImage;
     let currentClass = req.body.currentClass;
     let subjects = req.body.subjects;
+    let stream = req.body.stream;
 
 
     StudentDetails.create({
@@ -33,7 +34,8 @@ router.post("/student-details", tokenAuthentication, (req, res) => {
         profileImage: profileImage,
         currentClass: currentClass,
         subjects: subjects,
-        studentId: req.user.id
+        studentId: req.user.id,
+        stream: stream,
     })
         .then((result) => {
             console.log("Teacher details entered");
@@ -43,7 +45,9 @@ router.post("/student-details", tokenAuthentication, (req, res) => {
             if (error.name === 'SequelizeUniqueConstraintError') {
                 return res.json({ status: false, message: "You can not have more than dataset!" });
             }
+            console.log(error);
             return res.json({ status: false, message: "Something went wrong!" });
+
         })
 })
 

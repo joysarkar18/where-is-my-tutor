@@ -26,7 +26,7 @@ var app = express();
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
 app.use(logger('dev'));
@@ -64,7 +64,7 @@ Teacher.hasOne(TeacherDetails, { foreignKey: 'teacherId' })
 TeacherDetails.belongsTo(Teacher, { foreignKey: 'teacherId' })
 
 
-sequelize.sync({ force: true }).then((r) => {
+sequelize.sync().then((r) => {
   insertSubject();
   console.log("sync");
 }).catch((e) => {

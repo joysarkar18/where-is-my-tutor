@@ -3,6 +3,9 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { errorState } from "./authSlice";
 import axios from "axios";
 import { submitStudentDetailsUrl } from "../constants/urls";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies(null, { path: "/" });
 
 export type updateDetailsState = {
   status: boolean;
@@ -14,7 +17,7 @@ export type studentDetailsPayload = {
   firstName: string;
   lastName: string;
   gender: string;
-  phoneNumber: number;
+  phNumber: number;
   latitude: number;
   longitude: number;
   pinCode: number;
@@ -27,16 +30,21 @@ export type studentDetailsPayload = {
 
 export const submitStudentDetails = createAsyncThunk(
   "details/student",
+
   async (payload: studentDetailsPayload) => {
     let body;
     body = payload;
+    let token: string = cookies.get("fmt");
 
     const response = await axios.post(
       submitStudentDetailsUrl,
       body,
 
       {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
     console.log(response);
