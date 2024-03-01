@@ -88,7 +88,7 @@ router.post("/teacher-details", tokenAuthentication, (req, res) => {
             console.log("Teacher details entered");
             return res.json({ status: true, message: "Teacher details entered" });
         }).catch((error) => {
-            console.log("ERROR HAPPENS: ", error.name);
+            console.log("ERROR HAPPENS: ", error.name, error);
             if (error.name === 'SequelizeUniqueConstraintError') {
                 return res.json({ status: false, message: "You can not have more than dataset!" });
             }

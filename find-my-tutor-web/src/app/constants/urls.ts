@@ -9,6 +9,7 @@ export const resetPasswordUrl = `${baseUrl}/forgot-password/reset-password`;
 
 //submit details url
 export const submitStudentDetailsUrl = `${baseUrl}/update-details/student-details`;
+export const submitTeacherDetailsUrl = `${baseUrl}/update-details/teacher-details`;
 
 //Upload file urls
 export const uploadURL = `${baseUrl}/upload`;

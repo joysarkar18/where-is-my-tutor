@@ -61,7 +61,7 @@ const TeacherDetails = sequelize.define('teacherdetails', {
         allowNull: false,
     },
     aaddharNo: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(12),
         allowNull: false,
     },
     teacherId: {
